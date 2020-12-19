@@ -18,7 +18,7 @@ const Register = () => {
       minHeight="100vh"
       className={classes.bgColor}
     >
-      <Paper variant="elevation" elevation="24">
+      <Paper variant="elevation" elevation={24}>
         <Container component="main" maxWidth="xs">
           <div>
             <img src={Logo} alt="Logo" width="400" height="110" />
@@ -35,7 +35,7 @@ const Register = () => {
                 label="Name"
                 name="name"
                 autoFocus
-                size="large"
+                size="medium"
               />
               <TextField
                 variant="outlined"
@@ -46,7 +46,7 @@ const Register = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                size="large"
+                size="medium"
               />
               <TextField
                 variant="outlined"
@@ -58,7 +58,7 @@ const Register = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                size="large"
+                size="medium"
               />
               <TextField
                 variant="outlined"
@@ -70,7 +70,7 @@ const Register = () => {
                 type="password_confirmation"
                 id="password_confirmation"
                 autoComplete="current-password"
-                size="large"
+                size="medium"
               />
               <br />
               <br />

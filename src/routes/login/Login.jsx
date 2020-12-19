@@ -18,7 +18,7 @@ const SignIn = () => {
       minHeight="100vh"
       className={classes.bgColor}
     >
-      <Paper variant="elevation" elevation="24">
+      <Paper variant="elevation" elevation={24}>
         <Container component="main" maxWidth="xs">
           <div>
             <br />
@@ -37,7 +37,7 @@ const SignIn = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                size="large"
+                size="medium"
               />
               <TextField
                 variant="outlined"
@@ -49,7 +49,7 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                size="large"
+                size="medium"
               />
               <br />
               <br />
@@ -59,6 +59,7 @@ const SignIn = () => {
                 variant="contained"
                 size="large"
                 color="primary"
+                onSubmit={(e) => console.log(e)}
               >
                 Sign In
               </Button>
