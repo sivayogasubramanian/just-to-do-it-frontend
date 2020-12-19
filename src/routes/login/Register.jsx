@@ -81,7 +81,7 @@ const Register = () => {
                 size="large"
                 color="primary"
               >
-                Sign In
+                Create New Account
               </Button>
               <br />
               <br />
