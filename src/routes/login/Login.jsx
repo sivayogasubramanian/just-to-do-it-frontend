@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -7,9 +7,28 @@ import { Box, Paper } from '@material-ui/core';
 import Logo from '../../assets/logo.png';
 import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const SignIn = () => {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post('http://localhost:4000/authenticate', {
+        email: email,
+        password: password,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <Box
       display="flex"
@@ -26,7 +45,7 @@ const SignIn = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form noValidate>
+            <form noValidate onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -38,6 +57,7 @@ const SignIn = () => {
                 autoComplete="email"
                 autoFocus
                 size="medium"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -50,6 +70,7 @@ const SignIn = () => {
                 id="password"
                 autoComplete="current-password"
                 size="medium"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <br />
               <br />
@@ -59,7 +80,6 @@ const SignIn = () => {
                 variant="contained"
                 size="large"
                 color="primary"
-                onSubmit={(e) => console.log(e)}
               >
                 Sign In
               </Button>
