@@ -21,7 +21,7 @@ const Register = () => {
       <Paper variant="elevation" elevation="24">
         <Container component="main" maxWidth="xs">
           <div>
-            <img src={Logo} alt="Logo" width="350" height="100" />
+            <img src={Logo} alt="Logo" width="400" height="110" />
             <Typography component="h1" variant="h5">
               Register
             </Typography>

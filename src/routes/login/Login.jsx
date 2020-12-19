@@ -21,7 +21,8 @@ const SignIn = () => {
       <Paper variant="elevation" elevation="24">
         <Container component="main" maxWidth="xs">
           <div>
-            <img src={Logo} alt="Logo" width="300" height="70" />
+            <br />
+            <img src={Logo} alt="Logo" width="400" height="110" />
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
