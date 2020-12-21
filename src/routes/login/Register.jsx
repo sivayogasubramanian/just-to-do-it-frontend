@@ -137,10 +137,12 @@ const Register = () => {
                   Account created successfully! Please login now. You will be
                   redirected to login page.
                 </Alert>
-                {setTimeout(() => {
-                  history.push('/');
-                }, 3000)}
                 <br />
+                <p hidden>
+                  {setTimeout(() => {
+                    history.push('/');
+                  }, 4000)}
+                </p>
               </>
             )}
           </div>
