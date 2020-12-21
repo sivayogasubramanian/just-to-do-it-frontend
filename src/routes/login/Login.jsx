@@ -6,30 +6,24 @@ import {
   TextField,
   Typography,
   Container,
+  CircularProgress,
 } from '@material-ui/core';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Logo from '../../assets/logo.png';
 import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { signIn } from '../../helpers/authHelper';
 
-const SignIn = () => {
+const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post('http://localhost:4000/authenticate', {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    signIn(email, password, setError, setLoading);
   };
 
   return (
@@ -90,6 +84,16 @@ const SignIn = () => {
               <br />
               <br />
             </form>
+            {loading && <CircularProgress />}
+            {error && (
+              <>
+                <ErrorOutlineIcon color="error" fontSize="small" />
+                <Typography variant="subtitle1" color="error">
+                  Your email or password is incorrect. Please try again.
+                </Typography>
+                <br />
+              </>
+            )}
           </div>
         </Container>
       </Paper>
@@ -97,4 +101,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;
