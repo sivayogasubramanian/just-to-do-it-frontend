@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   Box,
   Paper,
@@ -6,13 +7,39 @@ import {
   TextField,
   Typography,
   Container,
+  CircularProgress,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Logo from '../../assets/logo.png';
 import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
+import { createAccount } from '../../helpers/authHelper';
 
 const Register = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password_cfm, setPasswordCfm] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createAccount(
+      name,
+      email,
+      password,
+      password_cfm,
+      setErrorMsg,
+      setLoading,
+      setSuccess
+    );
+  };
+
   return (
     <Box
       display="flex"
@@ -28,7 +55,7 @@ const Register = () => {
             <Typography component="h1" variant="h5">
               Register
             </Typography>
-            <form noValidate>
+            <form noValidate onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -38,6 +65,7 @@ const Register = () => {
                 name="name"
                 autoFocus
                 size="medium"
+                onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -48,6 +76,7 @@ const Register = () => {
                 name="email"
                 autoComplete="email"
                 size="medium"
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -59,6 +88,7 @@ const Register = () => {
                 id="password"
                 autoComplete="current-password"
                 size="medium"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -66,10 +96,11 @@ const Register = () => {
                 fullWidth
                 name="password_confirmation"
                 label="Password Confirmation"
-                type="password_confirmation"
+                type="password"
                 id="password_confirmation"
                 autoComplete="current-password"
                 size="medium"
+                onChange={(e) => setPasswordCfm(e.target.value)}
               />
               <br />
               <br />
@@ -88,6 +119,30 @@ const Register = () => {
               <br />
               <br />
             </form>
+            {loading && <CircularProgress />}
+            {errorMsg && (
+              <>
+                <ErrorOutlineIcon color="error" fontSize="small" />
+                {errorMsg.map((error) => (
+                  <Typography variant="subtitle1" color="error">
+                    {error}
+                  </Typography>
+                ))}
+                <br />
+              </>
+            )}
+            {success && (
+              <>
+                <Alert variant="outlined" severity="success" color="info">
+                  Account created successfully! Please login now. You will be
+                  redirected to login page.
+                </Alert>
+                {setTimeout(() => {
+                  history.push('/');
+                }, 3000)}
+                <br />
+              </>
+            )}
           </div>
         </Container>
       </Paper>

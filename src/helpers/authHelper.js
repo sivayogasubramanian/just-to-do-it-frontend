@@ -10,8 +10,8 @@ export const signIn = (email, password, setError, setLoading) => {
   setLoading(true);
   authAxios
     .post('/authenticate', {
-      email: email,
-      password: password,
+      email,
+      password,
     })
     .then((response) => {
       storeToken(response);
@@ -19,13 +19,40 @@ export const signIn = (email, password, setError, setLoading) => {
       setLoading(false);
     })
     .catch((error) => {
-      console.log(error);
       setError(true);
       setLoading(false);
       setTimeout(() => {
         setError(false);
-      }, 3000);
+      }, 4000);
     });
 };
 
-export const createAccount = (name, email, password, password_cfm) => {};
+export const createAccount = (
+  name,
+  email,
+  password,
+  password_cfm,
+  setErrorMsg,
+  setLoading,
+  setSuccess
+) => {
+  setLoading(true);
+  authAxios
+    .post('/users', {
+      name,
+      email,
+      password,
+      password_confirmation: password_cfm,
+    })
+    .then((response) => {
+      setLoading(false);
+      setSuccess(true);
+    })
+    .catch((error) => {
+      setLoading(false);
+      setErrorMsg(error.response.data);
+      setTimeout(() => {
+        setErrorMsg('');
+      }, 4000);
+    });
+};
