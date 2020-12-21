@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { Box, Paper } from '@material-ui/core';
+import {
+  Box,
+  Paper,
+  Button,
+  TextField,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import Logo from '../../assets/logo.png';
 import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
@@ -21,10 +24,10 @@ const SignIn = () => {
         email: email,
         password: password,
       })
-      .then(function (response) {
+      .then((response) => {
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -49,7 +52,6 @@ const SignIn = () => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -62,7 +64,6 @@ const SignIn = () => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password"
                 label="Password"
