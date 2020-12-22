@@ -1,20 +1,24 @@
+// React and Helpers
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { createAccount } from '../../helpers/authHelper';
+// MUI Components
 import {
   Box,
-  Paper,
   Button,
   TextField,
   Typography,
   Container,
   CircularProgress,
+  Card,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+// MUI icons and App logo
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Logo from '../../assets/logo.png';
+// Styles
 import { useStyles } from './styles';
-import { Link } from 'react-router-dom';
-import { createAccount } from '../../helpers/authHelper';
 
 const Register = () => {
   const classes = useStyles();
@@ -48,10 +52,16 @@ const Register = () => {
       minHeight="100vh"
       className={classes.bgColor}
     >
-      <Paper variant="elevation" elevation={24}>
+      <Card raised>
         <Container component="main" maxWidth="xs">
           <div>
-            <img src={Logo} alt="Logo" width="400" height="110" />
+            <img
+              className={classes.responsive}
+              src={Logo}
+              alt="Logo"
+              width="400"
+              height="110"
+            />
             <Typography component="h1" variant="h5">
               Register
             </Typography>
@@ -147,7 +157,7 @@ const Register = () => {
             )}
           </div>
         </Container>
-      </Paper>
+      </Card>
     </Box>
   );
 };
