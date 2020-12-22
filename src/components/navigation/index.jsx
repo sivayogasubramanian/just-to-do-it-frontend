@@ -97,7 +97,7 @@ function MiniDrawer() {
         <Divider />
         <List>
           {items.map((item) => (
-            <ListItem button key={item.index}>
+            <ListItem className={classes.listItems} button key={item.index}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
@@ -106,7 +106,7 @@ function MiniDrawer() {
         <Divider />
         <List>
           {tags.map((tag) => (
-            <ListItem button key={tag.index}>
+            <ListItem className={classes.listItems} button key={tag.index}>
               <ListItemIcon>
                 <LabelOutlinedIcon />
               </ListItemIcon>

@@ -54,4 +54,5 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+  listItems: { marginTop: '10px' },
 }));
