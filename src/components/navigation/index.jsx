@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 // MUI Icons
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -24,7 +25,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Nav Items
 import { items } from './items';
 import { tags } from './tags';
-import { Box } from '@material-ui/core';
 
 function MiniDrawer() {
   const classes = useStyles();
