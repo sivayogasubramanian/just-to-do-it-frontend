@@ -12,7 +12,7 @@ const Todo = ({ title, completed }) => {
         container
         direction="row"
         justify="space-around"
-        alignItems="flex-center"
+        alignItems="center"
         className={classes.grid}
       >
         <Grid item xs={2}>
