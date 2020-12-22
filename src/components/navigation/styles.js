@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 30,
   },
   hide: {
     display: 'none',
@@ -51,6 +51,9 @@ export const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9) + 1,
     },
   },
+  button: {
+    margin: theme.spacing(1),
+  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -62,8 +65,5 @@ export const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-  },
-  button: {
-    margin: theme.spacing(1),
   },
 }));

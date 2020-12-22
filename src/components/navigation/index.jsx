@@ -61,17 +61,15 @@ function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" noWrap>
-            Just To-do it
-          </Typography>
           <Box flexGrow={1} />
           <Button
             variant="contained"
             color="secondary"
+            size="small"
             className={classes.button}
             startIcon={<ExitToAppIcon />}
           >
-            Log out
+            Log-out
           </Button>
         </Toolbar>
       </AppBar>
