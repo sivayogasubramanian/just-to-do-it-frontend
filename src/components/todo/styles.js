@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
   card: {
     // Very light Blue
-    backgroundColor: '#f8f7ff',
+    backgroundColor: '#e2ffde',
     marginRight: '10px',
     marginTop: '10px',
   },
