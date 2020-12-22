@@ -58,8 +58,8 @@ function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
+          <Typography variant="h5" noWrap>
+            Just To-do it
           </Typography>
         </Toolbar>
       </AppBar>
