@@ -15,14 +15,17 @@ import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 // MUI Icons
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Nav Items
 import { items } from './items';
 import { tags } from './tags';
+import { Box } from '@material-ui/core';
 
 function MiniDrawer() {
   const classes = useStyles();
@@ -61,6 +64,15 @@ function MiniDrawer() {
           <Typography variant="h5" noWrap>
             Just To-do it
           </Typography>
+          <Box flexGrow={1} />
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.button}
+            startIcon={<ExitToAppIcon />}
+          >
+            Log out
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
