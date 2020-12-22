@@ -4,6 +4,7 @@ import Login from './routes/login/Login';
 import Register from './routes/login/Register';
 import MiniDrawer from './components/navigation';
 import Todo from './components/todo';
+import Home from './routes/home';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/navigation" component={MiniDrawer} />
           <Route exact path="/todo" component={Todo} />
+          <Route exact path="/home" component={Home} />
           <Route exact path="*" component={Login} />
         </Switch>
       </div>
