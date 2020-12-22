@@ -9,5 +9,6 @@ export const useStyles = makeStyles({
   },
   grid: {
     marginTop: '10px',
+    marginBottom: '5px',
   },
 });
