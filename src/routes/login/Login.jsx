@@ -1,7 +1,8 @@
 // React and Helpers
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { signIn } from '../../helpers/authHelper';
+import { useSelector } from 'react-redux';
+import useAuth from './useAuth';
 // MUI Components
 import {
   Box,
@@ -20,14 +21,13 @@ import { useStyles } from './styles';
 
 const Login = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const { email, setEmail, password, setPassword, signIn } = useAuth();
+  const loading = useSelector((state) => state.misc.loading);
+  const error = useSelector((state) => state.misc.error);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signIn(email, password, setError, setLoading);
+    signIn(email, password);
   };
 
   return (
