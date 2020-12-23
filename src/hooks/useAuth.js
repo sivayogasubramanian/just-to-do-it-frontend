@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import authAxios from '../../helpers/authAxios';
+import authAxios from '../helpers/authAxios';
 import {
   toggleLoading,
   toggleError,
   toggleSuccess,
   setErrorMsg,
-} from '../../actions/miscActions';
+} from '../actions/miscActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {

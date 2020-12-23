@@ -2,7 +2,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import useAuth from './useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useSelector, useDispatch } from 'react-redux';
 // Actions
 import { toggleSuccess } from '../../actions/miscActions';

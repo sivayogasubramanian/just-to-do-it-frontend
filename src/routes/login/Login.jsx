@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import useAuth from './useAuth';
+import useAuth from '../../hooks/useAuth';
 // MUI Components
 import {
   Box,
