@@ -6,10 +6,10 @@ import Register from './routes/login/Register';
 import MiniDrawer from './components/navigation';
 import Todo from './components/todo';
 import Home from './routes/home';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
   return (
     <Router>
       <div className="App">
