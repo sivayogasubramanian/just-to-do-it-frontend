@@ -1,8 +1,9 @@
-// React
+// React and helpers
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { useStyles } from './styles';
+import useAuth from '../../hooks/useAuth';
 // MUI Components
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -29,15 +30,12 @@ import { tags } from './tags';
 function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
+  const { logOut } = useAuth();
   const [open, setOpen] = useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const handleDrawerOpen = () => setOpen(true);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <div className={classes.root}>
@@ -67,6 +65,7 @@ function MiniDrawer() {
             size="small"
             className={classes.button}
             startIcon={<ExitToAppIcon />}
+            onClick={logOut}
           >
             Log-out
           </Button>

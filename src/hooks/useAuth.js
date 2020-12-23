@@ -10,7 +10,10 @@ import {
   setErrorMsg,
 } from '../actions/miscActions';
 import { storeUser } from '../actions/userActions';
-import { signIn as authenticateUser } from '../actions/authActions';
+import {
+  signIn as authenticateUser,
+  logOut as signOut,
+} from '../actions/authActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {
@@ -71,6 +74,11 @@ const useAuth = () => {
       });
   };
 
+  const logOut = () => {
+    dispatch(signOut());
+    dispatch(storeUser([]));
+  };
+
   return {
     name,
     setName,
@@ -82,6 +90,7 @@ const useAuth = () => {
     setPasswordCfm,
     signIn,
     createAccount,
+    logOut,
   };
 };
 
