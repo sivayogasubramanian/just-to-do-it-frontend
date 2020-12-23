@@ -138,8 +138,8 @@ const Register = () => {
             {errorMsg && (
               <>
                 <ErrorOutlineIcon color="error" fontSize="small" />
-                {errorMsg.map((error) => (
-                  <Typography variant="subtitle1" color="error">
+                {errorMsg.map((error, index) => (
+                  <Typography key={index} variant="subtitle1" color="error">
                     {error}
                   </Typography>
                 ))}
