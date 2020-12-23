@@ -38,7 +38,7 @@ const useAuth = () => {
         dispatch(toggleLoading());
         setTimeout(() => {
           dispatch(toggleError());
-        }, 4000);
+        }, 2000);
       });
   };
 
