@@ -1,6 +1,6 @@
 // React and Helpers
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 // MUI Components
@@ -24,6 +24,7 @@ const Login = () => {
   const { email, setEmail, password, setPassword, signIn } = useAuth();
   const loading = useSelector((state) => state.misc.loading);
   const error = useSelector((state) => state.misc.error);
+  const isAuthenticated = useSelector((state) => state.isAuthenticated);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -104,6 +105,7 @@ const Login = () => {
                 <br />
               </>
             )}
+            {isAuthenticated && <Redirect to="/home" />}
           </div>
         </Container>
       </Card>
