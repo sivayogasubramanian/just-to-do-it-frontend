@@ -1,10 +1,11 @@
 // React and Helpers
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { createAccount } from '../../helpers/authHelper';
 import useAuth from './useAuth';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+// Actions
+import { toggleSuccess } from '../../actions/miscActions';
 // MUI Components
 import {
   Box,
@@ -25,6 +26,7 @@ import { useStyles } from './styles';
 const Register = () => {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const {
     name,
@@ -153,6 +155,7 @@ const Register = () => {
                 <br />
                 <p hidden>
                   {setTimeout(() => {
+                    dispatch(toggleSuccess());
                     history.push('/');
                   }, 4000)}
                 </p>
