@@ -36,14 +36,12 @@ const useAuth = () => {
         password,
       })
       .then((response) => {
-        console.log(response);
         storeToken(response);
         dispatch(toggleLoading());
         dispatch(storeUser(response.data.user.data.attributes));
         dispatch(authenticateUser());
       })
       .catch((error) => {
-        console.log(error.response.data);
         dispatch(toggleError());
         dispatch(toggleLoading());
         setTimeout(() => {
