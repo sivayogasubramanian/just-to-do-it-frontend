@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createAccount } from '../../helpers/authHelper';
+import useAuth from './useAuth';
+import { useSelector } from 'react-redux';
 // MUI Components
 import {
   Box,
@@ -23,25 +25,26 @@ import { useStyles } from './styles';
 const Register = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [password_cfm, setPasswordCfm] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+
+  const {
+    name,
+    setName,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    password_cfm,
+    setPasswordCfm,
+    createAccount,
+  } = useAuth();
+
+  const loading = useSelector((state) => state.misc.loading);
+  const errorMsg = useSelector((state) => state.misc.errorMsg);
+  const success = useSelector((state) => state.misc.success);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createAccount(
-      name,
-      email,
-      password,
-      password_cfm,
-      setErrorMsg,
-      setLoading,
-      setSuccess
-    );
+    createAccount(name, email, password, password_cfm);
   };
 
   return (
