@@ -1,12 +1,16 @@
+// React and helpers
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
+// Actions
 import {
   toggleLoading,
   toggleError,
   toggleSuccess,
   setErrorMsg,
 } from '../actions/miscActions';
+import { storeUser } from '../actions/userActions';
+import { signIn as authenticateUser } from '../actions/authActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {
@@ -29,8 +33,11 @@ const useAuth = () => {
         password,
       })
       .then((response) => {
+        console.log(response);
         storeToken(response);
         dispatch(toggleLoading());
+        dispatch(storeUser(response.data.user.data.attributes));
+        dispatch(authenticateUser());
       })
       .catch((error) => {
         console.log(error.response.data);
