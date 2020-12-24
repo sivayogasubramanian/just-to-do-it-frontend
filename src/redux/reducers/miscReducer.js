@@ -3,7 +3,7 @@ import {
   TOGGLE_ERROR,
   TOGGLE_SUCCESS,
   SET_ERROR_MSG,
-} from '../actions/actionTypes';
+} from '../actionTypes';
 
 const initialState = {
   loading: false,

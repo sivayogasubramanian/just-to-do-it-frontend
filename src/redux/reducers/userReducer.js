@@ -1,4 +1,4 @@
-import { STORE_USER, REMOVE_USER } from '../actions/actionTypes';
+import { STORE_USER, REMOVE_USER } from '../actionTypes';
 
 const userReducer = (state = [], action) => {
   switch (action.type) {

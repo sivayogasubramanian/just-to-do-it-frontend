@@ -3,7 +3,7 @@ import {
   TOGGLE_ERROR,
   SET_ERROR_MSG,
   TOGGLE_SUCCESS,
-} from './actionTypes';
+} from '../actionTypes';
 
 export const toggleLoading = () => {
   return {
