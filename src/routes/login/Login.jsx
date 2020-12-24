@@ -1,7 +1,7 @@
 // React and Helpers
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 // MUI Components
 import {
@@ -19,12 +19,9 @@ import Logo from '../../assets/logo.png';
 // Styles
 import { useStyles } from './styles';
 
-const Login = () => {
+const Login = ({ loading, error, isAuthenticated }) => {
   const classes = useStyles();
   const { email, setEmail, password, setPassword, signIn } = useAuth();
-  const loading = useSelector((state) => state.misc.loading);
-  const error = useSelector((state) => state.misc.error);
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -113,4 +110,12 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.misc.loading,
+    error: state.misc.error,
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

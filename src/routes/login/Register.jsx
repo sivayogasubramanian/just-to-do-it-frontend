@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 // Actions
 import { toggleSuccess } from '../../actions/miscActions';
 // MUI Components
@@ -23,10 +23,9 @@ import Logo from '../../assets/logo.png';
 // Styles
 import { useStyles } from './styles';
 
-const Register = () => {
+const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
   const classes = useStyles();
   const history = useHistory();
-  const dispatch = useDispatch();
 
   const {
     name,
@@ -39,10 +38,6 @@ const Register = () => {
     setPasswordCfm,
     createAccount,
   } = useAuth();
-
-  const loading = useSelector((state) => state.misc.loading);
-  const errorMsg = useSelector((state) => state.misc.errorMsg);
-  const success = useSelector((state) => state.misc.success);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -155,7 +150,7 @@ const Register = () => {
                 <br />
                 <p hidden>
                   {setTimeout(() => {
-                    dispatch(toggleSuccess());
+                    toggleSuccess();
                     history.push('/');
                   }, 4000)}
                 </p>
@@ -168,4 +163,18 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => {
+  return {
+    loading: state.misc.loading,
+    errorMsg: state.misc.errorMsg,
+    success: state.misc.success,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleSuccess: () => dispatch(toggleSuccess()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
