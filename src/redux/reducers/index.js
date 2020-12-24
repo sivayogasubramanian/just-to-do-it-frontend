@@ -7,8 +7,8 @@ import todosReducer from './todosReducer';
 const rootReducer = combineReducers({
   isAuthenticated: authReducer,
   user: userReducer,
-  misc: miscReducer,
   todos: todosReducer,
+  misc: miscReducer,
 });
 
 export default rootReducer;

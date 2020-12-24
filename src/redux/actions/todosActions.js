@@ -1,5 +1,9 @@
 import authAxios from '../../helpers/authAxios';
-import { FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE } from '../actionTypes';
+import {
+  FETCH_TODOS_SUCCESS,
+  FETCH_TODOS_FAILURE,
+  CLEAR_TODOS,
+} from '../actionTypes';
 
 export const fetchTodos = () => (dispatch) => {
   authAxios
@@ -10,4 +14,8 @@ export const fetchTodos = () => (dispatch) => {
     .catch((response) => {
       dispatch({ type: FETCH_TODOS_FAILURE, payload: response.error });
     });
+};
+
+export const clearTodos = () => {
+  return { type: CLEAR_TODOS };
 };

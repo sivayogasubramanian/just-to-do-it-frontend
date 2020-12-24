@@ -14,6 +14,7 @@ import {
   signIn as authenticateUser,
   logOut as signOut,
 } from '../redux/actions/authActions';
+import { clearTodos } from '../redux/actions/todosActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {
@@ -75,6 +76,7 @@ const useAuth = () => {
   const logOut = () => {
     dispatch(signOut());
     dispatch(storeUser([]));
+    dispatch(clearTodos());
   };
 
   return {

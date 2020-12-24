@@ -7,9 +7,9 @@ import {
 
 const initialState = {
   loading: false,
+  success: false,
   error: false,
   errorMsg: '',
-  success: false,
 };
 
 const miscReducer = (state = initialState, action) => {
