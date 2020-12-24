@@ -7,7 +7,7 @@ const todosReducer = (state = initialState, action) => {
     case FETCH_TODOS_SUCCESS:
       return action.payload;
     case CLEAR_TODOS:
-      return [];
+      return initialState;
     default:
       return state;
   }
