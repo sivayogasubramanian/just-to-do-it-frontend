@@ -1,6 +1,8 @@
 import { CLEAR_TODOS, FETCH_TODOS_SUCCESS } from '../actionTypes';
 
-const todosReducer = (state = [], action) => {
+const initialState = { data: [] };
+
+const todosReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_TODOS_SUCCESS:
       return action.payload;
