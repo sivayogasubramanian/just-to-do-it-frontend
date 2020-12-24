@@ -23,6 +23,7 @@ const Home = ({ todos, fetchTodos }) => {
         {todos.data.map((todo) => (
           <Todo
             key={todo.id}
+            todoId={todo.id}
             title={todo.attributes.title}
             completed={todo.attributes.completed}
           />
