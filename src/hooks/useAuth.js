@@ -8,12 +8,12 @@ import {
   toggleError,
   toggleSuccess,
   setErrorMsg,
-} from '../actions/miscActions';
-import { storeUser } from '../actions/userActions';
+} from '../redux/actions/miscActions';
+import { storeUser } from '../redux/actions/userActions';
 import {
   signIn as authenticateUser,
   logOut as signOut,
-} from '../actions/authActions';
+} from '../redux/actions/authActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {

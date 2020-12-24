@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { connect } from 'react-redux';
 // Actions
-import { toggleSuccess } from '../../actions/miscActions';
+import { toggleSuccess } from '../../redux/actions/miscActions';
 // MUI Components
 import {
   Box,
