@@ -7,7 +7,7 @@ import { useStyles } from './styles';
 
 const Todo = ({ todoId, title, completed }) => {
   const classes = useStyles();
-  const { updateTodo } = useTodo();
+  const { updateTodo, destroyTodo } = useTodo();
   const firstUpdate = useRef(true);
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
@@ -50,7 +50,7 @@ const Todo = ({ todoId, title, completed }) => {
           </Button>
         </Grid>
         <Grid item xs={2}>
-          <Button>
+          <Button onClick={() => destroyTodo(todoId)}>
             <DeleteOutlineTwoToneIcon />
           </Button>
         </Grid>
