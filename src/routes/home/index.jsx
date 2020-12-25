@@ -1,19 +1,22 @@
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import React, { useEffect } from 'react';
+// React and helpers
+import React from 'react';
+import useTodo from '../../hooks/useTodo';
+import { connect } from 'react-redux';
+// Components
 import MiniDrawer from '../../components/navigation';
 import Todo from '../../components/todo';
-import { useStyles } from './styles';
-import { connect } from 'react-redux';
+// Actions
 import { fetchTodos } from '../../redux/actions/todosActions';
+// MUI Components
+import Fab from '@material-ui/core/Fab';
+// MUI Icons
+import AddIcon from '@material-ui/icons/Add';
+// Styles
+import { useStyles } from './styles';
 
 const Home = ({ todos, fetchTodos }) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    fetchTodos();
-    // eslint-disable-next-line
-  }, []);
+  const { createTodo } = useTodo();
 
   return (
     <div>
@@ -34,6 +37,8 @@ const Home = ({ todos, fetchTodos }) => {
         className={classes.floatingActionBtn}
         color="primary"
         aria-label="add"
+        onClick={() => createTodo()}
+        disableTouchRipple={true}
       >
         <AddIcon />
       </Fab>

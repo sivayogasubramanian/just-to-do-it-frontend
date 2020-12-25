@@ -1,3 +1,4 @@
+// Actions
 import {
   TOGGLE_LOADING,
   TOGGLE_ERROR,

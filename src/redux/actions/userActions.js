@@ -1,3 +1,4 @@
+// Actions
 import { STORE_USER, REMOVE_USER } from '../actionTypes';
 
 export const storeUser = (user) => {

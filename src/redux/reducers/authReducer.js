@@ -1,3 +1,4 @@
+// Actions
 import { SIGN_IN, LOG_OUT } from '../actionTypes';
 
 const authReducer = (state = false, action) => {

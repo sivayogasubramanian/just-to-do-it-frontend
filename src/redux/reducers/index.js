@@ -1,4 +1,6 @@
+// React and helpers
 import { combineReducers } from 'redux';
+// Reducers
 import authReducer from './authReducer';
 import miscReducer from './miscReducer';
 import userReducer from './userReducer';

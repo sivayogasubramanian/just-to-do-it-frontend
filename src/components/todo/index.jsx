@@ -1,8 +1,12 @@
+// React and helpers
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import useTodo from '../../hooks/useTodo';
+// MUI Components
 import { Card, Checkbox, TextField, Grid, Button } from '@material-ui/core';
+// MUI Icons
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
+// Styles
 import { useStyles } from './styles';
 
 const Todo = ({ todoId, title, completed }) => {
@@ -45,12 +49,16 @@ const Todo = ({ todoId, title, completed }) => {
           />
         </Grid>
         <Grid item xs={2}>
-          <Button>
+          <Button size="large">
             <EditTwoToneIcon />
           </Button>
         </Grid>
         <Grid item xs={2}>
-          <Button onClick={() => destroyTodo(todoId)}>
+          <Button
+            size="large"
+            onClick={() => destroyTodo(todoId)}
+            disableTouchRipple={true}
+          >
             <DeleteOutlineTwoToneIcon />
           </Button>
         </Grid>

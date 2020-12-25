@@ -1,3 +1,4 @@
+// Actions
 import { SIGN_IN, LOG_OUT } from '../actionTypes';
 
 export const signIn = () => {
