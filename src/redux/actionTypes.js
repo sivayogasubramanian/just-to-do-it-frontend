@@ -13,6 +13,7 @@ export const STORE_USER = 'STORE_USER';
 export const REMOVE_USER = 'REMOVE_USER';
 
 // For todoActions.js
+export const FETCH_TODOS_REQUESTED = 'FETCH_TODOS_REQUESTED';
 export const FETCH_TODOS_SUCCESS = 'FETCH_TODOS_SUCCESS';
 export const FETCH_TODOS_FAILURE = 'FETCH_TODOS_FAILURE';
 export const CLEAR_TODOS = 'CLEAR_TODOS';
