@@ -4,8 +4,6 @@ import useTodo from '../../hooks/useTodo';
 import { connect } from 'react-redux';
 // Actions
 import { openDialog } from '../../redux/actions/miscActions';
-// Components
-import EditTodoDialog from '../../components/editTodoDialog';
 // MUI Components
 import {
   Card,
@@ -21,14 +19,7 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Todo = ({
-  todoId,
-  title,
-  completed,
-  isDialogOpen,
-  dialogTodoId,
-  openDialog,
-}) => {
+const Todo = ({ todoId, title, completed, isDialogOpen, openDialog }) => {
   const classes = useStyles();
   const { updateTodo, destroyTodo } = useTodo();
   const firstUpdate = useRef(true);
@@ -100,15 +91,8 @@ const Todo = ({
           </Grid>
         </Card>
       </Slide>
-      {isDialogOpen && <EditTodoDialog />}
     </>
   );
-};
-
-const mapStateToProps = (state) => {
-  return {
-    isDialogOpen: state.misc.dialog.isDialogOpen,
-  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -117,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todo);
+export default connect(null, mapDispatchToProps)(Todo);
