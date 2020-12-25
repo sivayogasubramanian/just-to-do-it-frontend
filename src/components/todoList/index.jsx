@@ -4,7 +4,7 @@ import Todo from '../todo';
 
 const TodoList = ({ todos }) => {
   return (
-    <div>
+    <>
       {todos.data.map((todo) => (
         <Todo
           key={todo.id}
@@ -13,7 +13,7 @@ const TodoList = ({ todos }) => {
           completed={todo.attributes.completed}
         />
       ))}
-    </div>
+    </>
   );
 };
 
