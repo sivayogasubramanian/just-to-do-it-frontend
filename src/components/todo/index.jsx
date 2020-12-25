@@ -19,7 +19,7 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Todo = ({ todoId, title, completed, isDialogOpen, openDialog }) => {
+const Todo = ({ todoId, title, completed, openDialog }) => {
   const classes = useStyles();
   const { updateTodo, destroyTodo } = useTodo();
   const firstUpdate = useRef(true);
