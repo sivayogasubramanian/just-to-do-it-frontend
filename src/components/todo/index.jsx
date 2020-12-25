@@ -2,7 +2,14 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import useTodo from '../../hooks/useTodo';
 // MUI Components
-import { Card, Checkbox, TextField, Grid, Button } from '@material-ui/core';
+import {
+  Card,
+  Checkbox,
+  TextField,
+  Grid,
+  Button,
+  Slide,
+} from '@material-ui/core';
 // MUI Icons
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
@@ -25,41 +32,56 @@ const Todo = ({ todoId, title, completed }) => {
     // eslint-disable-next-line
   }, [taskTitle, isCompleted]);
 
+  const [checked, setChecked] = useState(true);
+
   return (
-    <Card raised className={classes.card}>
-      <Grid
-        container
-        direction="row"
-        justify="space-around"
-        alignItems="center"
-        className={classes.grid}
-      >
-        <Grid item xs={2}>
-          <Checkbox
-            color="primary"
-            checked={isCompleted}
-            onClick={(e) => setIsCompleted(!isCompleted)}
-          />
+    <Slide
+      direction="right"
+      in={checked}
+      mountOnEnter
+      timeout={{ enter: 300, exit: 300 }}
+    >
+      <Card raised className={classes.card}>
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+          className={classes.grid}
+        >
+          <Grid item xs={2}>
+            <Checkbox
+              color="primary"
+              checked={isCompleted}
+              onClick={(e) => setIsCompleted(!isCompleted)}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              value={taskTitle}
+              onChange={(e) => setTaskTitle(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Button size="large">
+              <EditTwoToneIcon />
+            </Button>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              size="large"
+              onClick={() => {
+                setChecked(false);
+                destroyTodo(todoId);
+              }}
+            >
+              <DeleteOutlineTwoToneIcon />
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            fullWidth
-            value={taskTitle}
-            onChange={(e) => setTaskTitle(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <Button size="large">
-            <EditTwoToneIcon />
-          </Button>
-        </Grid>
-        <Grid item xs={2}>
-          <Button size="large" onClick={() => destroyTodo(todoId)}>
-            <DeleteOutlineTwoToneIcon />
-          </Button>
-        </Grid>
-      </Grid>
-    </Card>
+      </Card>
+    </Slide>
   );
 };
 
