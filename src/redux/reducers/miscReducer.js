@@ -17,7 +17,7 @@ const initialState = {
 };
 
 const miscReducer = (state = initialState, action) => {
-  const { loading, error, success, dialog } = state;
+  const { loading, error, success } = state;
   switch (action.type) {
     case TOGGLE_LOADING:
       return { ...state, loading: !loading };
@@ -30,7 +30,7 @@ const miscReducer = (state = initialState, action) => {
     case OPEN_DIALOG:
       return { ...state, dialog: { ...action.payload } };
     case CLOSE_DIALOG:
-      return { ...state, dialog: { ...dialog, isDialogOpen: false } };
+      return { ...state, dialog: { ...initialState.dialog } };
     default:
       return state;
   }
