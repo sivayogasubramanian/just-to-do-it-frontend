@@ -5,6 +5,7 @@ import Login from './routes/login/Login';
 import Register from './routes/login/Register';
 import Home from './routes/home';
 import { useSelector } from 'react-redux';
+import EditTodoDialog from './components/editTodoDialog';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -20,6 +21,7 @@ const App = () => {
             component={Home}
             auth={isAuthenticated}
           />
+          <Route exact path="/edit" component={EditTodoDialog} />>
           <Route exact path="*" component={Login} />
         </Switch>
       </div>
