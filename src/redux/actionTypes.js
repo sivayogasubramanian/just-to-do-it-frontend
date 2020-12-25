@@ -7,6 +7,8 @@ export const TOGGLE_LOADING = 'TOGGLE_LOADING';
 export const TOGGLE_ERROR = 'TOGGLE_ERROR';
 export const SET_ERROR_MSG = 'SET_ERROR_MSG';
 export const TOGGLE_SUCCESS = 'TOGGLE_SUCCESS';
+export const OPEN_DIALOG = 'OPEN_DIALOG';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 
 // For userActions.js
 export const STORE_USER = 'STORE_USER';

@@ -4,6 +4,8 @@ import {
   TOGGLE_ERROR,
   SET_ERROR_MSG,
   TOGGLE_SUCCESS,
+  OPEN_DIALOG,
+  CLOSE_DIALOG,
 } from '../actionTypes';
 
 export const toggleLoading = () => {
@@ -28,5 +30,18 @@ export const setErrorMsg = (payload) => {
 export const toggleSuccess = () => {
   return {
     type: TOGGLE_SUCCESS,
+  };
+};
+
+export const openDialog = (payload) => {
+  return {
+    type: OPEN_DIALOG,
+    payload,
+  };
+};
+
+export const closeDialog = () => {
+  return {
+    type: CLOSE_DIALOG,
   };
 };
