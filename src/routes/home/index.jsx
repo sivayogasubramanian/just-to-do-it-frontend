@@ -28,7 +28,6 @@ const Home = () => {
         color="primary"
         aria-label="add"
         onClick={() => createTodo()}
-        disableTouchRipple={true}
       >
         <AddIcon />
       </Fab>

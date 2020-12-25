@@ -54,11 +54,7 @@ const Todo = ({ todoId, title, completed }) => {
           </Button>
         </Grid>
         <Grid item xs={2}>
-          <Button
-            size="large"
-            onClick={() => destroyTodo(todoId)}
-            disableTouchRipple={true}
-          >
+          <Button size="large" onClick={() => destroyTodo(todoId)}>
             <DeleteOutlineTwoToneIcon />
           </Button>
         </Grid>
