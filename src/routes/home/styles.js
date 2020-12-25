@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    marginLeft: '80px',
+    marginLeft: '70px',
   },
   floatingActionBtn: {
     margin: 0,
