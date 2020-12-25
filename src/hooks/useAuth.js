@@ -14,12 +14,16 @@ import {
   signIn as authenticateUser,
   logOut as signOut,
 } from '../redux/actions/authActions';
-import { clearTodos } from '../redux/actions/todosActions';
+import { fetchTodos, clearTodos } from '../redux/actions/todosActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {
     localStorage.setItem('token', response.data.token);
   }
+};
+
+const removeToken = () => {
+  localStorage.removeItem('token');
 };
 
 const useAuth = () => {
@@ -41,6 +45,7 @@ const useAuth = () => {
         dispatch(toggleLoading());
         dispatch(storeUser(response.data.user.data.attributes));
         dispatch(authenticateUser());
+        dispatch(fetchTodos());
       })
       .catch((error) => {
         dispatch(toggleError());
@@ -77,6 +82,7 @@ const useAuth = () => {
     dispatch(signOut());
     dispatch(storeUser([]));
     dispatch(clearTodos());
+    removeToken();
   };
 
   return {
