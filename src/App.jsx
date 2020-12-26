@@ -4,6 +4,7 @@ import GuardedRoute from './helpers/GuardedRoute';
 import Login from './routes/login/Login';
 import Register from './routes/login/Register';
 import Home from './routes/home';
+import EditTodoDialog from './routes/EditTodoDialog';
 import { useSelector } from 'react-redux';
 
 const App = () => {
@@ -20,7 +21,12 @@ const App = () => {
             component={Home}
             auth={isAuthenticated}
           />
-          <Route exact path="*" component={Login} />
+          <GuardedRoute
+            exact
+            path="/home/edit"
+            component={EditTodoDialog}
+            auth={isAuthenticated}
+          />
         </Switch>
       </div>
     </Router>

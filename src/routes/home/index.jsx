@@ -1,6 +1,8 @@
 // React and helpers
 import React from 'react';
 import useTodo from '../../hooks/useTodo';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 // Components
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
@@ -14,9 +16,10 @@ import { useStyles } from './styles';
 const Home = () => {
   const classes = useStyles();
   const { createTodo } = useTodo();
+  const isDialogOpen = useSelector((state) => state.misc.dialog.isDialogOpen);
 
   return (
-    <div>
+    <>
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
@@ -31,7 +34,8 @@ const Home = () => {
       >
         <AddIcon />
       </Fab>
-    </div>
+      {isDialogOpen && <Redirect to="/home/edit" />}
+    </>
   );
 };
 
