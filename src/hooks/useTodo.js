@@ -19,7 +19,7 @@ const useTodo = () => {
 
   const createTodo = () => {
     authAxios
-      .post(`/api/v1/todos/1212121212`, { title: '', completed: false })
+      .post(`/api/v1/todos`, { title: '', completed: false })
       .then(() => dispatch(fetchTodos()))
       .catch(ErrorHandler);
   };
