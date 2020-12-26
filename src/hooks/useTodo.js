@@ -2,30 +2,40 @@
 import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
 // Actions
+import { toggleError } from '../redux/actions/miscActions';
 import { fetchTodos } from '../redux/actions/todosActions';
+import { logOut } from '../redux/actions/authActions';
 
 const useTodo = () => {
   const dispatch = useDispatch();
+  const ErrorHandler = (error) => {
+    console.error(error);
+    dispatch(toggleError());
+    setTimeout(() => {
+      dispatch(toggleError());
+      dispatch(logOut());
+    }, 2000);
+  };
 
   const createTodo = () => {
     authAxios
-      .post(`/api/v1/todos/`, { title: '', completed: false })
+      .post(`/api/v1/todos/1212121212`, { title: '', completed: false })
       .then(() => dispatch(fetchTodos()))
-      .catch((error) => Promise.reject(new Error(error)));
+      .catch(ErrorHandler);
   };
 
   const updateTodo = (todoId, todoData) => {
     authAxios
       .patch(`/api/v1/todos/${todoId}`, todoData)
       .then(() => dispatch(fetchTodos()))
-      .catch((error) => Promise.reject(new Error(error)));
+      .catch(ErrorHandler);
   };
 
   const destroyTodo = (todoId) => {
     authAxios
       .delete(`/api/v1/todos/${todoId}`)
       .then(() => dispatch(fetchTodos()))
-      .catch((error) => Promise.reject(error));
+      .catch(ErrorHandler);
   };
 
   return { createTodo, updateTodo, destroyTodo };

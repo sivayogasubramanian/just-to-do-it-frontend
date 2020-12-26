@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Todo from '../todo';
+import { Alert } from '@material-ui/lab';
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, isError }) => {
   return (
     <>
       {todos.data.map((todo) => (
@@ -13,6 +14,14 @@ const TodoList = ({ todos }) => {
           completed={todo.attributes.completed}
         />
       ))}
+      {isError && (
+        <>
+          <br />
+          <Alert variant="outlined" severity="error" color="error">
+            Something went wrong. Please refresh and try again later.
+          </Alert>
+        </>
+      )}
     </>
   );
 };
@@ -20,6 +29,7 @@ const TodoList = ({ todos }) => {
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
+    isError: state.misc.error,
   };
 };
 
