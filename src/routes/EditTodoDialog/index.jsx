@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,12 +12,10 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import SaveIcon from '@material-ui/icons/Save';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { closeDialog } from '../../redux/actions/miscActions';
@@ -26,29 +25,32 @@ import { connect } from 'react-redux';
 import { Zoom } from '@material-ui/core';
 import useTodo from '../../hooks/useTodo';
 
-const EditTodoDialog = ({
-  taskTitle,
-  setTaskTitle,
-  setIsCompleted,
-  todos,
-  isDialogOpen,
-  todoId,
-  closeDialog,
-}) => {
+const EditTodoDialog = ({ todos, isDialogOpen, todoId, closeDialog }) => {
   const classes = useStyles();
   const todo = todos.filter((todo) => todo.id === todoId)[0];
 
-  const [desc, setDesc] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [taskTitle, setTaskTitle] = useState(
+    todo !== undefined ? todo.attributes.title : ''
+  );
+
+  const [desc, setDesc] = useState(
+    todo !== undefined ? todo.attributes.description : ''
+  );
+
+  const [selectedDate, setSelectedDate] = useState(
+    todo !== undefined
+      ? todo.attributes.deadline !== null
+        ? new Date(todo.attributes.deadline)
+        : new Date()
+      : new Date()
+  );
+
   const { updateTodo } = useTodo();
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-    console.log(format(selectedDate, 'yyyy-MM-dd HH:mm:ss'));
-  };
+  const handleDateChange = (date) => setSelectedDate(date);
 
   return (
-    <div>
+    <>
       <Dialog
         open={isDialogOpen}
         maxWidth="lg"
@@ -74,37 +76,26 @@ const EditTodoDialog = ({
             label="Description for this Todo"
             placeholder="Add a description here"
             multiline
-            rows={4}
+            rows={3}
             variant="filled"
+            value={desc}
             onChange={(e) => setDesc(e.target.value)}
           />
           <br />
           <br />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid container justify="space-evenly" alignItems="center">
-              <KeyboardDatePicker
-                margin="normal"
-                label="Due on (date)"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                onChange={handleDateChange}
-                disablePast
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-              <br />
-              <KeyboardTimePicker
-                margin="normal"
-                label="Due at (time)"
-                value={selectedDate}
-                onChange={handleDateChange}
-                disablePast
-                KeyboardButtonProps={{
-                  'aria-label': 'change time',
-                }}
-              />
-            </Grid>
+            <KeyboardDatePicker
+              fullWidth
+              margin="normal"
+              label="Due on (date)"
+              format="dd/MM/yyyy"
+              value={selectedDate}
+              onChange={handleDateChange}
+              disablePast
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
           </MuiPickersUtilsProvider>
           <DialogContentText>Tags</DialogContentText>
           <DialogContentText>Subtodos</DialogContentText>
@@ -112,9 +103,10 @@ const EditTodoDialog = ({
         <DialogActions>
           <Button
             onClick={() => {
-              setIsCompleted(true);
               updateTodo(todoId, { completed: true });
-              closeDialog();
+              setTimeout(() => {
+                closeDialog();
+              }, 500);
             }}
             size="small"
             startIcon={<DoneOutlineIcon />}
@@ -130,12 +122,27 @@ const EditTodoDialog = ({
           >
             Discard Changes
           </Button>
-          <Button size="small" startIcon={<SaveIcon />} color="primary">
+          <Button
+            onClick={() => {
+              updateTodo(todoId, {
+                title: taskTitle,
+                description: desc,
+                deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
+              });
+              setTimeout(() => {
+                closeDialog();
+              }, 500);
+            }}
+            size="small"
+            startIcon={<SaveIcon />}
+            color="primary"
+          >
             Save
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+      {!isDialogOpen && <Redirect to="/home" />}
+    </>
   );
 };
 
