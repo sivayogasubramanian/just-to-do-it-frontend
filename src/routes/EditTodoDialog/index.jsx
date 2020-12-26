@@ -19,14 +19,28 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { closeDialog } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
+import { connect } from 'react-redux';
+import { Zoom } from '@material-ui/core';
+import useTodo from '../../hooks/useTodo';
 
-const EditTodoDialog = ({ todoId, title, completed }) => {
+const EditTodoDialog = ({
+  taskTitle,
+  setTaskTitle,
+  setIsCompleted,
+  todos,
+  isDialogOpen,
+  todoId,
+  closeDialog,
+}) => {
   const classes = useStyles();
-  const [taskTitle, setTaskTitle] = useState(title);
+  const todo = todos.filter((todo) => todo.id === todoId)[0];
+
   const [desc, setDesc] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { updateTodo } = useTodo();
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -35,7 +49,13 @@ const EditTodoDialog = ({ todoId, title, completed }) => {
 
   return (
     <div>
-      <Dialog open={true} maxWidth="lg" fullWidth className={classes.dialog}>
+      <Dialog
+        open={isDialogOpen}
+        maxWidth="lg"
+        fullWidth
+        className={classes.dialog}
+        TransitionComponent={Zoom}
+      >
         <DialogTitle>
           <EditOutlinedIcon className={classes.editIcon} />
           Edit Todo Details
@@ -90,10 +110,24 @@ const EditTodoDialog = ({ todoId, title, completed }) => {
           <DialogContentText>Subtodos</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button size="small" startIcon={<DoneOutlineIcon />} color="primary">
+          <Button
+            onClick={() => {
+              setIsCompleted(true);
+              updateTodo(todoId, { completed: true });
+              closeDialog();
+            }}
+            size="small"
+            startIcon={<DoneOutlineIcon />}
+            color="primary"
+          >
             Mark as Completed
           </Button>
-          <Button size="small" startIcon={<DeleteIcon />} color="primary">
+          <Button
+            onClick={closeDialog}
+            size="small"
+            startIcon={<DeleteIcon />}
+            color="primary"
+          >
             Discard Changes
           </Button>
           <Button size="small" startIcon={<SaveIcon />} color="primary">
@@ -105,4 +139,18 @@ const EditTodoDialog = ({ todoId, title, completed }) => {
   );
 };
 
-export default EditTodoDialog;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos.data,
+    isDialogOpen: state.misc.dialog.isDialogOpen,
+    todoId: state.misc.dialog.todoId,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeDialog: () => dispatch(closeDialog()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditTodoDialog);
