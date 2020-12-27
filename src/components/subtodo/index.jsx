@@ -15,7 +15,7 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Subtodo = ({ todoId, title, completed, isDialogOpen, openDialog }) => {
+const Subtodo = ({ subTodoId, title, completed }) => {
   const classes = useStyles();
   // const { updateTodo, destroyTodo } = useTodo();
   const [taskTitle, setTaskTitle] = useState(title);

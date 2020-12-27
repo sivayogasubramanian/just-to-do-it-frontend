@@ -24,10 +24,20 @@ import { useStyles } from './styles';
 import { connect } from 'react-redux';
 import { Zoom } from '@material-ui/core';
 import useTodo from '../../hooks/useTodo';
+import Subtodo from '../../components/subtodo';
 
-const EditTodoDialog = ({ todos, isDialogOpen, todoId, closeDialog }) => {
+const EditTodoDialog = ({
+  todos,
+  allSubtodos,
+  isDialogOpen,
+  todoId,
+  closeDialog,
+}) => {
   const classes = useStyles();
   const todo = todos.filter((todo) => todo.id === todoId)[0];
+  const subtodos = allSubtodos.filter(
+    (subtodo) => subtodo.attributes.todo_id === parseInt(todoId)
+  );
 
   const [taskTitle, setTaskTitle] = useState(
     todo !== undefined ? todo.attributes.title : ''
@@ -98,7 +108,14 @@ const EditTodoDialog = ({ todos, isDialogOpen, todoId, closeDialog }) => {
             />
           </MuiPickersUtilsProvider>
           <DialogContentText>Tags</DialogContentText>
-          <DialogContentText>Subtodos</DialogContentText>
+          {subtodos.map((subtodo) => (
+            <Subtodo
+              key={subtodo.id}
+              subTodoId={subtodo.id}
+              title={subtodo.attributes.title}
+              completed={subtodo.attributes.completed}
+            />
+          ))}
         </DialogContent>
         <DialogActions>
           <Button
@@ -149,6 +166,7 @@ const EditTodoDialog = ({ todos, isDialogOpen, todoId, closeDialog }) => {
 const mapStateToProps = (state) => {
   return {
     todos: state.todos.data,
+    allSubtodos: state.todos.included,
     isDialogOpen: state.misc.dialog.isDialogOpen,
     todoId: state.misc.dialog.todoId,
   };
