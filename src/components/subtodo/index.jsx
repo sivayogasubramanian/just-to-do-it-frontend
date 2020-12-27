@@ -10,7 +10,6 @@ import {
   Button,
 } from '@material-ui/core';
 // MUI Icons
-import SubdirectoryArrowRightOutlinedIcon from '@material-ui/icons/SubdirectoryArrowRightOutlined';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
@@ -34,9 +33,6 @@ const Subtodo = ({ subTodoId, title, completed }) => {
             className={classes.grid}
           >
             <Grid item xs={2}>
-              <SubdirectoryArrowRightOutlinedIcon className={classes.icon} />
-            </Grid>
-            <Grid item xs={2}>
               <Checkbox
                 color="primary"
                 checked={isCompleted}
@@ -50,7 +46,7 @@ const Subtodo = ({ subTodoId, title, completed }) => {
                 onChange={(e) => setTaskTitle(e.target.value)}
               />
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={4}>
               <Button size="large">
                 <DeleteOutlineTwoToneIcon />
               </Button>

@@ -11,7 +11,4 @@ export const useStyles = makeStyles({
     marginTop: '10px',
     marginBottom: '5px',
   },
-  icon: {
-    marginTop: '5px',
-  },
 });
