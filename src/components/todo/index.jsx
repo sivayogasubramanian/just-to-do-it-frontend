@@ -20,7 +20,7 @@ import SaveIcon from '@material-ui/icons/Save';
 // Styles
 import { useStyles } from './styles';
 
-const Todo = ({ todoId, title, completed, isDialogOpen, openDialog }) => {
+const Todo = ({ todoId, title, completed, openDialog }) => {
   const classes = useStyles();
   const { updateTodo, destroyTodo } = useTodo();
   const [taskTitle, setTaskTitle] = useState(title);
