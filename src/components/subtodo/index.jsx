@@ -24,15 +24,18 @@ const Subtodo = ({ subTodoId, title, completed }) => {
   return (
     <>
       <Grow in={checked}>
-        <Card className={classes.card}>
+        <Card
+          raised
+          className={isCompleted ? classes.cardCompleted : classes.card}
+        >
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justify="space-around"
             alignItems="center"
             className={classes.grid}
           >
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <Checkbox
                 color="primary"
                 checked={isCompleted}
@@ -46,7 +49,7 @@ const Subtodo = ({ subTodoId, title, completed }) => {
                 onChange={(e) => setTaskTitle(e.target.value)}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={2}>
               <Button size="large">
                 <DeleteOutlineTwoToneIcon />
               </Button>
