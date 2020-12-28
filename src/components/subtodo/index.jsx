@@ -13,10 +13,11 @@ import {
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
+import useSubtodo from '../../hooks/useSubtodo';
 
-const Subtodo = ({ subTodoId, title, completed }) => {
+const Subtodo = ({ todoId, subTodoId, title, completed }) => {
   const classes = useStyles();
-  // const { updateTodo, destroyTodo } = useTodo();
+  const { destroySubtodo } = useSubtodo();
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
@@ -50,7 +51,13 @@ const Subtodo = ({ subTodoId, title, completed }) => {
               />
             </Grid>
             <Grid item xs={2}>
-              <Button size="large">
+              <Button
+                onClick={() => {
+                  destroySubtodo(todoId, subTodoId);
+                  setChecked(false);
+                }}
+                size="large"
+              >
                 <DeleteOutlineTwoToneIcon />
               </Button>
             </Grid>
