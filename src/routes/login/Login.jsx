@@ -12,6 +12,7 @@ import {
   Container,
   CircularProgress,
   Card,
+  Zoom,
 } from '@material-ui/core';
 // MUI icons and App logo
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
@@ -36,76 +37,78 @@ const Login = ({ loading, error, isAuthenticated }) => {
       minHeight="100vh"
       className={classes.bgColor}
     >
-      <Card raised>
-        <Container component="main" maxWidth="xs">
-          <div>
-            <br />
-            <img
-              className={classes.responsive}
-              src={Logo}
-              alt="Logo"
-              width="400"
-              height="110"
-            />
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
-            <form noValidate onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                size="medium"
-                onChange={(e) => setEmail(e.target.value)}
+      <Zoom in={true}>
+        <Card raised>
+          <Container component="main" maxWidth="xs">
+            <div>
+              <br />
+              <img
+                className={classes.responsive}
+                src={Logo}
+                alt="Logo"
+                width="400"
+                height="110"
               />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                size="medium"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <br />
-              <br />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                color="primary"
-              >
-                Sign In
-              </Button>
-              <br />
-              <br />
-              <Link to="/register">Don't have an account? Register here</Link>
-              <br />
-              <br />
-            </form>
-            {loading && <CircularProgress />}
-            {error && (
-              <>
-                <ErrorOutlineIcon color="error" fontSize="small" />
-                <Typography variant="subtitle1" color="error">
-                  Your email or password is incorrect. Please try again.
-                </Typography>
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
+              <form noValidate onSubmit={handleSubmit}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  size="medium"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  size="medium"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <br />
-              </>
-            )}
-            {isAuthenticated && <Redirect to="/home" />}
-          </div>
-        </Container>
-      </Card>
+                <br />
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                >
+                  Sign In
+                </Button>
+                <br />
+                <br />
+                <Link to="/register">Don't have an account? Register here</Link>
+                <br />
+                <br />
+              </form>
+              {loading && <CircularProgress />}
+              {error && (
+                <>
+                  <ErrorOutlineIcon color="error" fontSize="small" />
+                  <Typography variant="subtitle1" color="error">
+                    Your email or password is incorrect. Please try again.
+                  </Typography>
+                  <br />
+                </>
+              )}
+              {isAuthenticated && <Redirect to="/home" />}
+            </div>
+          </Container>
+        </Card>
+      </Zoom>
     </Box>
   );
 };

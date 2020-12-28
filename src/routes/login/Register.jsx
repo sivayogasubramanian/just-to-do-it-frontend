@@ -15,6 +15,7 @@ import {
   Container,
   CircularProgress,
   Card,
+  Zoom,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 // MUI icons and App logo
@@ -52,113 +53,115 @@ const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
       minHeight="100vh"
       className={classes.bgColor}
     >
-      <Card raised>
-        <Container component="main" maxWidth="xs">
-          <div>
-            <img
-              className={classes.responsive}
-              src={Logo}
-              alt="Logo"
-              width="400"
-              height="110"
-            />
-            <Typography component="h1" variant="h5">
-              Register
-            </Typography>
-            <form noValidate onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="Name"
-                label="Name"
-                name="name"
-                autoFocus
-                size="medium"
-                onChange={(e) => setName(e.target.value)}
+      <Zoom in={true}>
+        <Card raised>
+          <Container component="main" maxWidth="xs">
+            <div>
+              <img
+                className={classes.responsive}
+                src={Logo}
+                alt="Logo"
+                width="400"
+                height="110"
               />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                size="medium"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                size="medium"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                name="password_confirmation"
-                label="Password Confirmation"
-                type="password"
-                id="password_confirmation"
-                autoComplete="current-password"
-                size="medium"
-                onChange={(e) => setPasswordCfm(e.target.value)}
-              />
-              <br />
-              <br />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                color="primary"
-              >
-                Create New Account
-              </Button>
-              <br />
-              <br />
-              <Link to="/">Already have an account?</Link>
-              <br />
-              <br />
-            </form>
-            {loading && <CircularProgress />}
-            {errorMsg && (
-              <>
-                <ErrorOutlineIcon color="error" fontSize="small" />
-                {errorMsg.map((error, index) => (
-                  <Typography key={index} variant="subtitle1" color="error">
-                    {error}
-                  </Typography>
-                ))}
+              <Typography component="h1" variant="h5">
+                Register
+              </Typography>
+              <form noValidate onSubmit={handleSubmit}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  id="Name"
+                  label="Name"
+                  name="name"
+                  autoFocus
+                  size="medium"
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  size="medium"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  size="medium"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  fullWidth
+                  name="password_confirmation"
+                  label="Password Confirmation"
+                  type="password"
+                  id="password_confirmation"
+                  autoComplete="current-password"
+                  size="medium"
+                  onChange={(e) => setPasswordCfm(e.target.value)}
+                />
                 <br />
-              </>
-            )}
-            {success && (
-              <>
-                <Alert variant="outlined" severity="success" color="info">
-                  Account created successfully! Please login now. You will be
-                  redirected to login page.
-                </Alert>
                 <br />
-                <p hidden>
-                  {setTimeout(() => {
-                    toggleSuccess();
-                    history.push('/');
-                  }, 4000)}
-                </p>
-              </>
-            )}
-          </div>
-        </Container>
-      </Card>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                >
+                  Create New Account
+                </Button>
+                <br />
+                <br />
+                <Link to="/">Already have an account?</Link>
+                <br />
+                <br />
+              </form>
+              {loading && <CircularProgress />}
+              {errorMsg && (
+                <>
+                  <ErrorOutlineIcon color="error" fontSize="small" />
+                  {errorMsg.map((error, index) => (
+                    <Typography key={index} variant="subtitle1" color="error">
+                      {error}
+                    </Typography>
+                  ))}
+                  <br />
+                </>
+              )}
+              {success && (
+                <>
+                  <Alert variant="outlined" severity="success" color="info">
+                    Account created successfully! Please login now. You will be
+                    redirected to login page.
+                  </Alert>
+                  <br />
+                  <p hidden>
+                    {setTimeout(() => {
+                      toggleSuccess();
+                      history.push('/');
+                    }, 4000)}
+                  </p>
+                </>
+              )}
+            </div>
+          </Container>
+        </Card>
+      </Zoom>
     </Box>
   );
 };
