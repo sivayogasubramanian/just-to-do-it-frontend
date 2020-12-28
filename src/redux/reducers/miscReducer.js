@@ -6,10 +6,12 @@ import {
   SET_ERROR_MSG,
   OPEN_DIALOG,
   CLOSE_DIALOG,
+  TOGGLE_SAVE,
 } from '../actionTypes';
 
 const initialState = {
   dialog: { isDialogOpen: false, todoId: null },
+  save: false,
   loading: false,
   success: false,
   error: false,
@@ -17,7 +19,7 @@ const initialState = {
 };
 
 const miscReducer = (state = initialState, action) => {
-  const { loading, error, success } = state;
+  const { loading, error, success, save } = state;
   switch (action.type) {
     case TOGGLE_LOADING:
       return { ...state, loading: !loading };
@@ -25,6 +27,8 @@ const miscReducer = (state = initialState, action) => {
       return { ...state, error: !error };
     case TOGGLE_SUCCESS:
       return { ...state, success: !success };
+    case TOGGLE_SAVE:
+      return { ...state, save: !save };
     case SET_ERROR_MSG:
       return { ...state, errorMsg: action.payload };
     case OPEN_DIALOG:

@@ -6,6 +6,7 @@ import {
   TOGGLE_SUCCESS,
   OPEN_DIALOG,
   CLOSE_DIALOG,
+  TOGGLE_SAVE,
 } from '../actionTypes';
 
 export const toggleLoading = () => {
@@ -43,5 +44,11 @@ export const openDialog = (payload) => {
 export const closeDialog = () => {
   return {
     type: CLOSE_DIALOG,
+  };
+};
+
+export const toggleSave = () => {
+  return {
+    type: TOGGLE_SAVE,
   };
 };
