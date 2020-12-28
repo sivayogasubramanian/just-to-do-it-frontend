@@ -1,5 +1,7 @@
 // React and helpers
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import useSubtodo from '../../hooks/useSubtodo';
 // MUI Components
 import {
   Card,
@@ -13,8 +15,6 @@ import {
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
-import useSubtodo from '../../hooks/useSubtodo';
-import { useSelector } from 'react-redux';
 
 const Subtodo = ({ todoId, subTodoId, title, completed }) => {
   const classes = useStyles();
