@@ -26,6 +26,7 @@ import { Zoom } from '@material-ui/core';
 import useTodo from '../../hooks/useTodo';
 import useSubtodo from '../../hooks/useSubtodo';
 import Subtodo from '../../components/subtodo';
+import TagsArray from '../../components/tags';
 
 const EditTodoDialog = ({
   todos,
@@ -111,7 +112,7 @@ const EditTodoDialog = ({
               }}
             />
           </MuiPickersUtilsProvider>
-          <DialogContentText>Tags</DialogContentText>
+          <TagsArray />
           {subtodos.map((subtodo) => (
             <Subtodo
               key={subtodo.id}
