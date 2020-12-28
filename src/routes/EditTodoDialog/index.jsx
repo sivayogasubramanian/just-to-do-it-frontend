@@ -1,31 +1,37 @@
+// React and helpers
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import useTodo from '../../hooks/useTodo';
+import useSubtodo from '../../hooks/useSubtodo';
+import { connect } from 'react-redux';
+// Components
+import TagsArray from '../../components/tags';
+import Subtodo from '../../components/subtodo';
+// MUI Components
+import { Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-import SaveIcon from '@material-ui/icons/Save';
-import 'date-fns';
-import DateFnsUtils from '@date-io/date-fns';
-import { format } from 'date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+// MUI Icons
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import SaveIcon from '@material-ui/icons/Save';
+// Date Utils
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { format } from 'date-fns';
+// Actions
 import { closeDialog, toggleSave } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
-import { connect } from 'react-redux';
-import { Zoom } from '@material-ui/core';
-import useTodo from '../../hooks/useTodo';
-import useSubtodo from '../../hooks/useSubtodo';
-import Subtodo from '../../components/subtodo';
-import TagsArray from '../../components/tags';
 
 const EditTodoDialog = ({
   todos,
