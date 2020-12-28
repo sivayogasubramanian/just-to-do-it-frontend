@@ -78,6 +78,7 @@ const EditTodoDialog = ({
           Edit Todo Details
         </DialogTitle>
         <DialogContent>
+          <p>Todo:</p>
           <TextField
             fullWidth
             label="Todo"
@@ -86,6 +87,7 @@ const EditTodoDialog = ({
           />
           <br />
           <br />
+          <p>Description:</p>
           <TextField
             fullWidth
             label="Description for this Todo"
@@ -113,6 +115,7 @@ const EditTodoDialog = ({
             />
           </MuiPickersUtilsProvider>
           <TagsArray />
+          <p>Subtodos:</p>
           {subtodos.map((subtodo) => (
             <Subtodo
               key={subtodo.id}
