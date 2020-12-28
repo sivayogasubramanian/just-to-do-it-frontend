@@ -24,6 +24,7 @@ import { useStyles } from './styles';
 import { connect } from 'react-redux';
 import { Zoom } from '@material-ui/core';
 import useTodo from '../../hooks/useTodo';
+import useSubtodo from '../../hooks/useSubtodo';
 import Subtodo from '../../components/subtodo';
 
 const EditTodoDialog = ({
@@ -56,6 +57,7 @@ const EditTodoDialog = ({
   );
 
   const { updateTodo } = useTodo();
+  const { createSubtodo } = useSubtodo();
 
   const handleDateChange = (date) => setSelectedDate(date);
 
@@ -111,11 +113,21 @@ const EditTodoDialog = ({
           {subtodos.map((subtodo) => (
             <Subtodo
               key={subtodo.id}
+              todoId={todoId}
               subTodoId={subtodo.id}
               title={subtodo.attributes.title}
               completed={subtodo.attributes.completed}
             />
           ))}
+          <Button
+            onClick={() => createSubtodo(todoId)}
+            fullWidth
+            variant="outlined"
+            size="large"
+            className={classes.addBtn}
+          >
+            Add Subtodo
+          </Button>
         </DialogContent>
         <DialogActions>
           <Button
