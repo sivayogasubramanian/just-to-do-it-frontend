@@ -4,10 +4,20 @@ import { connect } from 'react-redux';
 import useTodo from '../../hooks/useTodo';
 // MUI Components
 import { Button, Grid, TextField, Chip, Paper } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 // Styles
 import useStyles from './styles';
+import { setErrorMsg, toggleError } from '../../redux/actions/miscActions';
 
-const TagsArray = ({ todos, todoId, isSubtodoSave }) => {
+const TagsArray = ({
+  todos,
+  todoId,
+  isSubtodoSave,
+  errorMsg,
+  isError,
+  toggleError,
+  setErrorMsg,
+}) => {
   const classes = useStyles();
   const { updateTodo } = useTodo();
   const tags = todos.filter((todo) => todo.id === todoId)[0].attributes.tags;
@@ -55,8 +65,17 @@ const TagsArray = ({ todos, todoId, isSubtodoSave }) => {
         <Grid item xs={2}>
           <Button
             onClick={() => {
-              setChipData((chips) => [...chips, newTag]);
-              setNewTag('');
+              if (newTag) {
+                setChipData((chips) => [...chips, newTag]);
+                setNewTag('');
+              } else {
+                toggleError();
+                setErrorMsg('Please type something before adding a tag.');
+                setTimeout(() => {
+                  toggleError();
+                  setErrorMsg('');
+                }, 3000);
+              }
             }}
             fullWidth
             variant="outlined"
@@ -65,6 +84,14 @@ const TagsArray = ({ todos, todoId, isSubtodoSave }) => {
           </Button>
         </Grid>
       </Grid>
+      {isError && (
+        <>
+          <br />
+          <Alert variant="outlined" severity="error" color="error">
+            {errorMsg}
+          </Alert>
+        </>
+      )}
       <br />
     </>
   );
@@ -75,7 +102,16 @@ const mapStateToProps = (state) => {
     todos: state.todos.data,
     todoId: state.misc.dialog.todoId,
     isSubtodoSave: state.misc.save,
+    isError: state.misc.error,
+    errorMsg: state.misc.errorMsg,
   };
 };
 
-export default connect(mapStateToProps)(TagsArray);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleError: () => dispatch(toggleError()),
+    setErrorMsg: (msg) => dispatch(setErrorMsg(msg)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TagsArray);
