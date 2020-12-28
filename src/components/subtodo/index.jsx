@@ -14,13 +14,21 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 import useSubtodo from '../../hooks/useSubtodo';
+import { useSelector } from 'react-redux';
 
 const Subtodo = ({ todoId, subTodoId, title, completed }) => {
   const classes = useStyles();
-  const { destroySubtodo } = useSubtodo();
+  const { destroySubtodo, updateSubtodo } = useSubtodo();
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
+  const isSubtodoSave = useSelector((state) => state.misc.save);
+
+  isSubtodoSave &&
+    updateSubtodo(todoId, subTodoId, {
+      title: taskTitle,
+      completed: isCompleted,
+    });
 
   return (
     <>
