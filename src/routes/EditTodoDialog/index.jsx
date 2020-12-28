@@ -18,7 +18,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { closeDialog } from '../../redux/actions/miscActions';
+import { closeDialog, toggleSave } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
 import { connect } from 'react-redux';
@@ -33,9 +33,14 @@ const EditTodoDialog = ({
   isDialogOpen,
   todoId,
   closeDialog,
+  toggleSave,
 }) => {
   const classes = useStyles();
+  const { updateTodo } = useTodo();
+  const { createSubtodo } = useSubtodo();
+
   const todo = todos.filter((todo) => todo.id === todoId)[0];
+
   const subtodos = allSubtodos.filter(
     (subtodo) => subtodo.attributes.todo_id === parseInt(todoId)
   );
@@ -55,9 +60,6 @@ const EditTodoDialog = ({
         : new Date()
       : new Date()
   );
-
-  const { updateTodo } = useTodo();
-  const { createSubtodo } = useSubtodo();
 
   const handleDateChange = (date) => setSelectedDate(date);
 
@@ -153,12 +155,14 @@ const EditTodoDialog = ({
           </Button>
           <Button
             onClick={() => {
+              toggleSave();
               updateTodo(todoId, {
                 title: taskTitle,
                 description: desc,
                 deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
               });
               setTimeout(() => {
+                toggleSave();
                 closeDialog();
               }, 500);
             }}
@@ -187,6 +191,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeDialog: () => dispatch(closeDialog()),
+    toggleSave: () => dispatch(toggleSave()),
   };
 };
 
