@@ -54,7 +54,7 @@ const TagsArray = ({
         <p>No tags yet</p>
       )}
       <Grid container spacing={2}>
-        <Grid item xs={10}>
+        <Grid item xs={7}>
           <TextField
             fullWidth
             label="Add New Tag"
@@ -62,7 +62,7 @@ const TagsArray = ({
             onChange={(e) => setNewTag(e.target.value)}
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={5}>
           <Button
             onClick={() => {
               if (newTag) {
