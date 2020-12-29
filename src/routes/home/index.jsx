@@ -1,8 +1,8 @@
 // React and helpers
 import React from 'react';
 import useTodo from '../../hooks/useTodo';
-import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
@@ -13,17 +13,16 @@ import AddIcon from '@material-ui/icons/Add';
 // Styles
 import { useStyles } from './styles';
 
-const Home = () => {
+const Home = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
   const { createTodo } = useTodo();
-  const isDialogOpen = useSelector((state) => state.misc.dialog.isDialogOpen);
 
   return (
     <>
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <TodoList />
+        <TodoList filteredTodos={todos} />
       </div>
       <Fab
         size="medium"
@@ -39,4 +38,11 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos.data,
+    isDialogOpen: state.misc.dialog.isDialogOpen,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
