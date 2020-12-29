@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import { useStyles } from './styles';
 import useAuth from '../../hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // MUI Components
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -97,12 +97,17 @@ function MiniDrawer() {
         <Divider />
         <List>
           {items.map((item) => (
-            <Link to={item.path} key={item.index}>
+            <NavLink
+              exact
+              to={item.path}
+              key={item.index}
+              activeClassName={classes.active}
+            >
               <ListItem className={classes.listItems} button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItem>
-            </Link>
+            </NavLink>
           ))}
         </List>
         <Divider />
