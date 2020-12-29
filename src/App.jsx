@@ -1,12 +1,13 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GuardedRoute from './helpers/GuardedRoute';
-import Login from './routes/login/Login';
-import Register from './routes/login/Register';
-import Home from './routes/home';
+import Login from './routes/Login/Login';
+import Register from './routes/Login/Register';
+import Home from './routes/Home';
 import EditTodoDialog from './routes/EditTodoDialog';
 import { useSelector } from 'react-redux';
-import Completed from './routes/completed';
+import Completed from './routes/Completed';
+import Today from './routes/Today';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -32,6 +33,12 @@ const App = () => {
             exact
             path="/completed"
             component={Completed}
+            auth={isAuthenticated}
+          />
+          <GuardedRoute
+            exact
+            path="/today"
+            component={Today}
             auth={isAuthenticated}
           />
         </Switch>
