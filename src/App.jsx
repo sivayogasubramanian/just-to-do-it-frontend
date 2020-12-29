@@ -6,6 +6,7 @@ import Register from './routes/login/Register';
 import Home from './routes/home';
 import EditTodoDialog from './routes/EditTodoDialog';
 import { useSelector } from 'react-redux';
+import Completed from './routes/completed';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -25,6 +26,12 @@ const App = () => {
             exact
             path="/home/edit"
             component={EditTodoDialog}
+            auth={isAuthenticated}
+          />
+          <GuardedRoute
+            exact
+            path="/completed"
+            component={Completed}
             auth={isAuthenticated}
           />
         </Switch>
