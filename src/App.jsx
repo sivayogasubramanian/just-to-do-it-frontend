@@ -8,6 +8,7 @@ import EditTodoDialog from './routes/EditTodoDialog';
 import { useSelector } from 'react-redux';
 import Completed from './routes/Completed';
 import Today from './routes/Today';
+import NextWeek from './routes/NextWeek';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -39,6 +40,12 @@ const App = () => {
             exact
             path="/today"
             component={Today}
+            auth={isAuthenticated}
+          />
+          <GuardedRoute
+            exact
+            path="/nextweek"
+            component={NextWeek}
             auth={isAuthenticated}
           />
         </Switch>
