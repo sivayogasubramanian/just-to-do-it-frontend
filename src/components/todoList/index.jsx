@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import Todo from '../todo';
 import { Alert } from '@material-ui/lab';
 
-const TodoList = ({ todos, isError }) => {
+const TodoList = ({ filteredTodos, isError }) => {
   return (
     <>
-      {todos.data.map((todo) => (
+      {filteredTodos.map((todo) => (
         <Todo
           key={todo.id}
           todoId={todo.id}
@@ -28,7 +28,6 @@ const TodoList = ({ todos, isError }) => {
 
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos,
     isError: state.misc.error,
   };
 };
