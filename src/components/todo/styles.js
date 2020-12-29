@@ -7,6 +7,12 @@ export const useStyles = makeStyles({
     marginRight: '10px',
     marginTop: '10px',
   },
+  cardCompleted: {
+    // Beige
+    backgroundColor: 'lightGreen',
+    marginRight: '10px',
+    marginTop: '10px',
+  },
   grid: {
     marginTop: '10px',
     marginBottom: '5px',

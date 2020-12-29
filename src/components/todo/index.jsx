@@ -35,7 +35,10 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
         mountOnEnter
         timeout={{ enter: 300, exit: 500 }}
       >
-        <Card raised className={classes.card}>
+        <Card
+          raised
+          className={isCompleted ? classes.cardCompleted : classes.card}
+        >
           <Grid
             container
             direction="row"
