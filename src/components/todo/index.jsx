@@ -30,10 +30,10 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
   return (
     <>
       <Slide
-        direction="right"
+        direction="left"
         in={checked}
         mountOnEnter
-        timeout={{ enter: 300, exit: 300 }}
+        timeout={{ enter: 300, exit: 500 }}
       >
         <Card raised className={classes.card}>
           <Grid
