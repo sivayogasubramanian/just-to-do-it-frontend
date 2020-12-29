@@ -9,7 +9,7 @@ export const items = [
   { index: 2, text: 'Due Today', icon: <TodayIcon />, path: '/today' },
   {
     index: 3,
-    text: 'Due Next Week',
+    text: 'Due This Week',
     icon: <NextWeekIcon />,
     path: '/nextweek',
   },
