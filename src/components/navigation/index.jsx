@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
-import { useStyles } from './styles';
 import useAuth from '../../hooks/useAuth';
 import { NavLink } from 'react-router-dom';
 // MUI Components
@@ -22,11 +21,12 @@ import Box from '@material-ui/core/Box';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 // Nav Items
 import { items } from './items';
-import { tags } from './tags';
+import Tags from './Tags';
+// Styles
+import { useStyles } from './styles';
 
 function MiniDrawer() {
   const classes = useStyles();
@@ -111,16 +111,7 @@ function MiniDrawer() {
           ))}
         </List>
         <Divider />
-        <List>
-          {tags.map((tag) => (
-            <ListItem className={classes.listItems} button key={tag.index}>
-              <ListItemIcon>
-                <LabelOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary={tag.text} />
-            </ListItem>
-          ))}
-        </List>
+        <Tags />
       </Drawer>
     </div>
   );
