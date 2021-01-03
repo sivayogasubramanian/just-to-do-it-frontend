@@ -5,20 +5,18 @@ import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
+// Date Functions
+import { isToday } from 'date-fns';
 // Styles
 import { useStyles } from './styles';
 
 const Today = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
-  const todaysDate = new Date();
-  const todaysDateSqlFormat = (
-    todaysDate.getFullYear() +
-    '-' +
-    (todaysDate.getMonth() + 1) +
-    '-' +
-    todaysDate.getDate()
-  ).toString();
+  const checkDate = (deadline) => {
+    const deadlineDate = new Date(deadline);
+    return isToday(deadlineDate);
+  };
 
   return (
     <>
@@ -29,7 +27,7 @@ const Today = ({ todos, isDialogOpen }) => {
           filteredTodos={todos.filter(
             (todo) =>
               todo.attributes.deadline !== null &&
-              todo.attributes.deadline.split('T')[0] === todaysDateSqlFormat
+              checkDate(todo.attributes.deadline)
           )}
         />
       </div>
