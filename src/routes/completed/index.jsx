@@ -17,9 +17,7 @@ const Completed = ({ todos, isDialogOpen }) => {
       <div className={classes.toolbar} />
       <div className={classes.content}>
         <TodoList
-          filteredTodos={todos.filter(
-            (todo) => todo.attributes.completed === true
-          )}
+          filteredTodos={todos.filter((todo) => todo.attributes.completed)}
         />
       </div>
       {isDialogOpen && <Redirect to="/home/edit" />}
