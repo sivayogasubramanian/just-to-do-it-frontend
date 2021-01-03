@@ -5,7 +5,7 @@ import useTodo from '../../hooks/useTodo';
 import useSubtodo from '../../hooks/useSubtodo';
 import { connect } from 'react-redux';
 // Components
-import TagsArray from '../../components/tags';
+import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
 import { Zoom } from '@material-ui/core';
