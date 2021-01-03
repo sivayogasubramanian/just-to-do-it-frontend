@@ -14,4 +14,5 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginLeft: '70px',
   },
+  paper: { backgroundColor: '#FBFBE5', margin: '20px' },
 }));

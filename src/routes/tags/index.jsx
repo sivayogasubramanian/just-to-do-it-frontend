@@ -19,10 +19,7 @@ const Tags = ({ isDialogOpen, todos, location }) => {
       <div className={classes.toolbar} />
       <div className={classes.content}>
         <Zoom in={true}>
-          <Paper
-            variant="outlined"
-            style={{ backgroundColor: 'lightBlue', margin: '20px' }}
-          >
+          <Paper variant="outlined" className={classes.paper}>
             <Box m="10px">
               <Typography variant="h5">
                 Current Tag Selected: <b>{currentTag}</b>
