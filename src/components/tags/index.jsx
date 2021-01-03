@@ -66,7 +66,7 @@ const TagsArray = ({
           <Button
             onClick={() => {
               if (newTag) {
-                setChipData((chips) => [...chips, newTag]);
+                setChipData((chips) => [...chips, newTag.toUpperCase()]);
                 setNewTag('');
               } else {
                 toggleError();
