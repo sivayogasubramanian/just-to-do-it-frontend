@@ -1,13 +1,17 @@
+// React and helpers
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+// MUI Components
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { connect } from 'react-redux';
-import { useStyles } from './styles';
+// MUI Icons
 import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
 import LabelTwoToneIcon from '@material-ui/icons/LabelTwoTone';
+// Styles
+import { useStyles } from './styles';
 
 const Tags = ({ todos }) => {
   const classes = useStyles();
