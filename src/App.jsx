@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Completed from './routes/completed';
 import Today from './routes/Today';
 import NextWeek from './routes/NextWeek';
+import Tags from './routes/tags';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -46,6 +47,12 @@ const App = () => {
             exact
             path="/nextweek"
             component={NextWeek}
+            auth={isAuthenticated}
+          />
+          <GuardedRoute
+            exact
+            path="/tags"
+            component={Tags}
             auth={isAuthenticated}
           />
         </Switch>
