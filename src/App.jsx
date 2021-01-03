@@ -1,6 +1,7 @@
-import './App.css';
+// React and helpers
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GuardedRoute from './helpers/GuardedRoute';
+// Routes
 import Login from './routes/login/Login';
 import Register from './routes/login/Register';
 import Home from './routes/home';
@@ -10,6 +11,8 @@ import Completed from './routes/completed';
 import Today from './routes/Today';
 import NextWeek from './routes/NextWeek';
 import Tags from './routes/tags';
+// Styles
+import './App.css';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);

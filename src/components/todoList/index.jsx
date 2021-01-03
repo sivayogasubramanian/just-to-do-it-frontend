@@ -1,6 +1,9 @@
+// React and helpers
 import React from 'react';
 import { connect } from 'react-redux';
+// Components
 import Todo from '../todo';
+// MUI Components
 import { Alert } from '@material-ui/lab';
 
 const TodoList = ({ filteredTodos, isError }) => {
