@@ -25,7 +25,7 @@ const Tags = ({ isDialogOpen, todos, location }) => {
           >
             <Box m="10px">
               <Typography variant="h5">
-                Current Tag Selected: {currentTag}
+                Current Tag Selected: <b>{currentTag}</b>
               </Typography>
             </Box>
           </Paper>
