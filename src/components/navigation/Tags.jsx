@@ -4,14 +4,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { useStyles } from './styles';
 import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
+import LabelTwoToneIcon from '@material-ui/icons/LabelTwoTone';
 
-const Tags = () => {
+const Tags = ({ todos }) => {
   const classes = useStyles();
   const tags = new Set();
-  const todos = useSelector((state) => state.todos);
 
   todos.data.map((todo) =>
     todo.attributes.tags.forEach((tag) => {
@@ -25,7 +25,7 @@ const Tags = () => {
         <NavLink exact to={{ pathname: '/tags', props: { tag } }} key={index}>
           <ListItem className={classes.listItems} button key={index}>
             <ListItemIcon>
-              <LabelOutlinedIcon />
+              {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}
             </ListItemIcon>
             <ListItemText primary={tag} />
           </ListItem>
@@ -35,4 +35,10 @@ const Tags = () => {
   );
 };
 
-export default Tags;
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos,
+  };
+};
+
+export default connect(mapStateToProps)(Tags);
