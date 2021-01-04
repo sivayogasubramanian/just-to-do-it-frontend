@@ -1,6 +1,5 @@
 // React and helpers
 import React from 'react';
-import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
 import Account from '../../components/account';
@@ -21,8 +20,4 @@ const MyAccount = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {};
-};
-
-export default connect(mapStateToProps)(MyAccount);
+export default MyAccount;
