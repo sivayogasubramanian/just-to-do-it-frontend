@@ -11,9 +11,9 @@ import Completed from './routes/completed';
 import Today from './routes/Today';
 import NextWeek from './routes/NextWeek';
 import Tags from './routes/tags';
+import MyAccount from './routes/MyAccount';
 // Styles
 import './App.css';
-import Account from './components/account';
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.isAuthenticated);
@@ -59,7 +59,12 @@ const App = () => {
             component={Tags}
             auth={isAuthenticated}
           />
-          <Route exact path="/account" component={Account} />
+          <GuardedRoute
+            exact
+            path="/account"
+            component={MyAccount}
+            auth={isAuthenticated}
+          />
         </Switch>
       </div>
     </Router>
