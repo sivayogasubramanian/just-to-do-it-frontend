@@ -1,4 +1,8 @@
+// React and helpers
 import React from 'react';
+import { connect } from 'react-redux';
+import useAuth from '../../hooks/useAuth';
+// MUI Components
 import {
   Paper,
   TextField,
@@ -9,10 +13,10 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { useStyles } from './styles';
-import { connect } from 'react-redux';
-import useAuth from '../../hooks/useAuth';
+// MUI Icons
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+// Styles
+import { useStyles } from './styles';
 
 const Account = ({ userId, username, loading, success, errorMsg }) => {
   const classes = useStyles();
