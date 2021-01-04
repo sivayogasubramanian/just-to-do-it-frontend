@@ -34,8 +34,8 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
   };
 
   return (
-    <Slide in={true} direction="up">
-      <Paper elevation={10} className={classes.paper}>
+    <Slide in={true} direction="down">
+      <Paper elevation={24} className={classes.paper}>
         <Grid
           container
           direction="column"
