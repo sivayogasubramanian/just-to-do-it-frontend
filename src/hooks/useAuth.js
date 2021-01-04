@@ -30,6 +30,7 @@ const useAuth = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [password_cfm, setPasswordCfm] = useState('');
 
@@ -43,7 +44,13 @@ const useAuth = () => {
       .then((response) => {
         storeToken(response);
         dispatch(toggleLoading());
-        dispatch(storeUser(response.data.user.data.attributes));
+        dispatch(
+          storeUser({
+            id: response.data.user.data.id,
+            ...response.data.user.data.attributes,
+          })
+        );
+        console.log(response);
         dispatch(authenticateUser());
         dispatch(fetchTodos());
       })
@@ -78,6 +85,49 @@ const useAuth = () => {
       });
   };
 
+  const updatePassword = (
+    userId,
+    email,
+    oldPassword,
+    password,
+    password_cfm
+  ) => {
+    dispatch(toggleLoading());
+    authAxios
+      .post('/authenticate', {
+        email,
+        password: oldPassword,
+      })
+      .then(() => {
+        authAxios
+          .patch(`/users/${userId}`, {
+            password,
+            password_confirmation: password_cfm,
+          })
+          .then(() => {
+            dispatch(toggleLoading());
+            dispatch(toggleSuccess());
+            setTimeout(() => {
+              dispatch(toggleSuccess());
+            }, 4000);
+          })
+          .catch((error) => {
+            dispatch(toggleLoading());
+            dispatch(setErrorMsg(error.response.data));
+            setTimeout(() => {
+              dispatch(setErrorMsg(''));
+            }, 4000);
+          });
+      })
+      .catch((error) => {
+        dispatch(toggleLoading());
+        dispatch(setErrorMsg(error.response.data));
+        setTimeout(() => {
+          dispatch(setErrorMsg(''));
+        }, 4000);
+      });
+  };
+
   const logOut = () => {
     dispatch(signOut());
     dispatch(storeUser([]));
@@ -90,12 +140,15 @@ const useAuth = () => {
     setName,
     email,
     setEmail,
+    oldPassword,
+    setOldPassword,
     password,
     setPassword,
     password_cfm,
     setPasswordCfm,
     signIn,
     createAccount,
+    updatePassword,
     logOut,
   };
 };
