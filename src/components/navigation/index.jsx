@@ -96,12 +96,14 @@ function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <ListItem className={classes.listItems} button>
-          <ListItemIcon>
-            <AccountCircleIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Account" />
-        </ListItem>
+        <NavLink exact to="/account" activeClassName={classes.active}>
+          <ListItem className={classes.listItems} button>
+            <ListItemIcon>
+              <AccountCircleIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Account" />
+          </ListItem>
+        </NavLink>
         <Divider />
         <List>
           {items.map((item) => (
