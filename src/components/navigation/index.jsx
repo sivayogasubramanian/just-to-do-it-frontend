@@ -22,6 +22,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // Nav Items
 import { items } from './items';
 import Tags from './Tags';
@@ -94,6 +95,13 @@ function MiniDrawer() {
             )}
           </IconButton>
         </div>
+        <Divider />
+        <ListItem className={classes.listItems} button>
+          <ListItemIcon>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="My Account" />
+        </ListItem>
         <Divider />
         <List>
           {items.map((item) => (

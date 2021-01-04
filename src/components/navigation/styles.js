@@ -54,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
-  listItems: { marginTop: '10px' },
+  listItems: { marginTop: '15px' },
   active: {
     color: 'red',
   },
