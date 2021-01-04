@@ -107,6 +107,10 @@ const useAuth = () => {
           .then(() => {
             dispatch(toggleLoading());
             dispatch(toggleSuccess());
+            setEmail('');
+            setOldPassword('');
+            setPassword('');
+            setPasswordCfm('');
             setTimeout(() => {
               dispatch(toggleSuccess());
             }, 4000);
