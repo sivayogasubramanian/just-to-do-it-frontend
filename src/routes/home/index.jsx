@@ -8,6 +8,7 @@ import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
 // MUI Components
 import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
 // MUI Icons
 import AddIcon from '@material-ui/icons/Add';
 // Styles
@@ -24,15 +25,17 @@ const Home = ({ todos, isDialogOpen }) => {
       <div className={classes.content}>
         <TodoList filteredTodos={todos} />
       </div>
-      <Fab
-        size="medium"
-        className={classes.floatingActionBtn}
-        color="primary"
-        aria-label="add"
-        onClick={() => createTodo()}
-      >
-        <AddIcon />
-      </Fab>
+      <Tooltip title="Add Todo" arrow>
+        <Fab
+          size="medium"
+          className={classes.floatingActionBtn}
+          color="primary"
+          aria-label="add"
+          onClick={() => createTodo()}
+        >
+          <AddIcon />
+        </Fab>
+      </Tooltip>
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
   );
