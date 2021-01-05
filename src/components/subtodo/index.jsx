@@ -10,6 +10,7 @@ import {
   Grid,
   Grow,
   Button,
+  Tooltip,
 } from '@material-ui/core';
 // MUI Icons
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
@@ -45,11 +46,13 @@ const Subtodo = ({ todoId, subTodoId, title, completed }) => {
             className={classes.grid}
           >
             <Grid item xs={1}>
-              <Checkbox
-                color="primary"
-                checked={isCompleted}
-                onClick={(e) => setIsCompleted(!isCompleted)}
-              />
+              <Tooltip title="Mark Subtodo as Completed" arrow>
+                <Checkbox
+                  color="primary"
+                  checked={isCompleted}
+                  onClick={(e) => setIsCompleted(!isCompleted)}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={6}>
               <TextField
@@ -59,15 +62,17 @@ const Subtodo = ({ todoId, subTodoId, title, completed }) => {
               />
             </Grid>
             <Grid item xs={2}>
-              <Button
-                onClick={() => {
-                  destroySubtodo(todoId, subTodoId);
-                  setChecked(false);
-                }}
-                size="large"
-              >
-                <DeleteOutlineTwoToneIcon />
-              </Button>
+              <Tooltip title="Delete Subtodo" arrow>
+                <Button
+                  onClick={() => {
+                    destroySubtodo(todoId, subTodoId);
+                    setChecked(false);
+                  }}
+                  size="large"
+                >
+                  <DeleteOutlineTwoToneIcon />
+                </Button>
+              </Tooltip>
             </Grid>
           </Grid>
         </Card>
