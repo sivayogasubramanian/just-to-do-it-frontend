@@ -120,9 +120,14 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
       <Snackbar
         open={isSnackbarOpen}
         autoHideDuration={3000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         onClose={() => setIsSnackbarOpen(false)}
       >
-        <Alert severity="success" variant="filled">
+        <Alert
+          severity="success"
+          variant="filled"
+          onClose={() => setIsSnackbarOpen(false)}
+        >
           Todo Saved Successfully
         </Alert>
       </Snackbar>
