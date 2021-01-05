@@ -13,7 +13,9 @@ import {
   Button,
   Slide,
   Tooltip,
+  Snackbar,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 // MUI Icons
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
@@ -27,9 +29,11 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
   // Button Handlers
   const onSaveClick = () => {
+    setIsSnackbarOpen(true);
     updateTodo(todoId, {
       title: taskTitle,
       completed: isCompleted,
@@ -113,6 +117,15 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
           </Grid>
         </Card>
       </Slide>
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setIsSnackbarOpen(false)}
+      >
+        <Alert severity="success" variant="filled">
+          Todo Saved Successfully
+        </Alert>
+      </Snackbar>
     </>
   );
 };
