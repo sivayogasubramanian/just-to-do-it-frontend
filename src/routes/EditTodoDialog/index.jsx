@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import { Zoom } from '@material-ui/core';
+import { CircularProgress, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -29,7 +29,11 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns';
 // Actions
-import { closeDialog, toggleSave } from '../../redux/actions/miscActions';
+import {
+  closeDialog,
+  toggleLoading,
+  toggleSave,
+} from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
 
@@ -40,6 +44,8 @@ const EditTodoDialog = ({
   todoId,
   closeDialog,
   toggleSave,
+  toggleLoading,
+  isLoading,
 }) => {
   const classes = useStyles();
   const { updateTodo } = useTodo();
@@ -141,12 +147,15 @@ const EditTodoDialog = ({
           </Button>
         </DialogContent>
         <DialogActions>
+          {isLoading && <CircularProgress />}
           <Button
             onClick={() => {
+              toggleLoading();
               updateTodo(todoId, { completed: true });
               setTimeout(() => {
+                toggleLoading();
                 closeDialog();
-              }, 500);
+              }, 2000);
             }}
             size="small"
             startIcon={<DoneOutlineIcon />}
@@ -165,6 +174,7 @@ const EditTodoDialog = ({
           <Button
             onClick={() => {
               toggleSave();
+              toggleLoading();
               updateTodo(todoId, {
                 title: taskTitle,
                 description: desc,
@@ -172,8 +182,9 @@ const EditTodoDialog = ({
               });
               setTimeout(() => {
                 toggleSave();
+                toggleLoading();
                 closeDialog();
-              }, 500);
+              }, 2000);
             }}
             size="small"
             startIcon={<SaveIcon />}
@@ -194,6 +205,7 @@ const mapStateToProps = (state) => {
     allSubtodos: state.todos.included,
     isDialogOpen: state.misc.dialog.isDialogOpen,
     todoId: state.misc.dialog.todoId,
+    isLoading: state.misc.loading,
   };
 };
 
@@ -201,6 +213,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeDialog: () => dispatch(closeDialog()),
     toggleSave: () => dispatch(toggleSave()),
+    toggleLoading: () => dispatch(toggleLoading()),
   };
 };
 
