@@ -5,6 +5,8 @@ import authAxios from '../helpers/authAxios';
 import { toggleError } from '../redux/actions/miscActions';
 import { fetchTodos } from '../redux/actions/todosActions';
 import { logOut } from '../redux/actions/authActions';
+// Date Fns
+import { format } from 'date-fns';
 
 const useTodo = () => {
   const dispatch = useDispatch();
@@ -19,7 +21,11 @@ const useTodo = () => {
 
   const createTodo = () => {
     authAxios
-      .post(`/api/v1/todos`, { title: '', completed: false })
+      .post(`/api/v1/todos`, {
+        title: '',
+        completed: false,
+        deadline: format(new Date(), 'yyyy-MM-dd'),
+      })
       .then(() => dispatch(fetchTodos()))
       .catch(ErrorHandler);
   };
