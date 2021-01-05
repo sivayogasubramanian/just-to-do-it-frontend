@@ -27,6 +27,29 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
 
+  // Button Handlers
+  const onSaveClick = () => {
+    updateTodo(todoId, {
+      title: taskTitle,
+      completed: isCompleted,
+    });
+  };
+
+  const onEditClick = () => {
+    openDialog({ isDialogOpen: true, todoId: todoId });
+  };
+
+  const onDeleteClick = () => {
+    setChecked(false);
+    destroyTodo(todoId);
+  };
+
+  const onKeyPress = (e) => {
+    const keycode = e.charCode || e.keycode;
+    if (keycode === 13) {
+      onSaveClick();
+    }
+  };
   return (
     <>
       <Slide
@@ -55,41 +78,26 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
             </Grid>
             <Grid item xs={4}>
               <TextField
+                placeholder="Press Enter to Save"
+                autoFocus
                 fullWidth
                 value={taskTitle}
                 onChange={(e) => setTaskTitle(e.target.value)}
+                onKeyPress={onKeyPress}
               />
             </Grid>
             <Grid item xs={2}>
-              <Button
-                onClick={() =>
-                  updateTodo(todoId, {
-                    title: taskTitle,
-                    completed: isCompleted,
-                  })
-                }
-              >
+              <Button onClick={onSaveClick}>
                 <SaveIcon />
               </Button>
             </Grid>
             <Grid item xs={2}>
-              <Button
-                onClick={() =>
-                  openDialog({ isDialogOpen: true, todoId: todoId })
-                }
-                size="large"
-              >
+              <Button onClick={onEditClick} size="large">
                 <EditTwoToneIcon />
               </Button>
             </Grid>
             <Grid item xs={2}>
-              <Button
-                size="large"
-                onClick={() => {
-                  setChecked(false);
-                  destroyTodo(todoId);
-                }}
-              >
+              <Button size="large" onClick={onDeleteClick}>
                 <DeleteOutlineTwoToneIcon />
               </Button>
             </Grid>
