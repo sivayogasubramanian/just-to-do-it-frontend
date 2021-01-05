@@ -71,7 +71,7 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
             className={classes.grid}
           >
             <Grid item xs={2}>
-              <Tooltip title="Mark Todo as Completed">
+              <Tooltip title="Mark Todo as Completed" arrow>
                 <Checkbox
                   color="primary"
                   checked={isCompleted}
@@ -90,21 +90,21 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
               />
             </Grid>
             <Grid item xs={2}>
-              <Tooltip title="Save Todo">
+              <Tooltip title="Save Todo" arrow>
                 <Button onClick={onSaveClick}>
                   <SaveIcon />
                 </Button>
               </Tooltip>
             </Grid>
             <Grid item xs={2}>
-              <Tooltip title="Edit Todo">
+              <Tooltip title="Edit Todo" arrow>
                 <Button onClick={onEditClick} size="large">
                   <EditTwoToneIcon />
                 </Button>
               </Tooltip>
             </Grid>
             <Grid item xs={2}>
-              <Tooltip title="Delete Todo">
+              <Tooltip title="Delete Todo" arrow>
                 <Button size="large" onClick={onDeleteClick}>
                   <DeleteOutlineTwoToneIcon />
                 </Button>
