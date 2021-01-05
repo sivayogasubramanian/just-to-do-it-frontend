@@ -95,7 +95,7 @@ const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
                   margin="normal"
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Password (minimum 6 characters)"
                   type="password"
                   id="password"
                   autoComplete="current-password"
@@ -107,7 +107,7 @@ const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
                   margin="normal"
                   fullWidth
                   name="password_confirmation"
-                  label="Password Confirmation"
+                  label="Password Confirmation (minimum 6 characters)"
                   type="password"
                   id="password_confirmation"
                   autoComplete="current-password"
