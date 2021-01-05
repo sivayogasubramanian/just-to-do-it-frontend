@@ -5,9 +5,10 @@ import useTodo from '../../hooks/useTodo';
 // MUI Components
 import { Button, Grid, TextField, Chip, Paper } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+// Actions
+import { setErrorMsg, toggleError } from '../../redux/actions/miscActions';
 // Styles
 import useStyles from './styles';
-import { setErrorMsg, toggleError } from '../../redux/actions/miscActions';
 
 const TagsArray = ({
   todos,
