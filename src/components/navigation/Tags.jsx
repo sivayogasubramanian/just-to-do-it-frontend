@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip';
 // MUI Icons
 import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
 import LabelTwoToneIcon from '@material-ui/icons/LabelTwoTone';
@@ -26,14 +27,16 @@ const Tags = ({ todos }) => {
   return (
     <List>
       {[...tags].map((tag, index) => (
-        <NavLink exact to={{ pathname: '/tags', props: { tag } }} key={index}>
-          <ListItem className={classes.listItems} button key={index}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}
-            </ListItemIcon>
-            <ListItemText primary={tag} />
-          </ListItem>
-        </NavLink>
+        <Tooltip title={tag}>
+          <NavLink exact to={{ pathname: '/tags', props: { tag } }} key={index}>
+            <ListItem className={classes.listItems} button key={index}>
+              <ListItemIcon>
+                {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}
+              </ListItemIcon>
+              <ListItemText primary={tag} />
+            </ListItem>
+          </NavLink>
+        </Tooltip>
       ))}
     </List>
   );

@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
 // MUI Icons
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -96,28 +97,32 @@ function MiniDrawer() {
           </IconButton>
         </div>
         <Divider />
-        <NavLink exact to="/account" activeClassName={classes.active}>
-          <ListItem className={classes.listItems} button>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="My Account" />
-          </ListItem>
-        </NavLink>
+        <Tooltip title="My Account">
+          <NavLink exact to="/account" activeClassName={classes.active}>
+            <ListItem className={classes.listItems} button>
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Account" />
+            </ListItem>
+          </NavLink>
+        </Tooltip>
         <Divider />
         <List>
           {items.map((item) => (
-            <NavLink
-              exact
-              to={item.path}
-              key={item.index}
-              activeClassName={classes.active}
-            >
-              <ListItem className={classes.listItems} button>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            </NavLink>
+            <Tooltip title={item.text}>
+              <NavLink
+                exact
+                to={item.path}
+                key={item.index}
+                activeClassName={classes.active}
+              >
+                <ListItem className={classes.listItems} button>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItem>
+              </NavLink>
+            </Tooltip>
           ))}
         </List>
         <Divider />
