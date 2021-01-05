@@ -13,10 +13,7 @@ import { useStyles } from './styles';
 const Today = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
-  const checkDate = (deadline) => {
-    const deadlineDate = new Date(deadline);
-    return isToday(deadlineDate);
-  };
+  const checkDate = (deadline) => isToday(new Date(deadline));
 
   return (
     <>

@@ -13,10 +13,7 @@ import { useStyles } from './styles';
 const NextWeek = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
-  const checkDate = (deadline) => {
-    const deadlineDate = new Date(deadline);
-    return isThisWeek(deadlineDate);
-  };
+  const checkDate = (deadline) => isThisWeek(new Date(deadline));
 
   return (
     <>
