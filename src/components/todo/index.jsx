@@ -12,6 +12,7 @@ import {
   Grid,
   Button,
   Slide,
+  Tooltip,
 } from '@material-ui/core';
 // MUI Icons
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
@@ -70,11 +71,13 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
             className={classes.grid}
           >
             <Grid item xs={2}>
-              <Checkbox
-                color="primary"
-                checked={isCompleted}
-                onClick={(e) => setIsCompleted(!isCompleted)}
-              />
+              <Tooltip title="Mark Todo as Completed">
+                <Checkbox
+                  color="primary"
+                  checked={isCompleted}
+                  onClick={(e) => setIsCompleted(!isCompleted)}
+                />
+              </Tooltip>
             </Grid>
             <Grid item xs={4}>
               <TextField
@@ -87,19 +90,25 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
               />
             </Grid>
             <Grid item xs={2}>
-              <Button onClick={onSaveClick}>
-                <SaveIcon />
-              </Button>
+              <Tooltip title="Save Todo">
+                <Button onClick={onSaveClick}>
+                  <SaveIcon />
+                </Button>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
-              <Button onClick={onEditClick} size="large">
-                <EditTwoToneIcon />
-              </Button>
+              <Tooltip title="Edit Todo">
+                <Button onClick={onEditClick} size="large">
+                  <EditTwoToneIcon />
+                </Button>
+              </Tooltip>
             </Grid>
             <Grid item xs={2}>
-              <Button size="large" onClick={onDeleteClick}>
-                <DeleteOutlineTwoToneIcon />
-              </Button>
+              <Tooltip title="Delete Todo">
+                <Button size="large" onClick={onDeleteClick}>
+                  <DeleteOutlineTwoToneIcon />
+                </Button>
+              </Tooltip>
             </Grid>
           </Grid>
         </Card>
