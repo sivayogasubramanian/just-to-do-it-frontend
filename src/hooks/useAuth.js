@@ -50,7 +50,6 @@ const useAuth = () => {
             ...response.data.user.data.attributes,
           })
         );
-        console.log(response);
         dispatch(authenticateUser());
         dispatch(fetchTodos());
       })
