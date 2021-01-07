@@ -154,7 +154,7 @@ const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
                     {setTimeout(() => {
                       toggleSuccess();
                       history.push('/');
-                    }, 4000)}
+                    }, 3000)}
                   </p>
                 </>
               )}
