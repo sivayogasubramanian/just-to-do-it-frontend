@@ -2,7 +2,7 @@
 import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
 // Actions
-import { toggleError } from '../redux/actions/miscActions';
+import { toggleError, toggleLoading } from '../redux/actions/miscActions';
 import { fetchTodos } from '../redux/actions/todosActions';
 import { logOut } from '../redux/actions/authActions';
 // Date Fns
@@ -10,8 +10,15 @@ import { format } from 'date-fns';
 
 const useTodo = () => {
   const dispatch = useDispatch();
+
+  const successHandler = () => {
+    dispatch(fetchTodos());
+    dispatch(toggleLoading());
+  };
+
   const ErrorHandler = (error) => {
     console.error(error);
+    dispatch(toggleLoading());
     dispatch(toggleError());
     setTimeout(() => {
       dispatch(toggleError());
@@ -20,27 +27,30 @@ const useTodo = () => {
   };
 
   const createTodo = () => {
+    dispatch(toggleLoading());
     authAxios
       .post(`/api/v1/todos`, {
         title: '',
         completed: false,
         deadline: format(new Date(), 'yyyy-MM-dd'),
       })
-      .then(() => dispatch(fetchTodos()))
+      .then(successHandler)
       .catch(ErrorHandler);
   };
 
   const updateTodo = (todoId, todoData) => {
+    dispatch(toggleLoading());
     authAxios
       .patch(`/api/v1/todos/${todoId}`, todoData)
-      .then(() => dispatch(fetchTodos()))
+      .then(successHandler)
       .catch(ErrorHandler);
   };
 
   const destroyTodo = (todoId) => {
+    dispatch(toggleLoading());
     authAxios
       .delete(`/api/v1/todos/${todoId}`)
-      .then(() => dispatch(fetchTodos()))
+      .then(successHandler)
       .catch(ErrorHandler);
   };
 
