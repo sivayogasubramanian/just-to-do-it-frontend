@@ -7,6 +7,8 @@ import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
   TOGGLE_SAVE,
+  SELECT_TAG,
+  RESET_MISC,
 } from '../actionTypes';
 
 const initialState = {
@@ -16,6 +18,7 @@ const initialState = {
   success: false,
   error: false,
   errorMsg: '',
+  tag: '',
 };
 
 const miscReducer = (state = initialState, action) => {
@@ -35,6 +38,10 @@ const miscReducer = (state = initialState, action) => {
       return { ...state, dialog: { ...action.payload } };
     case CLOSE_DIALOG:
       return { ...state, dialog: { ...initialState.dialog } };
+    case SELECT_TAG:
+      return { ...state, tag: action.payload };
+    case RESET_MISC:
+      return initialState;
     default:
       return state;
   }
