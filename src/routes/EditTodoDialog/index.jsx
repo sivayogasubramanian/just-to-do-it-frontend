@@ -183,8 +183,8 @@ const EditTodoDialog = ({
                 deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
               });
               setTimeout(() => {
-                toggleSave();
                 toggleLoading();
+                toggleSave();
                 closeDialog();
               }, 2000);
             }}
