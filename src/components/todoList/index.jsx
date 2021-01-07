@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // Components
 import Todo from '../todo';
 import Error from './Error';
-import TodosLoading from '../todosLoading';
+import TodosLoading from '../loading';
 
 const TodoList = ({ filteredTodos, isError, todosLoading }) => {
   return (
