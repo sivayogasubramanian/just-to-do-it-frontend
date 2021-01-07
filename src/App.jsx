@@ -65,6 +65,7 @@ const App = () => {
             component={MyAccount}
             auth={isAuthenticated}
           />
+          <GuardedRoute path="/" component={Home} auth={isAuthenticated} />
         </Switch>
       </div>
     </Router>
