@@ -9,7 +9,11 @@ import { logOut } from '../redux/actions/authActions';
 const useSubtodo = () => {
   const dispatch = useDispatch();
 
-  const ErrorHandler = (error) => {
+  const successHandler = () => {
+    dispatch(fetchTodos());
+  };
+
+  const errorHandler = (error) => {
     console.error(error);
     dispatch(toggleError());
     setTimeout(() => {
@@ -21,22 +25,22 @@ const useSubtodo = () => {
   const createSubtodo = (todoId) => {
     authAxios
       .post(`/api/v1/todos/${todoId}/subtodos`, { title: '', completed: false })
-      .then(() => dispatch(fetchTodos()))
-      .catch(ErrorHandler);
+      .then(successHandler)
+      .catch(errorHandler);
   };
 
   const updateSubtodo = (todoId, subtodoId, subTodoData) => {
     authAxios
       .patch(`/api/v1/todos/${todoId}/subtodos/${subtodoId}`, subTodoData)
-      .then(() => dispatch(fetchTodos()))
-      .catch(ErrorHandler);
+      .then(successHandler)
+      .catch(errorHandler);
   };
 
   const destroySubtodo = (todoId, subtodoId) => {
     authAxios
       .delete(`/api/v1/todos/${todoId}/subtodos/${subtodoId}`)
-      .then(() => dispatch(fetchTodos()))
-      .catch(ErrorHandler);
+      .then(successHandler)
+      .catch(errorHandler);
   };
 
   return { createSubtodo, updateSubtodo, destroySubtodo };
