@@ -9,9 +9,8 @@ import TodoList from '../../components/todoList';
 // Styles
 import { useStyles } from './styles';
 
-const Tags = ({ isDialogOpen, todos, location }) => {
+const Tags = ({ isDialogOpen, todos, currentTag }) => {
   const classes = useStyles();
-  const currentTag = location.props.tag;
 
   return (
     <>
@@ -42,6 +41,7 @@ const mapStateToProps = (state) => {
   return {
     todos: state.todos.data,
     isDialogOpen: state.misc.dialog.isDialogOpen,
+    currentTag: state.misc.tag,
   };
 };
 

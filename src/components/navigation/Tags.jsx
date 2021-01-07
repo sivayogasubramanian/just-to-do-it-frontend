@@ -2,6 +2,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+// Actions
+import { selectTag } from '../../redux/actions/miscActions';
 // MUI Components
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +16,7 @@ import LabelTwoToneIcon from '@material-ui/icons/LabelTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Tags = ({ todos }) => {
+const Tags = ({ todos, selectTag }) => {
   const classes = useStyles();
   const tags = new Set();
 
@@ -28,7 +30,7 @@ const Tags = ({ todos }) => {
     <List>
       {[...tags].map((tag, index) => (
         <Tooltip key={index} title={tag}>
-          <NavLink exact to={{ pathname: '/tags', props: { tag } }}>
+          <NavLink exact to="/tags" onClick={() => selectTag(tag)}>
             <ListItem className={classes.listItems} button key={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}
@@ -48,4 +50,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Tags);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectTag: (tag) => dispatch(selectTag(tag)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tags);
