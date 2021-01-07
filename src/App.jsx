@@ -1,12 +1,12 @@
 // React and helpers
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GuardedRoute from './helpers/GuardedRoute';
+import { useSelector } from 'react-redux';
 // Routes
 import Login from './routes/login/Login';
 import Register from './routes/login/Register';
 import Home from './routes/home';
 import EditTodoDialog from './routes/EditTodoDialog';
-import { useSelector } from 'react-redux';
 import Completed from './routes/completed';
 import Today from './routes/Today';
 import NextWeek from './routes/NextWeek';
