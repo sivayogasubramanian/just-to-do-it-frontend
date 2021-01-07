@@ -18,7 +18,7 @@ const TodoList = ({ filteredTodos, isError, todosLoading }) => {
         />
       ))}
       {isError && <Error />}
-      {todosLoading && <TodosLoading />}
+      <TodosLoading loading={todosLoading} />
     </>
   );
 };
