@@ -7,6 +7,8 @@ import {
   OPEN_DIALOG,
   CLOSE_DIALOG,
   TOGGLE_SAVE,
+  SELECT_TAG,
+  RESET_MISC,
 } from '../actionTypes';
 
 export const toggleLoading = () => {
@@ -50,5 +52,18 @@ export const closeDialog = () => {
 export const toggleSave = () => {
   return {
     type: TOGGLE_SAVE,
+  };
+};
+
+export const selectTag = (payload) => {
+  return {
+    type: SELECT_TAG,
+    payload,
+  };
+};
+
+export const resetMisc = () => {
+  return {
+    type: RESET_MISC,
   };
 };
