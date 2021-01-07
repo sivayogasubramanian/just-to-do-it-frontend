@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 // Components
 import Todo from '../todo';
-// MUI Components
-import { Alert } from '@material-ui/lab';
+import Error from './Error';
+import TodosLoading from './TodosLoading';
 
-const TodoList = ({ filteredTodos, isError }) => {
+const TodoList = ({ filteredTodos, isError, todosLoading }) => {
   return (
     <>
       {filteredTodos.map((todo) => (
@@ -17,14 +17,8 @@ const TodoList = ({ filteredTodos, isError }) => {
           completed={todo.attributes.completed}
         />
       ))}
-      {isError && (
-        <>
-          <br />
-          <Alert variant="outlined" severity="error" color="error">
-            Something went wrong. Please refresh and try again later.
-          </Alert>
-        </>
-      )}
+      {isError && <Error />}
+      {todosLoading && <TodosLoading todosLoading={todosLoading} />}
     </>
   );
 };
@@ -32,6 +26,7 @@ const TodoList = ({ filteredTodos, isError }) => {
 const mapStateToProps = (state) => {
   return {
     isError: state.misc.error,
+    todosLoading: state.misc.loading,
   };
 };
 
