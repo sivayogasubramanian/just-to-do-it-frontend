@@ -131,6 +131,13 @@ const useAuth = () => {
       });
   };
 
+  const deleteAccount = (userId) => {
+    authAxios
+      .delete(`/users/${userId}`)
+      .then(() => logOut())
+      .catch((error) => console.error(error));
+  };
+
   const logOut = () => {
     dispatch(signOut());
     dispatch(storeUser([]));
@@ -152,6 +159,7 @@ const useAuth = () => {
     signIn,
     createAccount,
     updatePassword,
+    deleteAccount,
     logOut,
   };
 };
