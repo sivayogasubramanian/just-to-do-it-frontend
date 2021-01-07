@@ -10,6 +10,8 @@ export const TOGGLE_SUCCESS = 'TOGGLE_SUCCESS';
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const TOGGLE_SAVE = 'TOGGLE_SAVE';
+export const SELECT_TAG = 'SELECT_TAG';
+export const RESET_MISC = 'RESET_MISC';
 
 // For userActions.js
 export const STORE_USER = 'STORE_USER';
