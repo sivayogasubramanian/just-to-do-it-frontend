@@ -27,8 +27,8 @@ const Tags = ({ todos }) => {
   return (
     <List>
       {[...tags].map((tag, index) => (
-        <Tooltip title={tag}>
-          <NavLink exact to={{ pathname: '/tags', props: { tag } }} key={index}>
+        <Tooltip key={index} title={tag}>
+          <NavLink exact to={{ pathname: '/tags', props: { tag } }}>
             <ListItem className={classes.listItems} button key={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}

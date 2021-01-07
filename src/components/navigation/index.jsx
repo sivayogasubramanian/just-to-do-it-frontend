@@ -110,13 +110,8 @@ function MiniDrawer() {
         <Divider />
         <List>
           {items.map((item) => (
-            <Tooltip title={item.text}>
-              <NavLink
-                exact
-                to={item.path}
-                key={item.index}
-                activeClassName={classes.active}
-              >
+            <Tooltip key={item.index} title={item.text}>
+              <NavLink exact to={item.path} activeClassName={classes.active}>
                 <ListItem className={classes.listItems} button>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
