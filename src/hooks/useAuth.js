@@ -8,6 +8,7 @@ import {
   toggleError,
   toggleSuccess,
   setErrorMsg,
+  resetMisc,
 } from '../redux/actions/miscActions';
 import { storeUser } from '../redux/actions/userActions';
 import {
@@ -142,6 +143,7 @@ const useAuth = () => {
     dispatch(signOut());
     dispatch(storeUser([]));
     dispatch(clearTodos());
+    dispatch(resetMisc());
     removeToken();
   };
 
