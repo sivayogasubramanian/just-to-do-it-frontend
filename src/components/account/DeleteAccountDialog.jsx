@@ -27,7 +27,7 @@ const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
           recovered.
           <br />
           <br />
-          Please consider your action carefully before making a decision.
+          <b>Please consider your action carefully before making a decision.</b>
           <br />
           <br />
         </Typography>
