@@ -86,7 +86,6 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
             <Grid item xs={4}>
               <TextField
                 placeholder="Press Enter to Save"
-                autoFocus
                 fullWidth
                 value={taskTitle}
                 onChange={(e) => setTaskTitle(e.target.value)}
