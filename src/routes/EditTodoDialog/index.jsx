@@ -53,7 +53,7 @@ const EditTodoDialog = ({
     .filter((subtodo) => subtodo.attributes.todo_id === parseInt(todoId))
     .sort((a, b) => (a.id > b.id ? 1 : -1));
 
-  const [saveSubtodos, setSaveSubtodos] = useState(false);
+  const [saveClicked, setSaveClicked] = useState(false);
 
   const [taskTitle, setTaskTitle] = useState(
     todo !== undefined ? todo.attributes.title : ''
@@ -123,7 +123,7 @@ const EditTodoDialog = ({
               }}
             />
           </MuiPickersUtilsProvider>
-          <TagsArray />
+          <TagsArray saveTags={saveClicked} />
           <p>Subtodos:</p>
           {subtodos.map((subtodo) => (
             <Subtodo
@@ -132,7 +132,7 @@ const EditTodoDialog = ({
               subTodoId={subtodo.id}
               title={subtodo.attributes.title}
               completed={subtodo.attributes.completed}
-              saveSubtodos={saveSubtodos}
+              saveSubtodos={saveClicked}
             />
           ))}
           <Button
@@ -172,8 +172,7 @@ const EditTodoDialog = ({
           </Button>
           <Button
             onClick={() => {
-              setSaveSubtodos(true);
-
+              setSaveClicked(true);
               setLoading(true);
               updateTodo(todoId, {
                 title: taskTitle,
@@ -182,7 +181,7 @@ const EditTodoDialog = ({
               });
               setTimeout(() => {
                 setLoading(false);
-                setSaveSubtodos(false);
+                setSaveClicked(false);
                 closeDialog();
               }, 3000);
             }}
