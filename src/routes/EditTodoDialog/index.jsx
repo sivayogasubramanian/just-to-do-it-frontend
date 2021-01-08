@@ -29,12 +29,7 @@ import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import { format } from 'date-fns';
 // Actions
-import {
-  closeDialog,
-  setLoadingTrue,
-  setLoadingFalse,
-  toggleSave,
-} from '../../redux/actions/miscActions';
+import { closeDialog } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
 
@@ -44,20 +39,21 @@ const EditTodoDialog = ({
   isDialogOpen,
   todoId,
   closeDialog,
-  toggleSave,
-  setLoadingTrue,
-  setLoadingFalse,
   isLoading,
 }) => {
   const classes = useStyles();
   const { updateTodo } = useTodo();
   const { createSubtodo } = useSubtodo();
 
+  const [loading, setLoading] = useState(false);
+
   const todo = todos.filter((todo) => todo.id === todoId)[0];
 
   const subtodos = allSubtodos
     .filter((subtodo) => subtodo.attributes.todo_id === parseInt(todoId))
     .sort((a, b) => (a.id > b.id ? 1 : -1));
+
+  const [saveSubtodos, setSaveSubtodos] = useState(false);
 
   const [taskTitle, setTaskTitle] = useState(
     todo !== undefined ? todo.attributes.title : ''
@@ -136,6 +132,7 @@ const EditTodoDialog = ({
               subTodoId={subtodo.id}
               title={subtodo.attributes.title}
               completed={subtodo.attributes.completed}
+              saveSubtodos={saveSubtodos}
             />
           ))}
           <Button
@@ -149,13 +146,13 @@ const EditTodoDialog = ({
           </Button>
         </DialogContent>
         <DialogActions>
-          {isLoading && <CircularProgress />}
+          {(isLoading || loading) && <CircularProgress />}
           <Button
             onClick={() => {
-              setLoadingTrue();
+              setLoading(true);
               updateTodo(todoId, { completed: true });
               setTimeout(() => {
-                setLoadingFalse();
+                setLoading(false);
                 closeDialog();
               }, 2000);
             }}
@@ -175,18 +172,19 @@ const EditTodoDialog = ({
           </Button>
           <Button
             onClick={() => {
-              toggleSave();
-              setLoadingTrue();
+              setSaveSubtodos(true);
+
+              setLoading(true);
               updateTodo(todoId, {
                 title: taskTitle,
                 description: desc,
                 deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
               });
               setTimeout(() => {
-                setLoadingFalse();
-                toggleSave();
+                setLoading(false);
+                setSaveSubtodos(false);
                 closeDialog();
-              }, 2000);
+              }, 3000);
             }}
             size="small"
             startIcon={<SaveIcon />}
@@ -214,9 +212,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeDialog: () => dispatch(closeDialog()),
-    toggleSave: () => dispatch(toggleSave()),
-    setLoadingTrue: () => dispatch(setLoadingTrue()),
-    setLoadingFalse: () => dispatch(setLoadingFalse()),
   };
 };
 
