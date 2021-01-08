@@ -4,13 +4,13 @@ export const useStyles = makeStyles({
   card: {
     // Beige
     backgroundColor: '#e2ffde',
-    marginRight: '10px',
+    marginRight: '5px',
     marginTop: '10px',
   },
   cardCompleted: {
     // Beige
     backgroundColor: 'lightGreen',
-    marginRight: '10px',
+    marginRight: '5px',
     marginTop: '10px',
   },
   grid: {
