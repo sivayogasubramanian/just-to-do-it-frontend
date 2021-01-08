@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GuardedRoute from './helpers/GuardedRoute';
 import { useSelector } from 'react-redux';
 // Routes
-import Login from './routes/login/Login';
+import Landing from './routes/login';
 import Register from './routes/login/Register';
 import Home from './routes/home';
 import EditTodoDialog from './routes/EditTodoDialog';
@@ -21,7 +21,7 @@ const App = () => {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <GuardedRoute
             exact
