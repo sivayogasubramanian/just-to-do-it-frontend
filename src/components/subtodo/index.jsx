@@ -1,6 +1,5 @@
 // React and helpers
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import useSubtodo from '../../hooks/useSubtodo';
 import clsx from 'clsx';
 // MUI Components
@@ -18,18 +17,20 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Subtodo = ({ todoId, subTodoId, title, completed, isSubtodoSave }) => {
+const Subtodo = ({ todoId, subTodoId, title, completed, saveSubtodos }) => {
   const classes = useStyles();
   const { destroySubtodo, updateSubtodo } = useSubtodo();
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
 
-  isSubtodoSave &&
+  useEffect(() => {
     updateSubtodo(todoId, subTodoId, {
       title: taskTitle,
       completed: isCompleted,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [saveSubtodos]);
 
   return (
     <>
@@ -84,10 +85,4 @@ const Subtodo = ({ todoId, subTodoId, title, completed, isSubtodoSave }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isSubtodoSave: state.misc.save,
-  };
-};
-
-export default connect(mapStateToProps)(Subtodo);
+export default Subtodo;
