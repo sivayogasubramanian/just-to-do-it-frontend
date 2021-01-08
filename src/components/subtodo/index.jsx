@@ -1,6 +1,6 @@
 // React and helpers
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useSubtodo from '../../hooks/useSubtodo';
 import clsx from 'clsx';
 // MUI Components
@@ -18,13 +18,12 @@ import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Subtodo = ({ todoId, subTodoId, title, completed }) => {
+const Subtodo = ({ todoId, subTodoId, title, completed, isSubtodoSave }) => {
   const classes = useStyles();
   const { destroySubtodo, updateSubtodo } = useSubtodo();
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
-  const isSubtodoSave = useSelector((state) => state.misc.save);
 
   isSubtodoSave &&
     updateSubtodo(todoId, subTodoId, {
@@ -85,4 +84,10 @@ const Subtodo = ({ todoId, subTodoId, title, completed }) => {
   );
 };
 
-export default Subtodo;
+const mapStateToProps = (state) => {
+  return {
+    isSubtodoSave: state.misc.save,
+  };
+};
+
+export default connect(mapStateToProps)(Subtodo);
