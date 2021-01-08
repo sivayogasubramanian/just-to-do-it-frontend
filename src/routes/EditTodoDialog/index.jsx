@@ -57,8 +57,6 @@ const EditTodoDialog = ({
     .filter((subtodo) => subtodo.attributes.todo_id === parseInt(todoId))
     .sort((a, b) => (a.id > b.id ? 1 : -1));
 
-  console.log(subtodos);
-
   const [taskTitle, setTaskTitle] = useState(
     todo !== undefined ? todo.attributes.title : ''
   );
