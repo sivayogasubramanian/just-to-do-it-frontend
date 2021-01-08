@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
-import { Box, Paper, Typography, Zoom } from '@material-ui/core';
+import CardMessage from '../../components/cardMessage';
 import TodoList from '../../components/todoList';
 // Styles
 import { useStyles } from './styles';
@@ -17,15 +17,13 @@ const Tags = ({ isDialogOpen, todos, currentTag }) => {
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <Zoom in={true}>
-          <Paper variant="outlined" className={classes.paper}>
-            <Box m="10px">
-              <Typography variant="h5">
-                Current Tag Selected: <b>{currentTag}</b>
-              </Typography>
-            </Box>
-          </Paper>
-        </Zoom>
+        <CardMessage
+          message={
+            <>
+              Current Tag Selected: <b>{currentTag}</b>
+            </>
+          }
+        />
         <TodoList
           filteredTodos={todos.filter((todo) =>
             todo.attributes.tags.includes(currentTag)
