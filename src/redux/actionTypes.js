@@ -2,6 +2,9 @@
 export const SIGN_IN = 'SIGN_IN';
 export const LOG_OUT = 'LOG_OUT';
 
+// For herokuActions.js
+export const WAKE_DYNO = 'WAKE_DYNO';
+
 // For miscActions.js
 export const TOGGLE_LOADING = 'TOGGLE_LOADING';
 export const TOGGLE_ERROR = 'TOGGLE_ERROR';
