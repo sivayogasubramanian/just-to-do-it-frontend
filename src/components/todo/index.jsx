@@ -122,7 +122,7 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
       </Slide>
       <Snackbar
         open={isSnackbarOpen}
-        autoHideDuration={3000}
+        autoHideDuration={1500}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         TransitionComponent={Slide}
         onClose={() => setIsSnackbarOpen(false)}
