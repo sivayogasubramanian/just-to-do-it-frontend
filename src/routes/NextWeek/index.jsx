@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
+import CardMessage from '../../components/cardMessage';
 // Date Functions
 import { isThisWeek } from 'date-fns';
 // Styles
@@ -14,19 +15,23 @@ const NextWeek = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
   const checkDate = (deadline) => isThisWeek(new Date(deadline));
+  const filteredTodos = todos.filter(
+    (todo) =>
+      todo.attributes.deadline !== null && checkDate(todo.attributes.deadline)
+  );
 
   return (
     <>
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <TodoList
-          filteredTodos={todos.filter(
-            (todo) =>
-              todo.attributes.deadline !== null &&
-              checkDate(todo.attributes.deadline)
-          )}
-        />
+        {filteredTodos.length === 0 ? (
+          <CardMessage
+            message={'Great! You do not have any todos due this week!'}
+          />
+        ) : (
+          <TodoList filteredTodos={filteredTodos} />
+        )}
       </div>
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>

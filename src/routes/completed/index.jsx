@@ -5,20 +5,23 @@ import { connect } from 'react-redux';
 // Components
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
+import CardMessage from '../../components/cardMessage';
 // Styles
 import { useStyles } from './styles';
 
 const Completed = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
-
+  const filteredTodos = todos.filter((todo) => todo.attributes.completed);
   return (
     <>
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <TodoList
-          filteredTodos={todos.filter((todo) => todo.attributes.completed)}
-        />
+        {filteredTodos.length === 0 ? (
+          <CardMessage message={'You do not have any completed todos.'} />
+        ) : (
+          <TodoList filteredTodos={filteredTodos} />
+        )}
       </div>
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
