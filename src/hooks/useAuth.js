@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
 // Actions
 import {
-  toggleLoading,
+  setLoadingTrue,
+  setLoadingFalse,
   toggleError,
   toggleSuccess,
   setErrorMsg,
@@ -48,7 +49,7 @@ const useAuth = () => {
   };
 
   const signIn = (email, password) => {
-    dispatch(toggleLoading());
+    dispatch(setLoadingTrue());
     authAxios
       .post('/authenticate', {
         email,
@@ -56,7 +57,7 @@ const useAuth = () => {
       })
       .then((response) => {
         storeToken(response);
-        dispatch(toggleLoading());
+        dispatch(setLoadingFalse());
         dispatch(
           storeUser({
             id: response.data.user.data.id,
@@ -68,7 +69,7 @@ const useAuth = () => {
       })
       .catch((error) => {
         dispatch(toggleError());
-        dispatch(toggleLoading());
+        dispatch(setLoadingFalse());
         setTimeout(() => {
           dispatch(toggleError());
         }, 2000);
@@ -76,7 +77,7 @@ const useAuth = () => {
   };
 
   const createAccount = (name, email, password, password_cfm) => {
-    dispatch(toggleLoading());
+    dispatch(setLoadingTrue());
     authAxios
       .post('/users', {
         name,
@@ -85,11 +86,11 @@ const useAuth = () => {
         password_confirmation: password_cfm,
       })
       .then((response) => {
-        dispatch(toggleLoading());
+        dispatch(setLoadingFalse());
         dispatch(toggleSuccess());
       })
       .catch((error) => {
-        dispatch(toggleLoading());
+        dispatch(setLoadingFalse());
         dispatch(setErrorMsg(error.response.data));
         setTimeout(() => {
           dispatch(setErrorMsg(''));
@@ -104,7 +105,7 @@ const useAuth = () => {
     password,
     password_cfm
   ) => {
-    dispatch(toggleLoading());
+    dispatch(setLoadingTrue());
     authAxios
       .post('/authenticate', {
         email,
@@ -117,7 +118,7 @@ const useAuth = () => {
             password_confirmation: password_cfm,
           })
           .then(() => {
-            dispatch(toggleLoading());
+            dispatch(setLoadingFalse());
             dispatch(toggleSuccess());
             setEmail('');
             setOldPassword('');
@@ -128,7 +129,7 @@ const useAuth = () => {
             }, 4000);
           })
           .catch((error) => {
-            dispatch(toggleLoading());
+            dispatch(setLoadingFalse());
             dispatch(setErrorMsg(error.response.data));
             setTimeout(() => {
               dispatch(setErrorMsg(''));
@@ -136,7 +137,7 @@ const useAuth = () => {
           });
       })
       .catch((error) => {
-        dispatch(toggleLoading());
+        dispatch(setLoadingFalse());
         dispatch(setErrorMsg(error.response.data));
         setTimeout(() => {
           dispatch(setErrorMsg(''));

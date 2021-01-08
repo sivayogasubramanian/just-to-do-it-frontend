@@ -31,7 +31,8 @@ import { format } from 'date-fns';
 // Actions
 import {
   closeDialog,
-  toggleLoading,
+  setLoadingTrue,
+  setLoadingFalse,
   toggleSave,
 } from '../../redux/actions/miscActions';
 // Styles
@@ -44,7 +45,8 @@ const EditTodoDialog = ({
   todoId,
   closeDialog,
   toggleSave,
-  toggleLoading,
+  setLoadingTrue,
+  setLoadingFalse,
   isLoading,
 }) => {
   const classes = useStyles();
@@ -150,10 +152,10 @@ const EditTodoDialog = ({
           {isLoading && <CircularProgress />}
           <Button
             onClick={() => {
-              toggleLoading();
+              setLoadingTrue();
               updateTodo(todoId, { completed: true });
               setTimeout(() => {
-                toggleLoading();
+                setLoadingFalse();
                 closeDialog();
               }, 2000);
             }}
@@ -174,14 +176,14 @@ const EditTodoDialog = ({
           <Button
             onClick={() => {
               toggleSave();
-              toggleLoading();
+              setLoadingTrue();
               updateTodo(todoId, {
                 title: taskTitle,
                 description: desc,
                 deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
               });
               setTimeout(() => {
-                toggleLoading();
+                setLoadingFalse();
                 toggleSave();
                 closeDialog();
               }, 2000);
@@ -213,7 +215,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     closeDialog: () => dispatch(closeDialog()),
     toggleSave: () => dispatch(toggleSave()),
-    toggleLoading: () => dispatch(toggleLoading()),
+    setLoadingTrue: () => dispatch(setLoadingTrue()),
+    setLoadingFalse: () => dispatch(setLoadingFalse()),
   };
 };
 
