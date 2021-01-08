@@ -1,5 +1,5 @@
 // React and helpers
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import useTodo from '../../hooks/useTodo';
 // MUI Components
@@ -13,11 +13,11 @@ import useStyles from './styles';
 const TagsArray = ({
   todos,
   todoId,
-  isSubtodoSave,
   errorMsg,
   isError,
   toggleError,
   setErrorMsg,
+  saveTags,
 }) => {
   const classes = useStyles();
   const { updateTodo } = useTodo();
@@ -30,7 +30,10 @@ const TagsArray = ({
     setChipData((chips) => chips.filter((chip) => chip !== chipToDelete));
   };
 
-  isSubtodoSave && updateTodo(todoId, { tags: chipData });
+  useEffect(() => {
+    updateTodo(todoId, { tags: chipData });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [saveTags]);
 
   return (
     <>
@@ -102,7 +105,6 @@ const mapStateToProps = (state) => {
   return {
     todos: state.todos.data,
     todoId: state.misc.dialog.todoId,
-    isSubtodoSave: state.misc.save,
     isError: state.misc.error,
     errorMsg: state.misc.errorMsg,
   };
