@@ -15,9 +15,7 @@ const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
   const { deleteAccount } = useAuth();
   return (
     <Dialog open={open}>
-      <DialogTitle>
-        <Typography variant="h4">Are you sure?</Typography>
-      </DialogTitle>
+      <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
       <DialogContent>
         <Typography variant="body1">
           This action <b>cannot be undone.</b>
