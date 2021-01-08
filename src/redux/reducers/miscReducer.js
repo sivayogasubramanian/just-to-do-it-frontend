@@ -1,6 +1,7 @@
 // Actions
 import {
-  TOGGLE_LOADING,
+  SET_LOADING_TRUE,
+  SET_LOADING_FALSE,
   TOGGLE_ERROR,
   TOGGLE_SUCCESS,
   SET_ERROR_MSG,
@@ -22,10 +23,12 @@ const initialState = {
 };
 
 const miscReducer = (state = initialState, action) => {
-  const { loading, error, success, save } = state;
+  const { error, success, save } = state;
   switch (action.type) {
-    case TOGGLE_LOADING:
-      return { ...state, loading: !loading };
+    case SET_LOADING_TRUE:
+      return { ...state, loading: true };
+    case SET_LOADING_FALSE:
+      return { ...state, loading: false };
     case TOGGLE_ERROR:
       return { ...state, error: !error };
     case TOGGLE_SUCCESS:

@@ -1,6 +1,7 @@
 // Actions
 import {
-  TOGGLE_LOADING,
+  SET_LOADING_TRUE,
+  SET_LOADING_FALSE,
   TOGGLE_ERROR,
   SET_ERROR_MSG,
   TOGGLE_SUCCESS,
@@ -11,9 +12,15 @@ import {
   RESET_MISC,
 } from '../actionTypes';
 
-export const toggleLoading = () => {
+export const setLoadingTrue = () => {
   return {
-    type: TOGGLE_LOADING,
+    type: SET_LOADING_TRUE,
+  };
+};
+
+export const setLoadingFalse = () => {
+  return {
+    type: SET_LOADING_FALSE,
   };
 };
 

@@ -6,7 +6,8 @@ export const LOG_OUT = 'LOG_OUT';
 export const WAKE_DYNO = 'WAKE_DYNO';
 
 // For miscActions.js
-export const TOGGLE_LOADING = 'TOGGLE_LOADING';
+export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';
+export const SET_LOADING_FALSE = 'SET_LOADING_FALSE';
 export const TOGGLE_ERROR = 'TOGGLE_ERROR';
 export const SET_ERROR_MSG = 'SET_ERROR_MSG';
 export const TOGGLE_SUCCESS = 'TOGGLE_SUCCESS';
