@@ -15,6 +15,7 @@ import {
   signIn as authenticateUser,
   logOut as signOut,
 } from '../redux/actions/authActions';
+import { wakeDyno } from '../redux/actions/herokuActions';
 import { fetchTodos, clearTodos } from '../redux/actions/todosActions';
 
 const storeToken = (response) => {
@@ -34,6 +35,17 @@ const useAuth = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [password_cfm, setPasswordCfm] = useState('');
+
+  const wakeHerokuDyno = () => {
+    authAxios
+      .get('')
+      .then((response) => {
+        if (response.statusText === 'OK') {
+          dispatch(wakeDyno());
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const signIn = (email, password) => {
     dispatch(toggleLoading());
@@ -158,6 +170,7 @@ const useAuth = () => {
     setPassword,
     password_cfm,
     setPasswordCfm,
+    wakeHerokuDyno,
     signIn,
     createAccount,
     updatePassword,
