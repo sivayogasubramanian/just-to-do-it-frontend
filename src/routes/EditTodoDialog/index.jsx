@@ -154,7 +154,7 @@ const EditTodoDialog = ({
               setTimeout(() => {
                 setLoading(false);
                 closeDialog();
-              }, 2000);
+              }, 1000);
             }}
             size="small"
             startIcon={<DoneOutlineIcon />}
