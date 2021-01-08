@@ -1,5 +1,7 @@
 // React and helpers
 import React from 'react';
+// Components
+import QuotesLoading from '../loading';
 // React Spinner Component
 import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
 // Styles
@@ -11,6 +13,7 @@ const StartupLoadingScreen = () => {
     <div className={classes.loader}>
       <ClimbingBoxLoader color={'#000000'} loading={true} size={40} />
       <h2>Loading...</h2>
+      <QuotesLoading loading={true} />
     </div>
   );
 };
