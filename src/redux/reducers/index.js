@@ -7,10 +7,16 @@ import authReducer from './authReducer';
 import miscReducer from './miscReducer';
 import userReducer from './userReducer';
 import todosReducer from './todosReducer';
+import herokuReducer from './herokuReducer';
 
-const persistConfig = { key: 'just-to-do-it', storage };
+const persistConfig = {
+  key: 'just-to-do-it',
+  blacklist: ['isHerokuDynoAwake'],
+  storage,
+};
 
 const rootReducer = combineReducers({
+  isHerokuDynoAwake: herokuReducer,
   isAuthenticated: authReducer,
   user: userReducer,
   todos: todosReducer,
