@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+// React and helpers
+import React, { useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
+import { connect } from 'react-redux';
+// Components
 import StartupLoadingScreen from '../../components/startupLoadingScreen';
-import authAxios from '../../helpers/authAxios';
 import Login from './Login';
 
-const Landing = () => {
-  const [isHerokuDynoAwake, setIsHerokuDynoAwake] = useState(false);
+const Landing = ({ isHerokuDynoAwake }) => {
+  const { wakeHerokuDyno } = useAuth();
   useEffect(() => {
-    authAxios
-      .get('')
-      .then((response) => {
-        if (response.statusText === 'OK') {
-          setIsHerokuDynoAwake(true);
-        }
-      })
-      .catch((error) => console.log(error));
+    wakeHerokuDyno();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <>{isHerokuDynoAwake ? <Login /> : <StartupLoadingScreen />}</>;
 };
 
-export default Landing;
+const mapStateToProps = (state) => {
+  return {
+    isHerokuDynoAwake: state.isHerokuDynoAwake,
+  };
+};
+
+export default connect(mapStateToProps)(Landing);
