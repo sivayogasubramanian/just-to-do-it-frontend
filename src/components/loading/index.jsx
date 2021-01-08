@@ -7,8 +7,8 @@ import { Snackbar } from '@material-ui/core';
 const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 const message = `${randomQuote.text} --By: ${randomQuote.author}`;
 
-const TodosLoading = ({ loading }) => {
+const QuotesLoading = ({ loading }) => {
   return <Snackbar open={loading} message={message} />;
 };
 
-export default TodosLoading;
+export default QuotesLoading;
