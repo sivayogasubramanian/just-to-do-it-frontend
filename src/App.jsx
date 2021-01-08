@@ -1,7 +1,7 @@
 // React and helpers
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GuardedRoute from './helpers/GuardedRoute';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 // Routes
 import Landing from './routes/login';
 import Register from './routes/login/Register';
@@ -15,8 +15,7 @@ import MyAccount from './routes/MyAccount';
 // Styles
 import './App.css';
 
-const App = () => {
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+const App = ({ isAuthenticated }) => {
   return (
     <Router>
       <div className="App">
@@ -72,4 +71,10 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+  };
+};
+
+export default connect(mapStateToProps)(App);
