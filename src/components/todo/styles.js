@@ -2,16 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
   card: {
-    // Beige
-    backgroundColor: '#e2ffde',
-    marginRight: '5px',
     marginTop: '10px',
   },
-  cardCompleted: {
+  cardInComplete: {
     // Beige
+    backgroundColor: '#e2ffde',
+  },
+  cardCompleted: {
+    // Light Green
     backgroundColor: 'lightGreen',
-    marginRight: '5px',
-    marginTop: '10px',
   },
   grid: {
     marginTop: '10px',

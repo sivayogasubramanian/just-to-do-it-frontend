@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import useTodo from '../../hooks/useTodo';
 import { connect } from 'react-redux';
+import clsx from 'clsx';
 // Actions
 import { openDialog } from '../../redux/actions/miscActions';
 // MUI Components
@@ -65,7 +66,10 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
       >
         <Card
           raised
-          className={isCompleted ? classes.cardCompleted : classes.card}
+          className={clsx(classes.card, {
+            [classes.cardCompleted]: isCompleted,
+            [classes.cardInComplete]: !isCompleted,
+          })}
         >
           <Grid
             container
