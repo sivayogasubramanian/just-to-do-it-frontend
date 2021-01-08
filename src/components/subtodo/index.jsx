@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import useSubtodo from '../../hooks/useSubtodo';
+import clsx from 'clsx';
 // MUI Components
 import {
   Card,
@@ -36,7 +37,10 @@ const Subtodo = ({ todoId, subTodoId, title, completed }) => {
       <Grow in={checked}>
         <Card
           raised
-          className={isCompleted ? classes.cardCompleted : classes.card}
+          className={clsx(classes.card, {
+            [classes.cardCompleted]: isCompleted,
+            [classes.cardInComplete]: !isCompleted,
+          })}
         >
           <Grid
             container
