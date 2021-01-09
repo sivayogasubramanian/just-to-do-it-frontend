@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // Components
 import Todo from '../todo';
 import Error from './Error';
-import QuotesLoading from '../loading';
 
 const TodoList = ({ filteredTodos, isError, todosLoading }) => {
   return (
@@ -18,7 +17,6 @@ const TodoList = ({ filteredTodos, isError, todosLoading }) => {
         />
       ))}
       {isError && <Error />}
-      <QuotesLoading loading={todosLoading} />
     </>
   );
 };
