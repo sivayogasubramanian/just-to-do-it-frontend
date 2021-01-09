@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // Actions
 import { selectTag } from '../../redux/actions/miscActions';
 // MUI Components
+import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -27,27 +28,34 @@ const Tags = ({ todos, selectTag, closeNavDrawer }) => {
   );
 
   return (
-    <List>
-      {[...tags].map((tag, index) => (
-        <Tooltip key={index} title={tag}>
-          <NavLink
-            exact
-            to="/tags"
-            onClick={() => {
-              selectTag(tag);
-              closeNavDrawer();
-            }}
-          >
-            <ListItem className={classes.listItems} button key={index}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}
-              </ListItemIcon>
-              <ListItemText primary={tag} />
-            </ListItem>
-          </NavLink>
-        </Tooltip>
-      ))}
-    </List>
+    <>
+      <Divider />
+      <List>
+        {[...tags].map((tag, index) => (
+          <Tooltip key={index} title={tag}>
+            <NavLink
+              exact
+              to="/tags"
+              onClick={() => {
+                selectTag(tag);
+                closeNavDrawer();
+              }}
+            >
+              <ListItem className={classes.listItems} button key={index}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? (
+                    <LabelTwoToneIcon />
+                  ) : (
+                    <LabelOutlinedIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={tag} />
+              </ListItem>
+            </NavLink>
+          </Tooltip>
+        ))}
+      </List>
+    </>
   );
 };
 
