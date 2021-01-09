@@ -1,48 +1,29 @@
 // React and helpers
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import useAuth from '../../hooks/useAuth';
 // Components
+import ChangePasswordForm from './ChangePasswordForm';
+import Success from './Success';
+import Error from './Error';
 import DeleteAccountDialog from './DeleteAccountDialog';
 // MUI Components
 import {
   Paper,
-  TextField,
   Grid,
   Typography,
   Slide,
   Button,
   CircularProgress,
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-// MUI Icons
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 // Styles
 import { useStyles } from './styles';
 
 const Account = ({ userId, username, loading, success, errorMsg }) => {
   const classes = useStyles();
-  const {
-    email,
-    setEmail,
-    oldPassword,
-    setOldPassword,
-    password,
-    setPassword,
-    password_cfm,
-    setPasswordCfm,
-    updatePassword,
-  } = useAuth();
+
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    updatePassword(userId, email, oldPassword, password, password_cfm);
-  };
-
-  const handleDeleteButton = () => {
-    setIsDeleteDialogOpen(true);
-  };
+  const handleDeleteButton = () => setIsDeleteDialogOpen(true);
 
   return (
     <>
@@ -60,56 +41,7 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
             <Typography color="inherit" variant="h5">
               Change Your Password Here
             </Typography>
-            <form noValidate onSubmit={handleSubmit}>
-              <TextField
-                variant="outlined"
-                size="medium"
-                margin="normal"
-                fullWidth
-                label="Email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="medium"
-                margin="normal"
-                fullWidth
-                label="Old Password"
-                type="password"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="medium"
-                margin="normal"
-                fullWidth
-                label="New Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="medium"
-                margin="normal"
-                fullWidth
-                label="Confirm New Password"
-                type="password"
-                value={password_cfm}
-                onChange={(e) => setPasswordCfm(e.target.value)}
-              ></TextField>
-              <Button
-                className={classes.button}
-                variant="contained"
-                size="large"
-                type="submit"
-              >
-                Change Password
-              </Button>
-            </form>
+            <ChangePasswordForm userId={userId} />
             <Button
               className={classes.button}
               variant="contained"
@@ -121,31 +53,8 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
             </Button>
           </Grid>
           {loading && <CircularProgress />}
-          {errorMsg && (
-            <>
-              <ErrorOutlineIcon color="error" fontSize="small" />
-              {errorMsg.error ? (
-                <Typography variant="h6" color="error">
-                  Your email and/or old password is wrong. Please Try again.
-                </Typography>
-              ) : (
-                errorMsg.map((error, index) => (
-                  <Typography key={index} variant="h6" color="error">
-                    {error}
-                  </Typography>
-                ))
-              )}
-              <br />
-            </>
-          )}
-          {success && (
-            <>
-              <Alert variant="outlined" severity="success" color="success">
-                Password Updated Successfully!
-              </Alert>
-              <br />
-            </>
-          )}
+          {errorMsg && <Error errorMsg={errorMsg} />}
+          {success && <Success />}
         </Paper>
       </Slide>
       <DeleteAccountDialog
