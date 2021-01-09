@@ -16,7 +16,7 @@ import LabelTwoToneIcon from '@material-ui/icons/LabelTwoTone';
 // Styles
 import { useStyles } from './styles';
 
-const Tags = ({ todos, selectTag }) => {
+const Tags = ({ todos, selectTag, closeNavDrawer }) => {
   const classes = useStyles();
   const tags = new Set();
 
@@ -30,7 +30,14 @@ const Tags = ({ todos, selectTag }) => {
     <List>
       {[...tags].map((tag, index) => (
         <Tooltip key={index} title={tag}>
-          <NavLink exact to="/tags" onClick={() => selectTag(tag)}>
+          <NavLink
+            exact
+            to="/tags"
+            onClick={() => {
+              selectTag(tag);
+              closeNavDrawer();
+            }}
+          >
             <ListItem className={classes.listItems} button key={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? <LabelTwoToneIcon /> : <LabelOutlinedIcon />}

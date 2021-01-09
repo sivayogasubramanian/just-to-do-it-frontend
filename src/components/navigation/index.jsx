@@ -111,7 +111,12 @@ function MiniDrawer() {
         <List>
           {items.map((item) => (
             <Tooltip key={item.index} title={item.text}>
-              <NavLink exact to={item.path} activeClassName={classes.active}>
+              <NavLink
+                exact
+                to={item.path}
+                activeClassName={classes.active}
+                onClick={() => handleDrawerClose()}
+              >
                 <ListItem className={classes.listItems} button>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
@@ -121,7 +126,7 @@ function MiniDrawer() {
           ))}
         </List>
         <Divider />
-        <Tags />
+        <Tags closeNavDrawer={handleDrawerClose} />
       </Drawer>
     </div>
   );
