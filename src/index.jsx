@@ -1,3 +1,5 @@
+// Why did you render dev tool
+import './wdyr';
 // React and helpers
 import React from 'react';
 import ReactDOM from 'react-dom';
