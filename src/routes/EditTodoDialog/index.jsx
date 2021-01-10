@@ -72,6 +72,29 @@ const EditTodoDialog = ({
   );
 
   const handleDateChange = (date) => setSelectedDate(date);
+  const addSubtodo = () => createSubtodo(todoId);
+  const markAsCompletedClick = () => {
+    setLoading(true);
+    updateTodo(todoId, { completed: true });
+    setTimeout(() => {
+      setLoading(false);
+      closeDialog();
+    }, 1000);
+  };
+  const saveClick = () => {
+    setSaveClicked(true);
+    setLoading(true);
+    updateTodo(todoId, {
+      title: taskTitle,
+      description: desc,
+      deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
+    });
+    setTimeout(() => {
+      setLoading(false);
+      setSaveClicked(false);
+      closeDialog();
+    }, 3000);
+  };
 
   return (
     <>
@@ -136,7 +159,7 @@ const EditTodoDialog = ({
             />
           ))}
           <Button
-            onClick={() => createSubtodo(todoId)}
+            onClick={addSubtodo}
             fullWidth
             variant="outlined"
             size="large"
@@ -148,14 +171,7 @@ const EditTodoDialog = ({
         <DialogActions>
           {(isLoading || loading) && <CircularProgress />}
           <Button
-            onClick={() => {
-              setLoading(true);
-              updateTodo(todoId, { completed: true });
-              setTimeout(() => {
-                setLoading(false);
-                closeDialog();
-              }, 1000);
-            }}
+            onClick={markAsCompletedClick}
             size="small"
             startIcon={<DoneOutlineIcon />}
             color="primary"
@@ -171,20 +187,7 @@ const EditTodoDialog = ({
             Discard Changes
           </Button>
           <Button
-            onClick={() => {
-              setSaveClicked(true);
-              setLoading(true);
-              updateTodo(todoId, {
-                title: taskTitle,
-                description: desc,
-                deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
-              });
-              setTimeout(() => {
-                setLoading(false);
-                setSaveClicked(false);
-                closeDialog();
-              }, 3000);
-            }}
+            onClick={saveClick}
             size="small"
             startIcon={<SaveIcon />}
             color="primary"
