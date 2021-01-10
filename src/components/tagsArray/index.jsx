@@ -3,96 +3,46 @@ import React, { useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import useTodo from '../../hooks/useTodo';
 // MUI Components
-import { Button, Grid, TextField, Chip, Paper } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-// Actions
-import { setErrorMsg, toggleError } from '../../redux/actions/miscActions';
-// Styles
-import useStyles from './styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { TextField } from '@material-ui/core';
 
-const TagsArray = ({
-  todos,
-  todoId,
-  errorMsg,
-  isError,
-  toggleError,
-  setErrorMsg,
-  saveTags,
-}) => {
-  const classes = useStyles();
+const TagsArray = ({ todos, todoId, saveTags }) => {
   const { updateTodo } = useTodo();
+
+  const allTags = new Set();
+  todos.map((todo) =>
+    todo.attributes.tags.forEach((tag) => {
+      allTags.add(tag);
+    })
+  );
+
   const tags = todos.filter((todo) => todo.id === todoId)[0].attributes.tags;
+  const [newTags, setNewTags] = useState(tags);
 
-  const [chipData, setChipData] = useState(tags);
-  const [newTag, setNewTag] = useState('');
-
-  const handleDelete = (chipToDelete) => () => {
-    setChipData((chips) => chips.filter((chip) => chip !== chipToDelete));
-  };
-
-  const addTagClick = () => {
-    if (newTag) {
-      setChipData((chips) => [...chips, newTag.toUpperCase()]);
-      setNewTag('');
-    } else {
-      toggleError();
-      setErrorMsg('Please type something before adding a tag.');
-      setTimeout(() => {
-        toggleError();
-        setErrorMsg('');
-      }, 3000);
-    }
-  };
+  const handleAutocompleteChange = (event, values) => setNewTags(values);
 
   useLayoutEffect(() => {
-    updateTodo(todoId, { tags: chipData });
+    updateTodo(todoId, { tags: newTags });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveTags]);
 
   return (
     <>
       <p>Tags: </p>
-      {chipData.length !== 0 ? (
-        <Paper component="ul" className={classes.root}>
-          {chipData.map((data, index) => {
-            return (
-              <li key={index}>
-                <Chip
-                  label={data}
-                  onDelete={handleDelete(data)}
-                  className={classes.chip}
-                />
-              </li>
-            );
-          })}
-        </Paper>
-      ) : (
-        <p>No tags yet</p>
-      )}
-      <Grid container spacing={2}>
-        <Grid item xs={7}>
-          <TextField
-            fullWidth
-            label="Add New Tag"
-            value={newTag}
-            onChange={(e) => setNewTag(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={5}>
-          <Button onClick={addTagClick} fullWidth variant="outlined">
-            Add tag
-          </Button>
-        </Grid>
-      </Grid>
-      {isError && (
-        <>
-          <br />
-          <Alert variant="outlined" severity="error" color="error">
-            {errorMsg}
-          </Alert>
-        </>
-      )}
-      <br />
+      <Autocomplete
+        multiple
+        freeSolo
+        autoComplete
+        defaultValue={tags}
+        value={newTags}
+        options={[...allTags]}
+        getOptionLabel={(option) => option}
+        onChange={handleAutocompleteChange}
+        filterSelectedOptions
+        renderInput={(params) => (
+          <TextField {...params} variant="outlined" placeholder="Add Tag" />
+        )}
+      />
     </>
   );
 };
@@ -101,16 +51,7 @@ const mapStateToProps = (state) => {
   return {
     todos: state.todos.data,
     todoId: state.misc.dialog.todoId,
-    isError: state.misc.error,
-    errorMsg: state.misc.errorMsg,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleError: () => dispatch(toggleError()),
-    setErrorMsg: (msg) => dispatch(setErrorMsg(msg)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TagsArray);
+export default connect(mapStateToProps)(TagsArray);
