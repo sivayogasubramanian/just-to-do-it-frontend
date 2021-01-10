@@ -83,7 +83,10 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
                 <Checkbox
                   color="primary"
                   checked={isCompleted}
-                  onClick={(e) => setIsCompleted(!isCompleted)}
+                  onClick={(e) => {
+                    setIsCompleted(!isCompleted);
+                    onSaveClick();
+                  }}
                 />
               </Tooltip>
             </Grid>
@@ -122,7 +125,7 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
       </Slide>
       <Snackbar
         open={isSnackbarOpen}
-        autoHideDuration={1500}
+        autoHideDuration={1000}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         TransitionComponent={Slide}
         onClose={() => setIsSnackbarOpen(false)}
