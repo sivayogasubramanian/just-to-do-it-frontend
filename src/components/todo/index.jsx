@@ -65,7 +65,7 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
         timeout={{ enter: 300, exit: 500 }}
       >
         <Card
-          raised
+          variant="outlined"
           className={clsx(classes.card, {
             [classes.cardCompleted]: isCompleted,
             [classes.cardInComplete]: !isCompleted,

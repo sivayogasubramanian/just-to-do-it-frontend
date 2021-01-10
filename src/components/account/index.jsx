@@ -27,7 +27,7 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
 
   return (
     <>
-      <Slide in={true} direction="down">
+      <Slide in={true} direction="left">
         <Paper variant="outlined" className={classes.paper}>
           <Grid
             container
