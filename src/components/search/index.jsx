@@ -1,13 +1,11 @@
 // React and helpers
-import React, { useState } from 'react';
+import React from 'react';
 // MUI Components
-import { Card, Grid, Slide, TextField } from '@material-ui/core';
+import { Card, Grid, Slide } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
 import SearchBar from 'material-ui-search-bar';
 // MUI Icons
 
