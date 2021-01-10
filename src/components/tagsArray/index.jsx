@@ -1,5 +1,5 @@
 // React and helpers
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import useTodo from '../../hooks/useTodo';
 // MUI Components
@@ -30,7 +30,21 @@ const TagsArray = ({
     setChipData((chips) => chips.filter((chip) => chip !== chipToDelete));
   };
 
-  useEffect(() => {
+  const addTagClick = () => {
+    if (newTag) {
+      setChipData((chips) => [...chips, newTag.toUpperCase()]);
+      setNewTag('');
+    } else {
+      toggleError();
+      setErrorMsg('Please type something before adding a tag.');
+      setTimeout(() => {
+        toggleError();
+        setErrorMsg('');
+      }, 3000);
+    }
+  };
+
+  useLayoutEffect(() => {
     updateTodo(todoId, { tags: chipData });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveTags]);
@@ -45,9 +59,7 @@ const TagsArray = ({
               <li key={index}>
                 <Chip
                   label={data}
-                  onDelete={
-                    data.label === 'React' ? undefined : handleDelete(data)
-                  }
+                  onDelete={handleDelete(data)}
                   className={classes.chip}
                 />
               </li>
@@ -67,23 +79,7 @@ const TagsArray = ({
           />
         </Grid>
         <Grid item xs={5}>
-          <Button
-            onClick={() => {
-              if (newTag) {
-                setChipData((chips) => [...chips, newTag.toUpperCase()]);
-                setNewTag('');
-              } else {
-                toggleError();
-                setErrorMsg('Please type something before adding a tag.');
-                setTimeout(() => {
-                  toggleError();
-                  setErrorMsg('');
-                }, 3000);
-              }
-            }}
-            fullWidth
-            variant="outlined"
-          >
+          <Button onClick={addTagClick} fullWidth variant="outlined">
             Add tag
           </Button>
         </Grid>

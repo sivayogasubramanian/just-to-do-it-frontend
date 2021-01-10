@@ -1,5 +1,5 @@
 // React and helpers
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import useSubtodo from '../../hooks/useSubtodo';
 import clsx from 'clsx';
 // MUI Components
@@ -24,7 +24,7 @@ const Subtodo = ({ todoId, subTodoId, title, completed, saveSubtodos }) => {
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     updateSubtodo(todoId, subTodoId, {
       title: taskTitle,
       completed: isCompleted,
