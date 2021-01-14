@@ -3,6 +3,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import TodayIcon from '@material-ui/icons/Today';
 import NextWeekIcon from '@material-ui/icons/NextWeek';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 
 export const items = [
   { index: 1, text: 'All', icon: <HomeIcon />, path: '/home' },
@@ -18,5 +19,11 @@ export const items = [
     text: 'Completed',
     icon: <CheckCircleIcon />,
     path: '/completed',
+  },
+  {
+    index: 5,
+    text: 'Recently Deleted',
+    icon: <DeleteSweepIcon />,
+    path: '/deleted',
   },
 ];
