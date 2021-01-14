@@ -11,6 +11,9 @@ import { useStyles } from './styles';
 
 const Tags = ({ isDialogOpen, todos, currentTag }) => {
   const classes = useStyles();
+  const filteredTodos = todos
+    .filter((todo) => !todo.attributes.deleted)
+    .filter((todo) => todo.attributes.tags.includes(currentTag));
 
   return (
     <>
@@ -24,11 +27,7 @@ const Tags = ({ isDialogOpen, todos, currentTag }) => {
             </>
           }
         />
-        <TodoList
-          filteredTodos={todos.filter((todo) =>
-            todo.attributes.tags.includes(currentTag)
-          )}
-        />
+        <TodoList filteredTodos={filteredTodos} />
       </div>
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>

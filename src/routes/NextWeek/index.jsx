@@ -15,10 +15,12 @@ const NextWeek = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
   const checkDate = (deadline) => isThisWeek(new Date(deadline));
-  const filteredTodos = todos.filter(
-    (todo) =>
-      todo.attributes.deadline !== null && checkDate(todo.attributes.deadline)
-  );
+  const filteredTodos = todos
+    .filter((todo) => !todo.attributes.deleted)
+    .filter(
+      (todo) =>
+        todo.attributes.deadline !== null && checkDate(todo.attributes.deadline)
+    );
 
   return (
     <>

@@ -17,13 +17,16 @@ import { useStyles } from './styles';
 const Home = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
   const { createTodo } = useTodo();
+  const filteredTodos = todos.filter((todo) => !todo.attributes.deleted);
+
+  const handleFloatingBtnClick = () => createTodo();
 
   return (
     <>
       <MiniDrawer />
       <div className={classes.toolbar} />
       <div className={classes.content}>
-        <TodoList filteredTodos={todos} />
+        <TodoList filteredTodos={filteredTodos} />
       </div>
       <Tooltip title="Add Todo" arrow>
         <Fab
@@ -31,7 +34,7 @@ const Home = ({ todos, isDialogOpen }) => {
           className={classes.floatingActionBtn}
           color="primary"
           aria-label="add"
-          onClick={() => createTodo()}
+          onClick={handleFloatingBtnClick}
         >
           <AddIcon />
         </Fab>

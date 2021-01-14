@@ -11,7 +11,9 @@ import { useStyles } from './styles';
 
 const Completed = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
-  const filteredTodos = todos.filter((todo) => todo.attributes.completed);
+  const filteredTodos = todos
+    .filter((todo) => !todo.attributes.deleted)
+    .filter((todo) => todo.attributes.completed);
   return (
     <>
       <MiniDrawer />
