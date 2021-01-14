@@ -10,7 +10,6 @@ import {
   Button,
   Typography,
   Divider,
-  ButtonGroup,
 } from '@material-ui/core';
 
 const DeleteForeverDialog = ({
