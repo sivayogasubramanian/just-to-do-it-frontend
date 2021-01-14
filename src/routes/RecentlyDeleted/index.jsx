@@ -1,9 +1,9 @@
 // React and helpers
-import React from 'react';
-import useTodo from '../../hooks/useTodo';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Components
+import DeleteForeverDialog from './DeleteForeverDialog';
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
 import CardMessage from '../../components/cardMessage';
@@ -17,13 +17,10 @@ import { useStyles } from './styles';
 
 const RecentlyDeleted = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
-  const { destroyTodo } = useTodo();
   const filteredTodos = todos.filter((todo) => todo.attributes.deleted);
-
-  const handleFloatingBtnClick = () =>
-    filteredTodos.forEach((todo) => {
-      destroyTodo(todo.id);
-    });
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(
+    false
+  );
 
   return (
     <>
@@ -42,11 +39,16 @@ const RecentlyDeleted = ({ todos, isDialogOpen }) => {
           className={classes.floatingActionBtn}
           color="primary"
           aria-label="add"
-          onClick={handleFloatingBtnClick}
+          onClick={() => setIsConfirmationDialogOpen(true)}
         >
           <DeleteForeverIcon />
         </Fab>
       </Tooltip>
+      <DeleteForeverDialog
+        filteredTodos={filteredTodos}
+        open={isConfirmationDialogOpen}
+        setIsConfirmationDialogOpen={setIsConfirmationDialogOpen}
+      />
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
   );
