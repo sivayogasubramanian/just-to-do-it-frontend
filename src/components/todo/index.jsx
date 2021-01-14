@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import useTodo from '../../hooks/useTodo';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
+import useDidUpdateEffect from '../../hooks/useDidUpdateEffect';
 // Actions
 import { openDialog } from '../../redux/actions/miscActions';
 // MUI Components
@@ -21,12 +22,13 @@ import { Alert } from '@material-ui/lab';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 import SaveIcon from '@material-ui/icons/Save';
+import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
 // Styles
 import { useStyles } from './styles';
 
-const Todo = ({ todoId, title, completed, openDialog }) => {
+const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
   const classes = useStyles();
-  const { updateTodo, destroyTodo } = useTodo();
+  const { updateTodo } = useTodo();
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
@@ -47,7 +49,15 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
 
   const onDeleteClick = () => {
     setChecked(false);
-    destroyTodo(todoId);
+    updateTodo(todoId, {
+      deleted: true,
+    });
+  };
+
+  const onRestoreClick = () => {
+    updateTodo(todoId, {
+      deleted: false,
+    });
   };
 
   const onKeyPress = (e) => {
@@ -56,13 +66,18 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
       onSaveClick();
     }
   };
+
+  useDidUpdateEffect(() => {
+    onSaveClick();
+  }, [isCompleted]);
+
   return (
     <>
       <Slide
         direction="left"
         in={checked}
         mountOnEnter
-        timeout={{ enter: 300, exit: 500 }}
+        timeout={{ enter: 200, exit: 200 }}
       >
         <Card
           variant="outlined"
@@ -83,10 +98,7 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
                 <Checkbox
                   color="primary"
                   checked={isCompleted}
-                  onClick={(e) => {
-                    setIsCompleted(!isCompleted);
-                    onSaveClick();
-                  }}
+                  onChange={() => setIsCompleted(!isCompleted)}
                 />
               </Tooltip>
             </Grid>
@@ -99,27 +111,41 @@ const Todo = ({ todoId, title, completed, openDialog }) => {
                 onKeyPress={onKeyPress}
               />
             </Grid>
-            <Grid item xs={2}>
-              <Tooltip title="Save Todo" arrow>
-                <Button onClick={onSaveClick}>
-                  <SaveIcon />
-                </Button>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={2}>
-              <Tooltip title="Edit Todo" arrow>
-                <Button onClick={onEditClick} size="large">
-                  <EditTwoToneIcon />
-                </Button>
-              </Tooltip>
-            </Grid>
-            <Grid item xs={2}>
-              <Tooltip title="Delete Todo" arrow>
-                <Button size="large" onClick={onDeleteClick}>
-                  <DeleteOutlineTwoToneIcon />
-                </Button>
-              </Tooltip>
-            </Grid>
+            {deleted ? (
+              <>
+                <Grid item xs={2}>
+                  <Tooltip title="Restore Todo" arrow>
+                    <Button size="large" onClick={onRestoreClick}>
+                      <RestoreFromTrashIcon />
+                    </Button>
+                  </Tooltip>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <Grid item xs={2}>
+                  <Tooltip title="Save Todo" arrow>
+                    <Button onClick={onSaveClick}>
+                      <SaveIcon />
+                    </Button>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={2}>
+                  <Tooltip title="Edit Todo" arrow>
+                    <Button onClick={onEditClick} size="large">
+                      <EditTwoToneIcon />
+                    </Button>
+                  </Tooltip>
+                </Grid>
+                <Grid item xs={2}>
+                  <Tooltip title="Delete Todo" arrow>
+                    <Button size="large" onClick={onDeleteClick}>
+                      <DeleteOutlineTwoToneIcon />
+                    </Button>
+                  </Tooltip>
+                </Grid>
+              </>
+            )}
           </Grid>
         </Card>
       </Slide>
