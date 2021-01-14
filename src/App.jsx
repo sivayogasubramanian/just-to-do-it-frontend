@@ -12,6 +12,7 @@ import Today from './routes/Today';
 import NextWeek from './routes/NextWeek';
 import Tags from './routes/tags';
 import MyAccount from './routes/MyAccount';
+import RecentlyDeleted from './routes/RecentlyDeleted';
 // Styles
 import './App.css';
 
@@ -62,6 +63,12 @@ const App = ({ isAuthenticated }) => {
             exact
             path="/account"
             component={MyAccount}
+            auth={isAuthenticated}
+          />
+          <GuardedRoute
+            exact
+            path="/deleted"
+            component={RecentlyDeleted}
             auth={isAuthenticated}
           />
           <GuardedRoute path="/" component={Home} auth={isAuthenticated} />
