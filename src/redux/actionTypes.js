@@ -17,6 +17,12 @@ export const TOGGLE_SAVE = 'TOGGLE_SAVE';
 export const SELECT_TAG = 'SELECT_TAG';
 export const RESET_MISC = 'RESET_MISC';
 
+// For searchActions.js
+export const SET_SEARCH_VIEW = 'SET_SEARCH_VIEW';
+export const SEARCH_TITLE = 'SEARCH_TITLE';
+export const SEARCH_TAG = 'SEARCH_TAG';
+export const CANCEL_SEARCH = 'CANCEL_SEARCH';
+
 // For userActions.js
 export const STORE_USER = 'STORE_USER';
 export const REMOVE_USER = 'REMOVE_USER';
