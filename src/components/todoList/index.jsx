@@ -5,10 +5,26 @@ import { connect } from 'react-redux';
 import Todo from '../todo';
 import Error from './Error';
 import CardMessage from '../cardMessage';
+import Search from '../../components/search';
 
-const TodoList = ({ filteredTodos, isError }) => {
+const TodoList = ({ searchTitle, searchTags, filteredTodos, isError }) => {
+  let searchFilterTodos = filteredTodos;
+
+  if (searchTitle === '' && searchTags.length === 0) {
+    searchFilterTodos = filteredTodos;
+  } else if (searchTags.length === 0) {
+    searchFilterTodos = filteredTodos.filter((todo) =>
+      todo.attributes.title.toLowerCase().includes(searchTitle.toLowerCase())
+    );
+  } else {
+    searchFilterTodos = filteredTodos.filter((todo) =>
+      searchTags.every((tag) => todo.attributes.tags.includes(tag))
+    );
+  }
+
   return (
     <>
+      <Search />
       {filteredTodos.length === 0 && (
         <CardMessage
           message={
@@ -16,7 +32,12 @@ const TodoList = ({ filteredTodos, isError }) => {
           }
         />
       )}
-      {filteredTodos.map((todo) => (
+      {searchFilterTodos.length === 0 && (
+        <CardMessage
+          message={'There were no todos matching your search inputs'}
+        />
+      )}
+      {searchFilterTodos.map((todo) => (
         <Todo
           key={todo.id}
           todoId={todo.id}
@@ -33,6 +54,8 @@ const TodoList = ({ filteredTodos, isError }) => {
 const mapStateToProps = (state) => {
   return {
     isError: state.misc.error,
+    searchTitle: state.search.title,
+    searchTags: state.search.tags,
   };
 };
 
