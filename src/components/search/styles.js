@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   card: {
-    marginTop: '10px',
-    backgroundColor: '#e2ffde',
+    padding: '10px',
+    backgroundColor: '#d2fcf5',
   },
   grid: {
     marginTop: '10px',
@@ -15,4 +15,5 @@ export const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: 90,
   },
+  autoComplete: { backgroundColor: 'white' },
 }));
