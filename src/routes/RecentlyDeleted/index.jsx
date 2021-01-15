@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // Components
-import DeleteForeverDialog from './DeleteForeverDialog';
+import DeleteForeverDialog from '../../components/ConfirmationDialog/DeleteForeverDialog';
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
 import CardMessage from '../../components/cardMessage';

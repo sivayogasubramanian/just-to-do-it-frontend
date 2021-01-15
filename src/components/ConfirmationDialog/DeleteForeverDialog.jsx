@@ -31,7 +31,8 @@ const DeleteForeverDialog = ({
   return (
     <Dialog open={open}>
       <DialogTitle>
-        Are you sure you want to permanently delete all your todos?
+        Are you sure you want to permanently delete all your Recently Deleted
+        todos?
       </DialogTitle>
       <Divider />
       <DialogContent>
@@ -40,7 +41,12 @@ const DeleteForeverDialog = ({
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" color="primary" onClick={handleCancelClick}>
+        <Button
+          autoFocus
+          variant="outlined"
+          color="primary"
+          onClick={handleCancelClick}
+        >
           Cancel
         </Button>
         <Button
