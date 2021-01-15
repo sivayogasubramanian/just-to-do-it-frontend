@@ -14,4 +14,12 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginLeft: '55px',
   },
+  floatingActionBtn: {
+    margin: 0,
+    top: 'auto',
+    right: 40,
+    bottom: 40,
+    left: 'auto',
+    position: 'fixed',
+  },
 }));
