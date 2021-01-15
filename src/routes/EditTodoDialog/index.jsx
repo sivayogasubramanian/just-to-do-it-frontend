@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import { CircularProgress, Zoom } from '@material-ui/core';
+import { CircularProgress, Grid, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -18,6 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
+  KeyboardTimePicker,
 } from '@material-ui/pickers';
 // MUI Icons
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -27,7 +28,6 @@ import SaveIcon from '@material-ui/icons/Save';
 // Date Utils
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
-import { format } from 'date-fns';
 // Actions
 import { closeDialog } from '../../redux/actions/miscActions';
 // Styles
@@ -89,7 +89,7 @@ const EditTodoDialog = ({
     updateTodo(todoId, {
       title: taskTitle,
       description: desc,
-      deadline: format(selectedDate, 'yyyy-MM-dd HH:mm:ss'),
+      deadline: selectedDate,
     });
     setTimeout(() => {
       setLoading(false);
@@ -135,18 +135,33 @@ const EditTodoDialog = ({
           <br />
           <br />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              fullWidth
-              margin="normal"
-              label="Due on (date)"
-              format="dd/MM/yyyy"
-              value={selectedDate}
-              onChange={handleDateChange}
-              disablePast
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item xs={6}>
+                <KeyboardDatePicker
+                  fullWidth
+                  margin="normal"
+                  label="Due on (date)"
+                  format="dd/MM/yyyy"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  disablePast
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <KeyboardTimePicker
+                  fullWidth
+                  margin="normal"
+                  label="Due on (time)"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                />
+              </Grid>
+            </Grid>
           </MuiPickersUtilsProvider>
           <TagsArray saveTags={saveClicked} />
           <p>Subtodos:</p>
