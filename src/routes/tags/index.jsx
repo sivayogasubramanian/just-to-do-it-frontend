@@ -11,10 +11,10 @@ import { useStyles } from './styles';
 
 const Tags = ({ isDialogOpen, todos, currentTag }) => {
   const classes = useStyles();
-  const filteredTodos = todos
-    .filter((todo) => !todo.attributes.deleted)
-    .filter((todo) => todo.attributes.tags.includes(currentTag));
-
+  const filteredTodos = todos.filter(
+    (todo) =>
+      !todo.attributes.deleted && todo.attributes.tags.includes(currentTag)
+  );
   return (
     <>
       <MiniDrawer />

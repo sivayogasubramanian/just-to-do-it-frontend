@@ -15,13 +15,12 @@ const Today = ({ todos, isDialogOpen }) => {
   const classes = useStyles();
 
   const checkDate = (deadline) => isToday(new Date(deadline));
-  const filteredTodos = todos
-    .filter((todo) => !todo.attributes.deleted)
-    .filter(
-      (todo) =>
-        todo.attributes.deadline !== null && checkDate(todo.attributes.deadline)
-    );
-
+  const filteredTodos = todos.filter(
+    (todo) =>
+      !todo.attributes.deleted &&
+      todo.attributes.deadline !== null &&
+      checkDate(todo.attributes.deadline)
+  );
   return (
     <>
       <MiniDrawer />

@@ -47,9 +47,9 @@ const EditTodoDialog = ({
 
   const [loading, setLoading] = useState(false);
 
-  const todo = todos
-    .filter((todo) => !todo.attributes.deleted)
-    .filter((todo) => todo.id === todoId)[0];
+  const todo = todos.filter(
+    (todo) => !todo.attributes.deleted && todo.id === todoId
+  )[0];
 
   const subtodos = allSubtodos
     .filter((subtodo) => subtodo.attributes.todo_id === parseInt(todoId))
