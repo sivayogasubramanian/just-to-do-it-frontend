@@ -8,6 +8,7 @@ import miscReducer from './miscReducer';
 import userReducer from './userReducer';
 import todosReducer from './todosReducer';
 import herokuReducer from './herokuReducer';
+import searchReducer from './searchReducer';
 
 const persistConfig = {
   key: 'just-to-do-it',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   isAuthenticated: authReducer,
   user: userReducer,
   todos: todosReducer,
+  search: searchReducer,
   misc: miscReducer,
 });
 
