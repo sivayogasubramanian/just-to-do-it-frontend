@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  Divider,
 } from '@material-ui/core';
 
 const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
@@ -17,11 +18,14 @@ const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
   return (
     <Dialog open={open}>
       <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
+      <Divider />
       <DialogContent>
         <DeleteAccountMessage />
       </DialogContent>
+      <Divider />
       <DialogActions>
         <Button
+          autoFocus
           variant="outlined"
           color="primary"
           onClick={() => setIsDeleteDialogOpen(false)}
