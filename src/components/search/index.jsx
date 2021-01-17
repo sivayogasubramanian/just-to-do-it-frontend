@@ -9,7 +9,7 @@ import {
   setSearchView,
 } from '../../redux/actions/searchActions';
 // MUI Components
-import { Card, Grid, Paper, Slide, TextField } from '@material-ui/core';
+import { Card, Grid, Paper, TextField } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -50,64 +50,55 @@ const Search = ({
   };
 
   return (
-    <>
-      <Slide
-        direction="left"
-        in={true}
-        mountOnEnter
-        timeout={{ enter: 200, exit: 200 }}
+    <Paper square variant="outlined">
+      <Grid
+        container
+        direction="row-reverse"
+        justify="space-around"
+        alignItems="center"
+        className={classes.card}
       >
-        <Paper square variant="outlined">
-          <Grid
-            container
-            direction="row-reverse"
-            justify="space-around"
-            alignItems="center"
-            className={classes.card}
-          >
-            <Grid item xs={6}>
-              {currentView === 10 ? (
-                <Card variant="outlined">
-                  <SearchBar
-                    value={title}
-                    onChange={handleSearchChange}
-                    onCancelSearch={handleCancelSearch}
-                  />
-                </Card>
-              ) : (
-                <Autocomplete
-                  multiple
-                  freeSolo
-                  autoComplete
-                  defaultValue={tags}
-                  value={tags}
-                  options={[...allTags]}
-                  getOptionLabel={(option) => option}
-                  onChange={handleAutocompleteChange}
-                  filterSelectedOptions
-                  className={classes.autoComplete}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      placeholder="Add Tag"
-                    />
-                  )}
+        <Grid item xs={6}>
+          {currentView === 10 ? (
+            <Card variant="outlined">
+              <SearchBar
+                value={title}
+                onChange={handleSearchChange}
+                onCancelSearch={handleCancelSearch}
+              />
+            </Card>
+          ) : (
+            <Autocomplete
+              multiple
+              freeSolo
+              autoComplete
+              defaultValue={tags}
+              value={tags}
+              options={[...allTags]}
+              getOptionLabel={(option) => option}
+              onChange={handleAutocompleteChange}
+              filterSelectedOptions
+              className={classes.autoComplete}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  variant="outlined"
+                  placeholder="Add Tag"
                 />
               )}
-            </Grid>
-            <Grid item xs={2}>
-              <FormControl className={classes.formControl}>
-                <Select onChange={handleSelection} defaultValue={currentView}>
-                  <MenuItem value={10}>By title</MenuItem>
-                  <MenuItem value={20}>By tags</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Slide>
-    </>
+            />
+          )}
+        </Grid>
+        <Grid item xs={2}>
+          <FormControl className={classes.formControl}>
+            <Select onChange={handleSelection} defaultValue={currentView}>
+              <MenuItem value={10}>By title</MenuItem>
+              <MenuItem value={20}>By tags</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 
