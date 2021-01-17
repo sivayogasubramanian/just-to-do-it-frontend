@@ -1,23 +1,23 @@
 // MUI Icons
-import HomeIcon from '@material-ui/icons/Home';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import AssignmentTurnedInTwoToneIcon from '@material-ui/icons/AssignmentTurnedInTwoTone';
 import TodayIcon from '@material-ui/icons/Today';
-import NextWeekIcon from '@material-ui/icons/NextWeek';
+import DateRangeIcon from '@material-ui/icons/DateRange';
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 
 export const items = [
-  { index: 1, text: 'All', icon: <HomeIcon />, path: '/home' },
+  { index: 1, text: 'All', icon: <FormatListBulletedIcon />, path: '/home' },
   { index: 2, text: 'Due Today', icon: <TodayIcon />, path: '/today' },
   {
     index: 3,
     text: 'Due This Week',
-    icon: <NextWeekIcon />,
+    icon: <DateRangeIcon />,
     path: '/nextweek',
   },
   {
     index: 4,
     text: 'Completed',
-    icon: <CheckCircleIcon />,
+    icon: <AssignmentTurnedInTwoToneIcon />,
     path: '/completed',
   },
   {
