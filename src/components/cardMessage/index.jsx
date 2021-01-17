@@ -6,7 +6,7 @@ import { useStyles } from './styles';
 const CardMessage = ({ message }) => {
   const classes = useStyles();
   return (
-    <Zoom in={true}>
+    <Zoom in={true} timeout={150}>
       <Paper variant="outlined" className={classes.paper}>
         <Box m="10px">
           <Typography variant="h5">{message}</Typography>

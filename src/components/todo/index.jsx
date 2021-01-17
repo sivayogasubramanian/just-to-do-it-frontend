@@ -128,7 +128,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
         direction="left"
         in={checked}
         mountOnEnter
-        timeout={{ enter: 200, exit: 200 }}
+        timeout={{ enter: 150, exit: 150 }}
       >
         <Card
           variant="outlined"
