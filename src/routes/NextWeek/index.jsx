@@ -8,12 +8,8 @@ import TodoList from '../../components/todoList';
 import CardMessage from '../../components/cardMessage';
 // Date Functions
 import { isThisWeek } from 'date-fns';
-// Styles
-import { useStyles } from './styles';
 
 const NextWeek = ({ todos, isDialogOpen }) => {
-  const classes = useStyles();
-
   const checkDate = (deadline) => isThisWeek(new Date(deadline));
   const filteredTodos = todos.filter(
     (todo) =>
@@ -23,17 +19,17 @@ const NextWeek = ({ todos, isDialogOpen }) => {
   );
   return (
     <>
-      <MiniDrawer />
-      <div className={classes.toolbar} />
-      <div className={classes.content}>
-        {filteredTodos.length === 0 ? (
-          <CardMessage
-            message={'Great! You do not have any todos due this week!'}
-          />
-        ) : (
-          <TodoList filteredTodos={filteredTodos} />
-        )}
-      </div>
+      <MiniDrawer
+        content={
+          filteredTodos.length === 0 ? (
+            <CardMessage
+              message={'Great! You do not have any todos due this week!'}
+            />
+          ) : (
+            <TodoList filteredTodos={filteredTodos} />
+          )
+        }
+      />
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
   );

@@ -6,29 +6,28 @@ import { connect } from 'react-redux';
 import MiniDrawer from '../../components/navigation';
 import CardMessage from '../../components/cardMessage';
 import TodoList from '../../components/todoList';
-// Styles
-import { useStyles } from './styles';
 
 const Tags = ({ isDialogOpen, todos, currentTag }) => {
-  const classes = useStyles();
   const filteredTodos = todos.filter(
     (todo) =>
       !todo.attributes.deleted && todo.attributes.tags.includes(currentTag)
   );
   return (
     <>
-      <MiniDrawer />
-      <div className={classes.toolbar} />
-      <div className={classes.content}>
-        <CardMessage
-          message={
-            <>
-              Current Tag Selected: <b>{currentTag}</b>
-            </>
-          }
-        />
-        <TodoList filteredTodos={filteredTodos} />
-      </div>
+      <MiniDrawer
+        content={
+          <>
+            <CardMessage
+              message={
+                <>
+                  Current Tag Selected: <b>{currentTag}</b>
+                </>
+              }
+            />
+            <TodoList filteredTodos={filteredTodos} />
+          </>
+        }
+      />
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
   );

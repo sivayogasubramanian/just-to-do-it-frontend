@@ -24,7 +24,7 @@ import Tags from './Tags';
 // Styles
 import { useStyles } from './styles';
 
-function MiniDrawer() {
+function MiniDrawer({ content }) {
   const classes = useStyles();
   const theme = useTheme();
   const { logOut } = useAuth();
@@ -97,6 +97,10 @@ function MiniDrawer() {
         <ItemsList closeNavDrawer={handleDrawerClose} />
         <Tags closeNavDrawer={handleDrawerClose} />
       </Drawer>
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
+        {content}
+      </main>
     </div>
   );
 }

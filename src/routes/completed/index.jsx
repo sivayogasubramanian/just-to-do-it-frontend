@@ -28,15 +28,15 @@ const Completed = ({ todos, isDialogOpen }) => {
   };
   return (
     <>
-      <MiniDrawer />
-      <div className={classes.toolbar} />
-      <div className={classes.content}>
-        {filteredTodos.length === 0 ? (
-          <CardMessage message={'You do not have any completed todos.'} />
-        ) : (
-          <TodoList filteredTodos={filteredTodos} />
-        )}
-      </div>
+      <MiniDrawer
+        content={
+          filteredTodos.length === 0 ? (
+            <CardMessage message={'You do not have any completed todos.'} />
+          ) : (
+            <TodoList filteredTodos={filteredTodos} />
+          )
+        }
+      />
       <Tooltip title="Delete All" arrow>
         <Fab
           size="medium"

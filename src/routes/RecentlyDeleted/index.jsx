@@ -24,15 +24,15 @@ const RecentlyDeleted = ({ todos, isDialogOpen }) => {
 
   return (
     <>
-      <MiniDrawer />
-      <div className={classes.toolbar} />
-      <div className={classes.content}>
-        {filteredTodos.length === 0 ? (
-          <CardMessage message={'Your Recently Deleted is Empty'} />
-        ) : (
-          <TodoList filteredTodos={filteredTodos} />
-        )}
-      </div>
+      <MiniDrawer
+        content={
+          filteredTodos.length === 0 ? (
+            <CardMessage message={'Your Recently Deleted is Empty'} />
+          ) : (
+            <TodoList filteredTodos={filteredTodos} />
+          )
+        }
+      />
       <Tooltip title="Delete Forever" arrow>
         <Fab
           size="medium"

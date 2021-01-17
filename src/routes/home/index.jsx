@@ -23,11 +23,7 @@ const Home = ({ todos, isDialogOpen }) => {
 
   return (
     <>
-      <MiniDrawer />
-      <div className={classes.toolbar} />
-      <div className={classes.content}>
-        <TodoList filteredTodos={filteredTodos} />
-      </div>
+      <MiniDrawer content={<TodoList filteredTodos={filteredTodos} />} />
       <Tooltip title="Add Todo" arrow>
         <Fab
           size="medium"
