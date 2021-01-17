@@ -10,7 +10,7 @@ import {
 import { fetchTodos } from '../redux/actions/todosActions';
 import { logOut } from '../redux/actions/authActions';
 // Date Fns
-import { format } from 'date-fns';
+import { addMinutes } from 'date-fns';
 
 const useTodo = () => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const useTodo = () => {
       .post(`/api/v1/todos`, {
         title: '',
         completed: false,
-        deadline: format(new Date(), 'yyyy-MM-dd'),
+        deadline: addMinutes(new Date(), 60),
       })
       .then(successHandler)
       .catch(ErrorHandler);
