@@ -214,7 +214,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
                           className={clsx(classes.expand, {
                             [classes.expandOpen]: isExtraMenuOpen,
                           })}
-                          size="large"
+                          color="inherit"
                           onClick={handleExtraMenuClick}
                         >
                           <ExpandMoreIcon />
