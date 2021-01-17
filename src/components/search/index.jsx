@@ -30,12 +30,13 @@ const Search = ({
 }) => {
   const classes = useStyles();
 
-  const allTags = new Set();
+  const allTagsSet = new Set();
   todos.map((todo) =>
     todo.attributes.tags.forEach((tag) => {
-      allTags.add(tag);
+      allTagsSet.add(tag);
     })
   );
+  const allTags = [...allTagsSet];
 
   const handleSelection = (e) => {
     cancelSearch();
@@ -74,7 +75,7 @@ const Search = ({
               autoComplete
               defaultValue={tags}
               value={tags}
-              options={[...allTags]}
+              options={allTags}
               getOptionLabel={(option) => option}
               onChange={handleAutocompleteChange}
               filterSelectedOptions
