@@ -12,27 +12,63 @@ import {
   Checkbox,
   TextField,
   Grid,
+  IconButton,
   Button,
   Slide,
   Tooltip,
   Snackbar,
+  Collapse,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+  KeyboardTimePicker,
+} from '@material-ui/pickers';
 // MUI Icons
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteOutlineTwoToneIcon from '@material-ui/icons/DeleteOutlineTwoTone';
 import SaveIcon from '@material-ui/icons/Save';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// Date Utils
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import { isBefore } from 'date-fns';
 // Styles
-import { useStyles } from './styles';
+import { useStyles, textFieldInputProps } from './styles';
 
-const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
+const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
   const classes = useStyles();
   const { updateTodo } = useTodo();
+
+  const todo = todos.filter(
+    (todo) => !todo.attributes.deleted && todo.id === todoId
+  )[0];
+  const currentDate = new Date();
+
   const [taskTitle, setTaskTitle] = useState(title);
   const [isCompleted, setIsCompleted] = useState(completed);
   const [checked, setChecked] = useState(true);
+  const [isOverdue, setIsOverdue] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [isExtraMenuOpen, setIsExtraMenuOpen] = useState(false);
+
+  const setDate = () => {
+    if (todo !== undefined) {
+      if (todo.attributes.deadline !== null) {
+        new Date(todo.attributes.deadline);
+      }
+    }
+    return currentDate;
+  };
+
+  const checkDate = () => {
+    if (isBefore(selectedDate, currentDate)) {
+      setIsOverdue(true);
+    }
+  };
+  const [selectedDate, setSelectedDate] = useState(setDate());
 
   // Button Handlers
   const onSaveClick = () => {
@@ -40,6 +76,7 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
     updateTodo(todoId, {
       title: taskTitle,
       completed: isCompleted,
+      deadline: selectedDate,
     });
   };
 
@@ -52,6 +89,10 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
     updateTodo(todoId, {
       deleted: true,
     });
+  };
+
+  const handleExtraMenuClick = () => {
+    setIsExtraMenuOpen(!isExtraMenuOpen);
   };
 
   const onRestoreClick = () => {
@@ -67,9 +108,12 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
     }
   };
 
+  const handleDateChange = (date) => setSelectedDate(date);
+
   useDidUpdateEffect(() => {
     onSaveClick();
-  }, [isCompleted]);
+    checkDate();
+  }, [isCompleted, selectedDate]);
 
   return (
     <>
@@ -82,8 +126,9 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
         <Card
           variant="outlined"
           className={clsx(classes.card, {
-            [classes.cardCompleted]: isCompleted,
-            [classes.cardInComplete]: !isCompleted,
+            [classes.overdue]: isOverdue,
+            [classes.cardCompleted]: isCompleted && !isOverdue,
+            [classes.cardInComplete]: !isCompleted && !isOverdue,
           })}
         >
           <Grid
@@ -102,51 +147,112 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
                 />
               </Tooltip>
             </Grid>
-            <Grid item xs={4}>
-              <TextField
-                placeholder="Press Enter to Save"
-                fullWidth
-                value={taskTitle}
-                onChange={(e) => setTaskTitle(e.target.value)}
-                onKeyPress={onKeyPress}
-              />
+            <Grid item xs={10}>
+              <Grid
+                container
+                direction="row"
+                justify="space-around"
+                alignItems="center"
+              >
+                <Grid item xs={11}>
+                  <TextField
+                    inputProps={textFieldInputProps}
+                    placeholder="Press Enter to Save"
+                    fullWidth
+                    value={taskTitle}
+                    onChange={(e) => setTaskTitle(e.target.value)}
+                    onKeyPress={onKeyPress}
+                  />
+                </Grid>
+                <Grid item xs={1} />
+                {deleted ? (
+                  <>
+                    <Grid item xs={11}>
+                      <Button
+                        size="large"
+                        onClick={onRestoreClick}
+                        startIcon={<RestoreFromTrashIcon />}
+                      >
+                        Restore Todo
+                      </Button>
+                    </Grid>
+                    <Grid item xs={1} />
+                  </>
+                ) : (
+                  <>
+                    <Grid item xs={3}>
+                      <Tooltip title="Save Todo" arrow>
+                        <Button onClick={onSaveClick}>
+                          <SaveIcon />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Tooltip title="Edit Todo" arrow>
+                        <Button onClick={onEditClick} size="large">
+                          <EditTwoToneIcon />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Tooltip title="Delete Todo" arrow>
+                        <Button size="large" onClick={onDeleteClick}>
+                          <DeleteOutlineTwoToneIcon />
+                        </Button>
+                      </Tooltip>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Tooltip title="More Info" arrow>
+                        <IconButton
+                          className={clsx(classes.expand, {
+                            [classes.expandOpen]: isExtraMenuOpen,
+                          })}
+                          size="large"
+                          onClick={handleExtraMenuClick}
+                        >
+                          <ExpandMoreIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                  </>
+                )}
+              </Grid>
             </Grid>
-            {deleted ? (
-              <>
-                <Grid item xs={2}>
-                  <Tooltip title="Restore Todo" arrow>
-                    <Button size="large" onClick={onRestoreClick}>
-                      <RestoreFromTrashIcon />
-                    </Button>
-                  </Tooltip>
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid item xs={2}>
-                  <Tooltip title="Save Todo" arrow>
-                    <Button onClick={onSaveClick}>
-                      <SaveIcon />
-                    </Button>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs={2}>
-                  <Tooltip title="Edit Todo" arrow>
-                    <Button onClick={onEditClick} size="large">
-                      <EditTwoToneIcon />
-                    </Button>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs={2}>
-                  <Tooltip title="Delete Todo" arrow>
-                    <Button size="large" onClick={onDeleteClick}>
-                      <DeleteOutlineTwoToneIcon />
-                    </Button>
-                  </Tooltip>
-                </Grid>
-              </>
-            )}
           </Grid>
+          <Collapse in={isExtraMenuOpen} timeout="auto" unmountOnExit>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+              >
+                <Grid item xs={2} />
+                <Grid item xs={4}>
+                  <KeyboardDatePicker
+                    minDateMessage={'This todo is overdue'}
+                    fullWidth
+                    margin="normal"
+                    label="Due on (date)"
+                    format="dd/MM/yyyy"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    disablePast
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <KeyboardTimePicker
+                    fullWidth
+                    margin="normal"
+                    label="Due on (time)"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
+            </MuiPickersUtilsProvider>
+          </Collapse>
         </Card>
       </Slide>
       <Snackbar
@@ -168,10 +274,16 @@ const Todo = ({ todoId, title, completed, deleted, openDialog }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todos.data,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     openDialog: (payload) => dispatch(openDialog(payload)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(Todo);
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);
