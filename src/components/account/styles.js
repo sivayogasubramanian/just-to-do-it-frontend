@@ -7,4 +7,7 @@ export const useStyles = makeStyles(() => ({
   button: {
     margin: '20px',
   },
+  form: {
+    padding: '20px',
+  },
 }));
