@@ -57,7 +57,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
   const setDate = () => {
     if (todo !== undefined) {
       if (todo.attributes.deadline !== null) {
-        new Date(todo.attributes.deadline);
+        return new Date(todo.attributes.deadline);
       }
     }
     return currentDate;
@@ -66,6 +66,8 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
   const checkDate = () => {
     if (isBefore(selectedDate, currentDate)) {
       setIsOverdue(true);
+    } else {
+      setIsOverdue(false);
     }
   };
   const [selectedDate, setSelectedDate] = useState(setDate());
@@ -126,8 +128,8 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
         <Card
           variant="outlined"
           className={clsx(classes.card, {
-            [classes.overdue]: isOverdue,
-            [classes.cardCompleted]: isCompleted && !isOverdue,
+            [classes.cardCompleted]: isCompleted,
+            [classes.overdue]: isOverdue && !isCompleted,
             [classes.cardInComplete]: !isCompleted && !isOverdue,
           })}
         >
