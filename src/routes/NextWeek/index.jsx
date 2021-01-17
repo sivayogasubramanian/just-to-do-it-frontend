@@ -23,7 +23,7 @@ const NextWeek = ({ todos, isDialogOpen }) => {
         content={
           filteredTodos.length === 0 ? (
             <CardMessage
-              message={'Great! You do not have any todos due this week!'}
+              message={'Wow! Your week is free. Go play hard! You deserved it!'}
             />
           ) : (
             <TodoList filteredTodos={filteredTodos} />
