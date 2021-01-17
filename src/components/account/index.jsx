@@ -7,14 +7,8 @@ import Success from './Success';
 import Error from './Error';
 import DeleteAccountDialog from './DeleteAccountDialog';
 // MUI Components
-import {
-  Paper,
-  Grid,
-  Typography,
-  Slide,
-  Button,
-  CircularProgress,
-} from '@material-ui/core';
+import { Paper, Grid, Typography, Slide, Button } from '@material-ui/core';
+import CircleLoader from 'react-spinners/CircleLoader';
 // Styles
 import { useStyles } from './styles';
 
@@ -27,7 +21,7 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
 
   return (
     <>
-      <Slide in={true} direction="left">
+      <Slide in={true} direction="left" timeout={150}>
         <Paper variant="outlined" className={classes.paper}>
           <Grid
             container
@@ -51,8 +45,14 @@ const Account = ({ userId, username, loading, success, errorMsg }) => {
             >
               Delete Account
             </Button>
+            {loading && (
+              <CircleLoader
+                size={50}
+                color="#240971"
+                className={classes.loader}
+              />
+            )}
           </Grid>
-          {loading && <CircularProgress />}
           {errorMsg && <Error errorMsg={errorMsg} />}
           {success && <Success />}
         </Paper>

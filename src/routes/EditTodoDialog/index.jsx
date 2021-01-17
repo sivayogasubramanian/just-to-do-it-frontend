@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import { CircularProgress, Grid, Zoom } from '@material-ui/core';
+import CircleLoader from 'react-spinners/CircleLoader';
+import { Grid, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -106,6 +107,7 @@ const EditTodoDialog = ({
         fullWidth
         className={classes.dialog}
         TransitionComponent={Zoom}
+        transitionDuration={150}
       >
         <DialogTitle>
           <EditOutlinedIcon className={classes.editIcon} />
@@ -186,7 +188,7 @@ const EditTodoDialog = ({
           </Button>
         </DialogContent>
         <DialogActions>
-          {(isLoading || loading) && <CircularProgress />}
+          {(isLoading || loading) && <CircleLoader size={35} color="#240971" />}
           <Button
             onClick={markAsCompletedClick}
             size="small"
