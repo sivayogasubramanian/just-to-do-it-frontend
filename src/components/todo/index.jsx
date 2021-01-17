@@ -1,5 +1,5 @@
 // React and helpers
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useTodo from '../../hooks/useTodo';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
@@ -116,6 +116,11 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
     onSaveClick();
     checkDate();
   }, [isCompleted, selectedDate]);
+
+  useEffect(() => {
+    checkDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
