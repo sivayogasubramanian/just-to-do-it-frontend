@@ -21,11 +21,13 @@ const Tags = ({ todos, selectTag, closeNavDrawer }) => {
   const classes = useStyles();
   const tags = new Set();
 
-  todos.data.map((todo) =>
-    todo.attributes.tags.forEach((tag) => {
-      tags.add(tag);
-    })
-  );
+  todos.data
+    .filter((todo) => !todo.attributes.deleted)
+    .map((todo) =>
+      todo.attributes.tags.forEach((tag) => {
+        tags.add(tag);
+      })
+    );
 
   return (
     <>
