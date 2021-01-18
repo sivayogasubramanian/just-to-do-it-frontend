@@ -6,16 +6,16 @@ import {
   SET_SEARCH_VIEW,
 } from '../actionTypes';
 
-const initialState = { view: 10, title: '', tags: [] };
+const initialState = { isSearchActive: false, view: 10, title: '', tags: [] };
 
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH_VIEW:
       return { ...state, view: action.payload };
     case SEARCH_TITLE:
-      return { ...state, title: action.payload };
+      return { ...state, title: action.payload, isSearchActive: true };
     case SEARCH_TAG:
-      return { ...state, tags: action.payload };
+      return { ...state, tags: action.payload, isSearchActive: true };
     case CANCEL_SEARCH:
       return { ...initialState, view: state.view };
     default:

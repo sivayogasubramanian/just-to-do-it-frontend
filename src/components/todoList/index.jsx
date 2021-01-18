@@ -7,7 +7,13 @@ import Error from './Error';
 import CardMessage from '../cardMessage';
 import Search from '../../components/search';
 
-const TodoList = ({ searchTitle, searchTags, filteredTodos, isError }) => {
+const TodoList = ({
+  searchTitle,
+  searchTags,
+  filteredTodos,
+  isError,
+  isSearchActive,
+}) => {
   let searchFilterTodos = filteredTodos;
 
   if (searchTitle === '' && searchTags.length === 0) {
@@ -24,7 +30,7 @@ const TodoList = ({ searchTitle, searchTags, filteredTodos, isError }) => {
 
   return (
     <>
-      <Search />
+      {filteredTodos.length !== 0 && <Search />}
       {filteredTodos.length === 0 && (
         <CardMessage
           message={
@@ -32,7 +38,7 @@ const TodoList = ({ searchTitle, searchTags, filteredTodos, isError }) => {
           }
         />
       )}
-      {searchFilterTodos.length === 0 && (
+      {searchFilterTodos.length === 0 && isSearchActive && (
         <CardMessage
           message={'There were no todos matching your search inputs'}
         />
@@ -54,6 +60,7 @@ const TodoList = ({ searchTitle, searchTags, filteredTodos, isError }) => {
 const mapStateToProps = (state) => {
   return {
     isError: state.misc.error,
+    isSearchActive: state.search.isSearchActive,
     searchTitle: state.search.title,
     searchTags: state.search.tags,
   };
