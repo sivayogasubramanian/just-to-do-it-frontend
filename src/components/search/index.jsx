@@ -47,7 +47,11 @@ const Search = ({
   };
   const handleCancelSearch = () => cancelSearch();
   const handleAutocompleteChange = (event, values) => {
-    searchTags(values);
+    if (values.length !== 0) {
+      searchTags(values);
+    } else {
+      cancelSearch();
+    }
   };
 
   return (
