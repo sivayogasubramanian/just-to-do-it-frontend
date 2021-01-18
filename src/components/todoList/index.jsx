@@ -6,6 +6,10 @@ import Todo from '../todo';
 import Error from './Error';
 import CardMessage from '../cardMessage';
 import Search from '../../components/search';
+// MUI Components
+import LinearProgress from '@material-ui/core/LinearProgress';
+// Styles
+import { useStyles } from './styles';
 
 const TodoList = ({
   searchTitle,
@@ -13,7 +17,10 @@ const TodoList = ({
   filteredTodos,
   isError,
   isSearchActive,
+  isLoading,
+  todosLoading,
 }) => {
+  const classes = useStyles();
   let searchFilterTodos = filteredTodos;
 
   if (searchTitle === '' && searchTags.length === 0) {
@@ -52,6 +59,9 @@ const TodoList = ({
           deleted={todo.attributes.deleted}
         />
       ))}
+      {(isLoading || todosLoading) && (
+        <LinearProgress className={classes.loader} />
+      )}
       {isError && <Error />}
     </>
   );
@@ -60,6 +70,8 @@ const TodoList = ({
 const mapStateToProps = (state) => {
   return {
     isError: state.misc.error,
+    isLoading: state.misc.loading,
+    todosLoading: state.todos.todosLoading,
     isSearchActive: state.search.isSearchActive,
     searchTitle: state.search.title,
     searchTags: state.search.tags,
