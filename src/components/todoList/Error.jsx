@@ -1,16 +1,15 @@
 // React and helpers
 import React from 'react';
-// MUI Components
-import { Alert } from '@material-ui/lab';
+// Components
+import CustomSnackbar from '../customSnackbar';
 
 const Error = () => {
   return (
-    <>
-      <br />
-      <Alert variant="outlined" severity="error" color="error">
-        Something went wrong. Please refresh and try again later.
-      </Alert>
-    </>
+    <CustomSnackbar
+      open={true}
+      message={'Something went wrong. Please refresh and try again later.'}
+      severity={'error'}
+    />
   );
 };
 

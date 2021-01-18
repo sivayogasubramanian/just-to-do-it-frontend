@@ -1,16 +1,11 @@
 // React
 import React from 'react';
-// MUI Components
-import { Alert } from '@material-ui/lab';
+// Components
+import CustomSnackbar from '../customSnackbar';
 
 const Success = () => {
   return (
-    <>
-      <Alert variant="outlined" severity="success" color="success">
-        Password Updated Successfully!
-      </Alert>
-      <br />
-    </>
+    <CustomSnackbar open={true} message={'Password Updated Successfully!'} />
   );
 };
 

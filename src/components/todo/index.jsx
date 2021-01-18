@@ -6,6 +6,8 @@ import clsx from 'clsx';
 import useDidUpdateEffect from '../../hooks/useDidUpdateEffect';
 // Actions
 import { openDialog } from '../../redux/actions/miscActions';
+// Components
+import CustomSnackbar from '../customSnackbar';
 // MUI Components
 import {
   Card,
@@ -16,10 +18,9 @@ import {
   Button,
   Slide,
   Tooltip,
-  Snackbar,
   Collapse,
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -71,6 +72,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
     }
   };
   const [selectedDate, setSelectedDate] = useState(setDate());
+  const handleSnackBar = () => setIsSnackbarOpen(false);
 
   // Button Handlers
   const onSaveClick = () => {
@@ -128,6 +130,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
         direction="left"
         in={checked}
         mountOnEnter
+        unmountOnExit
         timeout={{ enter: 150, exit: 150 }}
       >
         <Card
@@ -262,21 +265,11 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
           </Collapse>
         </Card>
       </Slide>
-      <Snackbar
+      <CustomSnackbar
         open={isSnackbarOpen}
-        autoHideDuration={1000}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        TransitionComponent={Slide}
-        onClose={() => setIsSnackbarOpen(false)}
-      >
-        <Alert
-          severity="success"
-          variant="filled"
-          onClose={() => setIsSnackbarOpen(false)}
-        >
-          Todo Saved Successfully
-        </Alert>
-      </Snackbar>
+        onClose={handleSnackBar}
+        message={'Changes Updated Successfully!'}
+      />
     </>
   );
 };

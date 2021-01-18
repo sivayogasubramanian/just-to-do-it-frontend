@@ -1,5 +1,5 @@
 // React and helpers
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useTodo from '../../hooks/useTodo';
@@ -7,6 +7,7 @@ import useTodo from '../../hooks/useTodo';
 import MiniDrawer from '../../components/navigation';
 import TodoList from '../../components/todoList';
 import CardMessage from '../../components/cardMessage';
+import CustomSnackbar from '../../components/customSnackbar';
 // MUI Components
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -22,10 +23,13 @@ const Completed = ({ todos, isDialogOpen }) => {
     (todo) => !todo.attributes.deleted && todo.attributes.completed
   );
   const handleFloatingActionClick = () => {
+    setIsSnackbarOpen(true);
     filteredTodos.forEach((todo) => {
       updateTodo(todo.id, { deleted: true });
     });
   };
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const handleSnackbarClose = () => setIsSnackbarOpen(false);
   return (
     <>
       <MiniDrawer
@@ -48,6 +52,11 @@ const Completed = ({ todos, isDialogOpen }) => {
           <DeleteSweepIcon />
         </Fab>
       </Tooltip>
+      <CustomSnackbar
+        open={isSnackbarOpen}
+        message={'All Completed todos deleted!'}
+        onClose={handleSnackbarClose}
+      />
       {isDialogOpen && <Redirect to="/home/edit" />}
     </>
   );
