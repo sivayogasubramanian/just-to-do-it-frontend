@@ -2,7 +2,11 @@
 import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
 // Actions
-import { toggleError } from '../redux/actions/miscActions';
+import {
+  toggleError,
+  setLoadingTrue,
+  setLoadingFalse,
+} from '../redux/actions/miscActions';
 import { fetchTodos } from '../redux/actions/todosActions';
 import { logOut } from '../redux/actions/authActions';
 
@@ -11,10 +15,12 @@ const useSubtodo = () => {
 
   const successHandler = () => {
     dispatch(fetchTodos());
+    dispatch(setLoadingFalse());
   };
 
   const errorHandler = (error) => {
     console.error(error);
+    dispatch(setLoadingFalse());
     dispatch(toggleError());
     setTimeout(() => {
       dispatch(toggleError());
@@ -23,6 +29,7 @@ const useSubtodo = () => {
   };
 
   const createSubtodo = (todoId) => {
+    dispatch(setLoadingTrue());
     authAxios
       .post(`/api/v1/todos/${todoId}/subtodos`, { title: '', completed: false })
       .then(successHandler)
@@ -30,6 +37,7 @@ const useSubtodo = () => {
   };
 
   const updateSubtodo = (todoId, subtodoId, subTodoData) => {
+    dispatch(setLoadingTrue());
     authAxios
       .patch(`/api/v1/todos/${todoId}/subtodos/${subtodoId}`, subTodoData)
       .then(successHandler)
@@ -37,6 +45,7 @@ const useSubtodo = () => {
   };
 
   const destroySubtodo = (todoId, subtodoId) => {
+    dispatch(setLoadingTrue());
     authAxios
       .delete(`/api/v1/todos/${todoId}/subtodos/${subtodoId}`)
       .then(successHandler)
