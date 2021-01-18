@@ -21,6 +21,7 @@ const RecentlyDeleted = ({ todos, isDialogOpen }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(
     false
   );
+  const handleFloatingBtnClick = () => setIsConfirmationDialogOpen(true);
 
   return (
     <>
@@ -39,7 +40,7 @@ const RecentlyDeleted = ({ todos, isDialogOpen }) => {
           className={classes.floatingActionBtn}
           color="primary"
           aria-label="add"
-          onClick={() => setIsConfirmationDialogOpen(true)}
+          onClick={handleFloatingBtnClick}
         >
           <DeleteForeverIcon />
         </Fab>
