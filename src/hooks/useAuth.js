@@ -126,7 +126,7 @@ const useAuth = () => {
             setPasswordCfm('');
             setTimeout(() => {
               dispatch(toggleSuccess());
-            }, 4000);
+            }, 2000);
           })
           .catch((error) => {
             dispatch(setLoadingFalse());
