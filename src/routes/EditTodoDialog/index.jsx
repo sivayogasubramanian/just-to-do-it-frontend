@@ -36,6 +36,7 @@ import { useStyles } from './styles';
 
 const EditTodoDialog = ({
   todos,
+  todosLoading,
   allSubtodos,
   isDialogOpen,
   todoId,
@@ -188,7 +189,9 @@ const EditTodoDialog = ({
           </Button>
         </DialogContent>
         <DialogActions>
-          {(isLoading || loading) && <CircleLoader size={35} color="#240971" />}
+          {(isLoading || loading || todosLoading) && (
+            <CircleLoader size={30} color="#240971" />
+          )}
           <Button
             onClick={markAsCompletedClick}
             size="small"
@@ -223,6 +226,7 @@ const EditTodoDialog = ({
 const mapStateToProps = (state) => {
   return {
     todos: state.todos.data,
+    todosLoading: state.todos.todosLoading,
     allSubtodos: state.todos.included,
     isDialogOpen: state.misc.dialog.isDialogOpen,
     todoId: state.misc.dialog.todoId,
