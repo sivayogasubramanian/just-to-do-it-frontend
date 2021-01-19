@@ -9,6 +9,7 @@ import userReducer from './userReducer';
 import todosReducer from './todosReducer';
 import herokuReducer from './herokuReducer';
 import searchReducer from './searchReducer';
+import themeReducer from './themeReducer';
 
 const persistConfig = {
   key: 'just-to-do-it',
@@ -19,6 +20,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   isHerokuDynoAwake: herokuReducer,
   isAuthenticated: authReducer,
+  currentTheme: themeReducer,
   user: userReducer,
   todos: todosReducer,
   search: searchReducer,

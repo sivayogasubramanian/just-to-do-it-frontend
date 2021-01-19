@@ -23,6 +23,10 @@ export const SEARCH_TITLE = 'SEARCH_TITLE';
 export const SEARCH_TAG = 'SEARCH_TAG';
 export const CANCEL_SEARCH = 'CANCEL_SEARCH';
 
+// For themeActions.js
+export const SET_THEME_LIGHT = 'SET_THEME_LIGHT';
+export const SET_THEME_DARK = 'SET_THEME_DARK';
+
 // For userActions.js
 export const STORE_USER = 'STORE_USER';
 export const REMOVE_USER = 'REMOVE_USER';
