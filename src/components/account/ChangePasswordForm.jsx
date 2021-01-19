@@ -29,6 +29,7 @@ const ChangePasswordForm = ({ userId }) => {
   return (
     <form noValidate onSubmit={handleSubmit} className={classes.form}>
       <TextField
+        color="primary"
         variant="outlined"
         size="medium"
         margin="normal"

@@ -43,7 +43,7 @@ const DeleteForeverDialog = ({
       <DialogActions>
         <Button
           autoFocus
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={handleCancelClick}
         >

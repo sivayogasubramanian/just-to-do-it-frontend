@@ -12,13 +12,19 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // Styles
 import { useStyles } from './styles';
 
-const MyAccount = () => {
+const MyAccount = ({ closeNavDrawer }) => {
   const classes = useStyles();
   return (
     <>
       <Divider />
       <Tooltip title="My Account">
-        <NavLink exact to="/account" activeClassName={classes.active}>
+        <NavLink
+          exact
+          to="/account"
+          className={classes.navlink}
+          activeClassName={classes.active}
+          onClick={closeNavDrawer}
+        >
           <ListItem className={classes.listItems} button>
             <ListItemIcon>
               <AccountCircleIcon />

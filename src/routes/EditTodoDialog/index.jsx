@@ -196,7 +196,7 @@ const EditTodoDialog = ({
             onClick={markAsCompletedClick}
             size="small"
             startIcon={<DoneOutlineIcon />}
-            color="primary"
+            className={classes.buttons}
           >
             Mark as Completed
           </Button>
@@ -204,7 +204,7 @@ const EditTodoDialog = ({
             onClick={closeDialog}
             size="small"
             startIcon={<DeleteIcon />}
-            color="primary"
+            className={classes.buttons}
           >
             Discard Changes
           </Button>
@@ -212,7 +212,7 @@ const EditTodoDialog = ({
             onClick={saveClick}
             size="small"
             startIcon={<SaveIcon />}
-            color="primary"
+            className={classes.buttons}
           >
             Save
           </Button>

@@ -24,8 +24,9 @@ const ItemsList = ({ closeNavDrawer }) => {
             <NavLink
               exact
               to={item.path}
+              className={classes.navlink}
               activeClassName={classes.active}
-              onClick={() => closeNavDrawer()}
+              onClick={closeNavDrawer}
             >
               <ListItem className={classes.listItems} button>
                 <ListItemIcon>{item.icon}</ListItemIcon>
