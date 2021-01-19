@@ -15,6 +15,8 @@ import {
 
 const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
   const { deleteAccount } = useAuth();
+  const handleCancelClick = () => setIsDeleteDialogOpen(false);
+  const handleConfirmClick = () => deleteAccount(userId);
   return (
     <Dialog open={open}>
       <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
@@ -26,16 +28,16 @@ const DeleteAccountDialog = ({ userId, open, setIsDeleteDialogOpen }) => {
       <DialogActions>
         <Button
           autoFocus
-          variant="outlined"
+          variant="contained"
           color="primary"
-          onClick={() => setIsDeleteDialogOpen(false)}
+          onClick={handleCancelClick}
         >
           Cancel
         </Button>
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => deleteAccount(userId)}
+          onClick={handleConfirmClick}
         >
           Confirm
         </Button>
