@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+  title: { color: 'white' },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
@@ -23,7 +24,8 @@ export const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 30,
+    color: 'white',
+    marginRight: 5,
   },
   hide: {
     display: 'none',
@@ -60,6 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(1),
   },
+  navlink: { color: theme.palette.primary.main, textDecoration: 'none' },
   button: {
     margin: theme.spacing(1),
   },

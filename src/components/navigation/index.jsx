@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import useAuth from '../../hooks/useAuth';
+import { connect } from 'react-redux';
+// Actions
+import { setTheme } from '../../redux/actions/themeActions';
+// Components
+import CustomToggle from './toggle';
 // MUI Components
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,11 +29,20 @@ import Tags from './Tags';
 // Styles
 import { useStyles } from './styles';
 
-function MiniDrawer({ content }) {
+function MiniDrawer({ content, currentTheme, setTheme }) {
   const classes = useStyles();
   const theme = useTheme();
   const { logOut } = useAuth();
   const [open, setOpen] = useState(false);
+
+  const darkModeToggleState = currentTheme === 'dark';
+  const handleDarkModeToggle = () => {
+    if (darkModeToggleState) {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
+  };
 
   const handleDrawerOpen = () => setOpen(true);
 
@@ -45,7 +59,6 @@ function MiniDrawer({ content }) {
       >
         <Toolbar>
           <IconButton
-            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -55,10 +68,15 @@ function MiniDrawer({ content }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap className={classes.title}>
             Just To-do it
           </Typography>
           <Box flexGrow={1} />
+          <CustomToggle
+            checked={darkModeToggleState}
+            onChange={handleDarkModeToggle}
+            name="darkModeToggle"
+          />
           <Button
             variant="contained"
             color="secondary"
@@ -93,7 +111,7 @@ function MiniDrawer({ content }) {
             )}
           </IconButton>
         </div>
-        <MyAccount />
+        <MyAccount closeNavDrawer={handleDrawerClose} />
         <ItemsList closeNavDrawer={handleDrawerClose} />
         <Tags closeNavDrawer={handleDrawerClose} />
       </Drawer>
@@ -105,4 +123,16 @@ function MiniDrawer({ content }) {
   );
 }
 
-export default MiniDrawer;
+const mapStateToProps = (state) => {
+  return {
+    currentTheme: state.currentTheme,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setTheme: (theme) => dispatch(setTheme(theme)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniDrawer);

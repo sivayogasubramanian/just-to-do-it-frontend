@@ -29,6 +29,11 @@ const Tags = ({ todos, selectTag, closeNavDrawer }) => {
       })
     );
 
+  const handleTagClick = (tag) => {
+    selectTag(tag);
+    closeNavDrawer();
+  };
+
   return (
     <>
       <Divider />
@@ -36,12 +41,10 @@ const Tags = ({ todos, selectTag, closeNavDrawer }) => {
         {[...tags].map((tag, index) => (
           <Tooltip key={index} title={tag}>
             <NavLink
+              className={classes.navlink}
               exact
               to="/tags"
-              onClick={() => {
-                selectTag(tag);
-                closeNavDrawer();
-              }}
+              onClick={() => handleTagClick(tag)}
             >
               <ListItem className={classes.listItems} button key={index}>
                 <ListItemIcon>
