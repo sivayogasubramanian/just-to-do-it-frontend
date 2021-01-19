@@ -28,6 +28,7 @@ import ItemsList from './ItemsList';
 import Tags from './Tags';
 // Styles
 import { useStyles } from './styles';
+import { Tooltip } from '@material-ui/core';
 
 function MiniDrawer({ content, currentTheme, setTheme }) {
   const classes = useStyles();
@@ -72,11 +73,13 @@ function MiniDrawer({ content, currentTheme, setTheme }) {
             Just To-do it
           </Typography>
           <Box flexGrow={1} />
-          <CustomToggle
-            checked={darkModeToggleState}
-            onChange={handleDarkModeToggle}
-            name="darkModeToggle"
-          />
+          <Tooltip arrow title="Toggle Dark Mode" placement="left">
+            <CustomToggle
+              checked={darkModeToggleState}
+              onChange={handleDarkModeToggle}
+              name="darkModeToggle"
+            />
+          </Tooltip>
           <Button
             variant="contained"
             color="secondary"
