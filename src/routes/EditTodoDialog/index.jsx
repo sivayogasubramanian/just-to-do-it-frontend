@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import CircleLoader from 'react-spinners/CircleLoader';
+import PropagateLoader from 'react-spinners/PropagateLoader';
 import { Grid, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -33,6 +33,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { closeDialog } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
+import { useTheme } from '@material-ui/core/styles';
 
 const EditTodoDialog = ({
   todos,
@@ -43,6 +44,7 @@ const EditTodoDialog = ({
   closeDialog,
   isLoading,
 }) => {
+  const theme = useTheme();
   const classes = useStyles();
   const { updateTodo } = useTodo();
   const { createSubtodo } = useSubtodo();
@@ -190,7 +192,12 @@ const EditTodoDialog = ({
         </DialogContent>
         <DialogActions>
           {(isLoading || loading || todosLoading) && (
-            <CircleLoader size={30} color="#240971" />
+            <div className={classes.loader}>
+              <PropagateLoader
+                size={15}
+                color={theme.palette.type === 'dark' ? '#b0bcff' : '#0027ff'}
+              />
+            </div>
           )}
           <Button
             onClick={markAsCompletedClick}

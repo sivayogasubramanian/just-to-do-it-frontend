@@ -14,5 +14,6 @@ export const useStyles = makeStyles((theme) => {
     buttons: {
       color: isDarkTheme ? 'lightBlue' : 'blue',
     },
+    loader: { marginRight: '350px', marginBottom: '10px' },
   };
 });
