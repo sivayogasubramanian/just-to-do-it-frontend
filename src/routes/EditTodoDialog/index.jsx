@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import PropagateLoader from 'react-spinners/PropagateLoader';
+import CircleLoader from 'react-spinners/CircleLoader';
 import { Grid, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -192,12 +192,10 @@ const EditTodoDialog = ({
         </DialogContent>
         <DialogActions>
           {(isLoading || loading || todosLoading) && (
-            <div className={classes.loader}>
-              <PropagateLoader
-                size={15}
-                color={theme.palette.type === 'dark' ? '#b0bcff' : '#0027ff'}
-              />
-            </div>
+            <CircleLoader
+              size={30}
+              color={theme.palette.type === 'dark' ? '#b0bcff' : '#0027ff'}
+            />
           )}
           <Button
             onClick={markAsCompletedClick}
