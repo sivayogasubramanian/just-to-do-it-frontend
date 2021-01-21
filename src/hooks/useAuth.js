@@ -18,6 +18,7 @@ import {
 } from '../redux/actions/authActions';
 import { wakeDyno } from '../redux/actions/herokuActions';
 import { fetchTodos, clearTodos } from '../redux/actions/todosActions';
+import { setTheme } from '../redux/actions/themeActions'
 
 const storeToken = (response) => {
   if (response.status === 200) {
@@ -154,6 +155,7 @@ const useAuth = () => {
 
   const logOut = () => {
     dispatch(signOut());
+    dispatch(setTheme('light'));
     dispatch(storeUser([]));
     dispatch(clearTodos());
     dispatch(resetMisc());
