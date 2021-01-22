@@ -8,12 +8,13 @@ export const WAKE_DYNO = 'WAKE_DYNO';
 // For miscActions.js
 export const SET_LOADING_TRUE = 'SET_LOADING_TRUE';
 export const SET_LOADING_FALSE = 'SET_LOADING_FALSE';
-export const TOGGLE_ERROR = 'TOGGLE_ERROR';
+export const SET_ERROR_TRUE = 'SET_ERROR_TRUE';
+export const SET_ERROR_FALSE = 'SET_ERROR_FALSE';
 export const SET_ERROR_MSG = 'SET_ERROR_MSG';
-export const TOGGLE_SUCCESS = 'TOGGLE_SUCCESS';
+export const SET_SUCCESS_TRUE = 'SET_SUCCESS_TRUE';
+export const SET_SUCCESS_FALSE = 'SET_SUCCESS_FALSE';
 export const OPEN_DIALOG = 'OPEN_DIALOG';
 export const CLOSE_DIALOG = 'CLOSE_DIALOG';
-export const TOGGLE_SAVE = 'TOGGLE_SAVE';
 export const SELECT_TAG = 'SELECT_TAG';
 export const RESET_MISC = 'RESET_MISC';
 

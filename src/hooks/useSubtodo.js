@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import authAxios from '../helpers/authAxios';
 // Actions
 import {
-  toggleError,
+  setErrorTrue,
+  setErrorFalse,
   setLoadingTrue,
   setLoadingFalse,
 } from '../redux/actions/miscActions';
@@ -21,9 +22,9 @@ const useSubtodo = () => {
   const errorHandler = (error) => {
     console.error(error);
     dispatch(setLoadingFalse());
-    dispatch(toggleError());
+    dispatch(setErrorTrue());
     setTimeout(() => {
-      dispatch(toggleError());
+      dispatch(setErrorFalse());
       dispatch(logOut());
     }, 2000);
   };

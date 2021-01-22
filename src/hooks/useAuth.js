@@ -6,8 +6,10 @@ import authAxios from '../helpers/authAxios';
 import {
   setLoadingTrue,
   setLoadingFalse,
-  toggleError,
-  toggleSuccess,
+  setErrorTrue,
+  setErrorFalse,
+  setSuccessTrue,
+  setSuccessFalse,
   setErrorMsg,
   resetMisc,
 } from '../redux/actions/miscActions';
@@ -18,7 +20,7 @@ import {
 } from '../redux/actions/authActions';
 import { wakeDyno } from '../redux/actions/herokuActions';
 import { fetchTodos, clearTodos } from '../redux/actions/todosActions';
-import { setTheme } from '../redux/actions/themeActions'
+import { setTheme } from '../redux/actions/themeActions';
 
 const storeToken = (response) => {
   if (response.status === 200) {
@@ -69,10 +71,10 @@ const useAuth = () => {
         dispatch(fetchTodos());
       })
       .catch((error) => {
-        dispatch(toggleError());
+        dispatch(setErrorTrue());
         dispatch(setLoadingFalse());
         setTimeout(() => {
-          dispatch(toggleError());
+          dispatch(setErrorFalse());
         }, 2000);
       });
   };
@@ -88,7 +90,7 @@ const useAuth = () => {
       })
       .then((response) => {
         dispatch(setLoadingFalse());
-        dispatch(toggleSuccess());
+        dispatch(setSuccessTrue());
       })
       .catch((error) => {
         dispatch(setLoadingFalse());
@@ -120,13 +122,13 @@ const useAuth = () => {
           })
           .then(() => {
             dispatch(setLoadingFalse());
-            dispatch(toggleSuccess());
+            dispatch(setSuccessTrue());
             setEmail('');
             setOldPassword('');
             setPassword('');
             setPasswordCfm('');
             setTimeout(() => {
-              dispatch(toggleSuccess());
+              dispatch(setSuccessFalse());
             }, 2000);
           })
           .catch((error) => {

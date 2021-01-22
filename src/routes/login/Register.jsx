@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { connect } from 'react-redux';
 // Actions
-import { toggleSuccess } from '../../redux/actions/miscActions';
+import { setSuccessFalse } from '../../redux/actions/miscActions';
 // MUI Components
 import {
   Box,
@@ -24,7 +24,7 @@ import Logo from '../../assets/logo.png';
 // Styles
 import { useStyles } from './styles';
 
-const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
+const Register = ({ loading, errorMsg, success, setSuccessFalse }) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -152,7 +152,7 @@ const Register = ({ loading, errorMsg, success, toggleSuccess }) => {
                   <br />
                   <p hidden>
                     {setTimeout(() => {
-                      toggleSuccess();
+                      setSuccessFalse();
                       history.push('/');
                     }, 3000)}
                   </p>
@@ -176,7 +176,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    toggleSuccess: () => dispatch(toggleSuccess()),
+    setSuccessFalse: () => dispatch(setSuccessFalse()),
   };
 };
 

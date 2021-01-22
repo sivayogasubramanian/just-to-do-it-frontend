@@ -2,19 +2,19 @@
 import {
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
-  TOGGLE_ERROR,
-  TOGGLE_SUCCESS,
+  SET_ERROR_TRUE,
+  SET_ERROR_FALSE,
+  SET_SUCCESS_TRUE,
+  SET_SUCCESS_FALSE,
   SET_ERROR_MSG,
   OPEN_DIALOG,
   CLOSE_DIALOG,
-  TOGGLE_SAVE,
   SELECT_TAG,
   RESET_MISC,
 } from '../actionTypes';
 
 const initialState = {
   dialog: { isDialogOpen: false, todoId: null },
-  save: false,
   loading: false,
   success: false,
   error: false,
@@ -23,18 +23,19 @@ const initialState = {
 };
 
 const miscReducer = (state = initialState, action) => {
-  const { error, success, save } = state;
   switch (action.type) {
     case SET_LOADING_TRUE:
       return { ...state, loading: true };
     case SET_LOADING_FALSE:
       return { ...state, loading: false };
-    case TOGGLE_ERROR:
-      return { ...state, error: !error };
-    case TOGGLE_SUCCESS:
-      return { ...state, success: !success };
-    case TOGGLE_SAVE:
-      return { ...state, save: !save };
+    case SET_ERROR_TRUE:
+      return { ...state, error: true };
+    case SET_ERROR_FALSE:
+      return { ...state, error: false };
+    case SET_SUCCESS_TRUE:
+      return { ...state, success: true };
+    case SET_SUCCESS_FALSE:
+      return { ...state, success: false };
     case SET_ERROR_MSG:
       return { ...state, errorMsg: action.payload };
     case OPEN_DIALOG:

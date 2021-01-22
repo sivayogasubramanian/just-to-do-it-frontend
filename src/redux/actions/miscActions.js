@@ -2,14 +2,15 @@
 import {
   SET_LOADING_TRUE,
   SET_LOADING_FALSE,
-  TOGGLE_ERROR,
+  SET_ERROR_TRUE,
+  SET_ERROR_FALSE,
   SET_ERROR_MSG,
-  TOGGLE_SUCCESS,
   OPEN_DIALOG,
   CLOSE_DIALOG,
-  TOGGLE_SAVE,
   SELECT_TAG,
   RESET_MISC,
+  SET_SUCCESS_FALSE,
+  SET_SUCCESS_TRUE,
 } from '../actionTypes';
 
 export const setLoadingTrue = () => {
@@ -24,9 +25,15 @@ export const setLoadingFalse = () => {
   };
 };
 
-export const toggleError = () => {
+export const setErrorTrue = () => {
   return {
-    type: TOGGLE_ERROR,
+    type: SET_ERROR_TRUE,
+  };
+};
+
+export const setErrorFalse = () => {
+  return {
+    type: SET_ERROR_FALSE,
   };
 };
 
@@ -37,9 +44,15 @@ export const setErrorMsg = (payload) => {
   };
 };
 
-export const toggleSuccess = () => {
+export const setSuccessTrue = () => {
   return {
-    type: TOGGLE_SUCCESS,
+    type: SET_SUCCESS_TRUE,
+  };
+};
+
+export const setSuccessFalse = () => {
+  return {
+    type: SET_SUCCESS_FALSE,
   };
 };
 
@@ -53,12 +66,6 @@ export const openDialog = (payload) => {
 export const closeDialog = () => {
   return {
     type: CLOSE_DIALOG,
-  };
-};
-
-export const toggleSave = () => {
-  return {
-    type: TOGGLE_SAVE,
   };
 };
 
