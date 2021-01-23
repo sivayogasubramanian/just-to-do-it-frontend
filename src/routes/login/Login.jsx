@@ -10,10 +10,10 @@ import {
   TextField,
   Typography,
   Container,
-  CircularProgress,
   Card,
   Zoom,
 } from '@material-ui/core';
+import SyncLoader from 'react-spinners/SyncLoader';
 // MUI icons and App logo
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Logo from '../../assets/logo.png';
@@ -94,7 +94,11 @@ const Login = ({ loading, error, isAuthenticated }) => {
                 <br />
                 <br />
               </form>
-              {loading && <CircularProgress />}
+              {loading && (
+                <div className={classes.loader}>
+                  <SyncLoader color="#4745DB" size="10" margin="7" />
+                </div>
+              )}
               {error && (
                 <>
                   <ErrorOutlineIcon color="error" fontSize="small" />

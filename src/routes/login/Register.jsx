@@ -13,11 +13,11 @@ import {
   TextField,
   Typography,
   Container,
-  CircularProgress,
   Card,
   Zoom,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import SyncLoader from 'react-spinners/SyncLoader';
 // MUI icons and App logo
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Logo from '../../assets/logo.png';
@@ -131,7 +131,11 @@ const Register = ({ loading, errorMsg, success, setSuccessFalse }) => {
                 <br />
                 <br />
               </form>
-              {loading && <CircularProgress />}
+              {loading && (
+                <div className={classes.loader}>
+                  <SyncLoader color="#4745DB" size="10" margin="7" />
+                </div>
+              )}
               {errorMsg && (
                 <>
                   <ErrorOutlineIcon color="error" fontSize="small" />
