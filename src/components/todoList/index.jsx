@@ -8,12 +8,17 @@ import CardMessage from '../cardMessage';
 import Search from '../../components/search';
 // MUI Components
 import LinearProgress from '@material-ui/core/LinearProgress';
+// Date Utils
+import 'date-fns';
 // Styles
 import { useStyles } from './styles';
+import { isAfter, isBefore } from 'date-fns';
 
 const TodoList = ({
   searchTitle,
   searchTags,
+  searchDateFrom,
+  searchDateTo,
   filteredTodos,
   isError,
   isSearchActive,
@@ -23,16 +28,37 @@ const TodoList = ({
   const classes = useStyles();
   let searchFilterTodos = filteredTodos;
 
-  if (searchTitle === '' && searchTags.length === 0) {
+  if (
+    searchTitle === '' &&
+    searchTags.length === 0 &&
+    searchDateFrom === '' &&
+    searchDateTo === ''
+  ) {
     searchFilterTodos = filteredTodos;
-  } else if (searchTags.length === 0) {
+  } else if (
+    searchTags.length === 0 &&
+    searchDateFrom === '' &&
+    searchDateTo === ''
+  ) {
     searchFilterTodos = filteredTodos.filter((todo) =>
       todo.attributes.title.toLowerCase().includes(searchTitle.toLowerCase())
     );
-  } else {
+  } else if (
+    searchTitle === '' &&
+    searchDateFrom === '' &&
+    searchDateTo === ''
+  ) {
     searchFilterTodos = filteredTodos.filter((todo) =>
       searchTags.every((tag) => todo.attributes.tags.includes(tag))
     );
+  } else {
+    searchFilterTodos = filteredTodos.filter((todo) => {
+      const todoDeadline = new Date(todo.attributes.deadline);
+      return (
+        isAfter(todoDeadline, new Date(searchDateFrom)) &&
+        isBefore(todoDeadline, new Date(searchDateTo))
+      );
+    });
   }
 
   return (
@@ -75,6 +101,8 @@ const mapStateToProps = (state) => {
     isSearchActive: state.search.isSearchActive,
     searchTitle: state.search.title,
     searchTags: state.search.tags,
+    searchDateFrom: state.search.date.from,
+    searchDateTo: state.search.date.to,
   };
 };
 
