@@ -1,7 +1,7 @@
 // React and helpers
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session';
 // Reducers
 import authReducer from './authReducer';
 import miscReducer from './miscReducer';
@@ -14,7 +14,7 @@ import themeReducer from './themeReducer';
 const persistConfig = {
   key: 'just-to-do-it',
   blacklist: ['isHerokuDynoAwake'],
-  storage,
+  storage: storageSession,
 };
 
 const rootReducer = combineReducers({
