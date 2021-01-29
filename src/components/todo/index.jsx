@@ -20,7 +20,6 @@ import {
   Tooltip,
   Collapse,
 } from '@material-ui/core';
-
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -54,6 +53,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
   const [isOverdue, setIsOverdue] = useState(false);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [isExtraMenuOpen, setIsExtraMenuOpen] = useState(false);
+  const [taskEdited, setTaskEdited] = useState(false);
 
   const setDate = () => {
     if (todo !== undefined) {
@@ -77,6 +77,7 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
   // Button Handlers
   const onSaveClick = () => {
     setIsSnackbarOpen(true);
+    setTaskEdited(false);
     updateTodo(todoId, {
       title: taskTitle,
       completed: isCompleted,
@@ -114,6 +115,12 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
 
   const handleDateChange = (date) => setSelectedDate(date);
 
+  const handleEventListener = (e) => {
+    if (taskEdited) {
+      onSaveClick();
+    }
+  };
+
   useDidUpdateEffect(() => {
     onSaveClick();
     checkDate();
@@ -123,6 +130,13 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
     checkDate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    document.addEventListener('click', handleEventListener);
+    return () => {
+      document.removeEventListener('click', handleEventListener);
+    };
+  });
 
   return (
     <>
@@ -170,7 +184,10 @@ const Todo = ({ todos, todoId, title, completed, deleted, openDialog }) => {
                     placeholder="Press Enter to Save"
                     fullWidth
                     value={taskTitle}
-                    onChange={(e) => setTaskTitle(e.target.value)}
+                    onChange={(e) => {
+                      setTaskTitle(e.target.value);
+                      setTaskEdited(true);
+                    }}
                     onKeyPress={onKeyPress}
                   />
                 </Grid>
