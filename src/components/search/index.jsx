@@ -1,6 +1,7 @@
 // React and helpers
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import useDidUpdateEffect from '../../hooks/useDidUpdateEffect';
 // Actions
 import {
   searchTitle,
@@ -73,7 +74,7 @@ const Search = ({
   const handleFromDateChange = (date) => setFromDate(date);
   const handleToDateChange = (date) => setToDate(date);
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     setDate(fromDate, toDate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fromDate, toDate]);
