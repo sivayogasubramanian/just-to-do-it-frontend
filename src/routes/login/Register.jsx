@@ -133,7 +133,7 @@ const Register = ({ loading, errorMsg, success, setSuccessFalse }) => {
               </form>
               {loading && (
                 <div className={classes.loader}>
-                  <SyncLoader color="#4745DB" size="10" margin="7" />
+                  <SyncLoader color="#4745DB" size="10px" margin="7px" />
                 </div>
               )}
               {errorMsg && (
