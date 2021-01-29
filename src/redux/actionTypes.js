@@ -23,6 +23,7 @@ export const SET_SEARCH_VIEW = 'SET_SEARCH_VIEW';
 export const SEARCH_TITLE = 'SEARCH_TITLE';
 export const SEARCH_TAG = 'SEARCH_TAG';
 export const CANCEL_SEARCH = 'CANCEL_SEARCH';
+export const SEARCH_DATE = 'SEARCH_DATE';
 
 // For themeActions.js
 export const SET_THEME_LIGHT = 'SET_THEME_LIGHT';

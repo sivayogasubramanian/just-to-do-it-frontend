@@ -2,6 +2,7 @@
 import {
   SEARCH_TITLE,
   SEARCH_TAG,
+  SEARCH_DATE,
   CANCEL_SEARCH,
   SET_SEARCH_VIEW,
 } from '../actionTypes';
@@ -24,6 +25,13 @@ export const searchTags = (payload) => {
   return {
     type: SEARCH_TAG,
     payload,
+  };
+};
+
+export const searchDate = (from = '', to = '') => {
+  return {
+    type: SEARCH_DATE,
+    payload: { from, to },
   };
 };
 
