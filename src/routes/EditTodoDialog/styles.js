@@ -14,5 +14,8 @@ export const useStyles = makeStyles((theme) => {
     buttons: {
       color: isDarkTheme ? 'lightBlue' : 'blue',
     },
+    loader: {
+      color: isDarkTheme ? '#b0bcff' : '#0027ff',
+    },
   };
 });

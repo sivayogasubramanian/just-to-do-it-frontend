@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TagsArray from '../../components/tagsArray';
 import Subtodo from '../../components/subtodo';
 // MUI Components
-import CircleLoader from 'react-spinners/CircleLoader';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { Grid, Zoom } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -33,7 +33,6 @@ import DateFnsUtils from '@date-io/date-fns';
 import { closeDialog } from '../../redux/actions/miscActions';
 // Styles
 import { useStyles } from './styles';
-import { useTheme } from '@material-ui/core/styles';
 
 const EditTodoDialog = ({
   todos,
@@ -44,7 +43,6 @@ const EditTodoDialog = ({
   closeDialog,
   isLoading,
 }) => {
-  const theme = useTheme();
   const classes = useStyles();
   const { updateTodo } = useTodo();
   const { createSubtodo } = useSubtodo();
@@ -115,6 +113,9 @@ const EditTodoDialog = ({
         <DialogTitle>
           <EditOutlinedIcon className={classes.editIcon} />
           Edit Todo Details
+          {(isLoading || loading || todosLoading) && (
+            <LinearProgress className={classes.loader} />
+          )}
         </DialogTitle>
         <DialogContent>
           <p>Todo:</p>
@@ -191,12 +192,6 @@ const EditTodoDialog = ({
           </Button>
         </DialogContent>
         <DialogActions>
-          {(isLoading || loading || todosLoading) && (
-            <CircleLoader
-              size={30}
-              color={theme.palette.type === 'dark' ? '#b0bcff' : '#0027ff'}
-            />
-          )}
           <Button
             onClick={markAsCompletedClick}
             size="small"
