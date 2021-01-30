@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+<p align="center"><img width=50% src="./src/assets/logo.png"/></p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Just To-Do It</h1>
 
-## Available Scripts
+<div align="center">
 
-In the project directory, you can run:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9514b006-1e01-472a-9101-7141f12a9f1e/deploy-status)](https://app.netlify.com/sites/just-to-do-it-website/deploys)
+
+</div>
+
+<h3 align="center">A todo manager built for CVWO</h3>
+<h3 align="center"><a href="https://just-to-do-it-website.netlify.app/">Get Started here!</a></h3>
+<h4 align="center">RUPPA NAGARAJAN SIVAYOGA SUBRAMANIAN | A0217979U</h4>
+<br/>
+
+# Getting started with local development
+
+After cloning the parent repository you should set up environment variables for both frontend and backend submodules.
+
+## Environment Variables
+
+This project makes use of `.env` file to store environment variables. To get started create a .env file and type this line in to the file. Be sure to replace the backend url with your backend url.
+
+```
+REACT_APP_BACKEND_URL = <YOUR-BACKEND-URL-HERE>
+```
+
+### `yarn install`
+
+You can run the command above to install all project dependencies
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This will launch the puma web server. By default, this will run at [http://localhost:3000/](http://localhost:3000/)
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When you are done you can run the command above to let react optimise the code for production.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To learn more about Just To-Do It features you can click [here](https://github.com/sivayogasubramanian/just-to-do-it/blob/main/final-assignment-submission/just-to-do-it-user-guide.pdf).
 
-### `yarn eject`
+## Frameworks Used
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br/>
+Done with:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br/>
+<p align="center">
+  <img src="https://camo.githubusercontent.com/42d79599b684d4449d0fab6ee8df849c39fa0148993c7680b85210494dda4599/68747470733a2f2f63646e342e69636f6e66696e6465722e636f6d2f646174612f69636f6e732f6c6f676f732d332f3630302f52656163742e6a735f6c6f676f2d3531322e706e67" width=30% />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://community.cdn.kony.com/sites/default/files/logo-redux.png" width=30% />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://material-ui.com/static/logo_raw.svg" width=30% />
+</p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Deployed on:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<br/>
+<p align="center">
+  <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEAt7-u6GJMlw/company-logo_200_200/0/1583277392105?e=2159024400&v=beta&t=m6tOVslELtoH9vqJo-vP47orqRK0kqIK9m-lS26Rzbw" width=30% />
+</p>
