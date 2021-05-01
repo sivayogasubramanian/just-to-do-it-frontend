@@ -3543,10 +3543,10 @@ axe-core@^4.0.2:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.1.1.tgz#70a7855888e287f7add66002211a423937063eaf"
   integrity sha512-5Kgy8Cz6LPC9DJcNb3yjAXTu3XihQgEdnIg50c//zOC/MyLP0Clg+Y8Sh9ZjjnvBrDZU4DgXS9C3T9r4/scGZQ==
 
-axios-react@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/axios-react/-/axios-react-2.0.2.tgz#ee39bf3d4e12fbf47dd73b63dde891ba230f3f52"
-  integrity sha512-Xflh2qJH6NjHBP707LzdqCVY2+702U9i4/53D2djCAJ/7hfhuKpcnLNaMTV3VdC8z2/CQmx/3OfzfmCXfMzqNQ==
+axios-react@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/axios-react/-/axios-react-2.0.7.tgz#36d3ad28a7667f5b7c3f0111f23768ecea86a19c"
+  integrity sha512-nImylK2me6RCA2cjQYyE1lM1ijIaLPWMZboGSJHkccG5JdIFOjOiD8/9YsAd6qL9EIRwu+5pu+kQkty4QlYMvg==
   dependencies:
     "@types/axios" "^0.14.0"
     "@types/is-online" "^8.1.0"
