@@ -10,7 +10,6 @@
 
 <h3 align="center">A todo manager built for CVWO</h3>
 <h3 align="center"><a href="https://just-to-do-it-website.netlify.app/">Get Started here!</a></h3>
-<h4 align="center">RUPPA NAGARAJAN SIVAYOGA SUBRAMANIAN | A0217379U</h4>
 <br/>
 
 # Getting started with local development
@@ -52,7 +51,7 @@ Done with:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://community.cdn.kony.com/sites/default/files/logo-redux.png" width=30% />
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://material-ui.com/static/logo_raw.svg" width=30% />
+  <img src="https://mui.com/static/logo.png" width=30% />
 </p>
 
 Deployed on:
