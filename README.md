@@ -50,10 +50,3 @@ Done with:
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://mui.com/static/logo.png" width=30% />
 </p>
-
-Deployed on:
-
-<br/>
-<p align="center">
-  <img src="https://media-exp1.licdn.com/dms/image/C4E0BAQEAt7-u6GJMlw/company-logo_200_200/0/1583277392105?e=2159024400&v=beta&t=m6tOVslELtoH9vqJo-vP47orqRK0kqIK9m-lS26Rzbw" width=30% />
-</p>
